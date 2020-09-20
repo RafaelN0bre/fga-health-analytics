@@ -13,7 +13,7 @@ Além disso, com os dados levantados traçaremos um perfil do índice de mortali
 # Fontes de Dados
 
 Nosso dataset pode ser encontrado aqui:
--[Dataset municípios e estados brasileiros](https://brasil.io/dataset/covid19/caso_full/) (space, space)
+-[Dataset municípios e estados brasileiros](https://brasil.io/dataset/covid19/caso_full/)(space, space)
 -[Dataset dos países](https://ourworldindata.org/coronavirus-source-data)
 
 ---
