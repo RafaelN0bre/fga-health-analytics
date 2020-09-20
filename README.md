@@ -11,23 +11,23 @@ Além disso, com os dados levantados traçaremos um perfil do índice de mortali
 
 ---
 # Fontes de Dados
-
-Nosso dataset pode ser encontrado aqui:(space, space)
--[Dataset municípios e estados brasileiros](https://brasil.io/dataset/covid19/caso_full/)(space, space)
+Atualizar esse layout.
+Nosso dataset pode ser encontrado aqui:
+-[Dataset municípios e estados brasileiros](https://brasil.io/dataset/covid19/caso_full/)
 -[Dataset dos países](https://ourworldindata.org/coronavirus-source-data)
 
 ---
 # Esboço
 
-**Produto**: Dashboard de acompanhamento da pandemia do Coronavírus.(space, space)
+**Produto**: Dashboard de acompanhamento da pandemia do Coronavírus.
 
-**Cliente**: Disseminadores de informações.(space, space)
+**Cliente**: Disseminadores de informações.
 
-**Público-Alvo**: Pessoas em geral interessadas em informações sobre a pandemia.(space, space)
+**Público-Alvo**: Pessoas em geral interessadas em informações sobre a pandemia.
 
-**Projetistas**: (Em aberto). (space, space)
+**Projetistas**: (Em aberto).
 
-**Declaração sobre o problema**: A informação da pandemia do Coronavírus, embora existente e bem detalhada, chega ao público de forma fragmentada e pouco esclarecedora.(space,space)
+**Declaração sobre o problema**: A informação da pandemia do Coronavírus, embora existente e bem detalhada, chega ao público de forma fragmentada e pouco esclarecedora.
 
 **Declaração sobre o projeto**: Levantamento de dados sobre o número de casos, óbitos e pacientes recuperados do Coronavírus.
 
