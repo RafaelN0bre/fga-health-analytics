@@ -35,5 +35,3 @@ Nosso dataset pode ser encontrado aqui:
 # Protótipo
 
 Precisamos inserir o protótipo do dashboard.
-
-# Maurício 
