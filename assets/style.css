@@ -1,0 +1,42 @@
+/* Gráfico 1  --> Atenção para o float right ele está alterando a estrutura do body.*/
+#example-graph{
+    width: 65%;
+    padding: 7px 7px 7px 7px;
+    float: right;
+}
+
+/* Gráfico 2 --> Mesma situação que o gráfico 1*/
+#example-graph_2{
+    width: 65%;
+    padding: 7px 7px 7px 7px;
+    float: right;
+}
+
+/* Cabeçalho --> Aonde fica nosaa logo e o ícone de menu */
+#header{
+    height: 7.617%;
+    background-color: #5E60CE;
+    margin: 0;
+}
+
+/* Escrita Fga Health Analytics */
+#header p{
+    margin: 0;
+    display: inline-block;
+    vertical-align: middle;
+    color: #FCFCFC;
+}
+
+/* Logo da nosso dashboard*/
+#header img
+{
+    width: 4.16%;
+    height: 5.37%;
+    display: inline-block;
+    padding: 12px 0px 0px 20px;
+}
+
+body{
+    background-color: #C5D5FD;
+    margin: 0;
+}
