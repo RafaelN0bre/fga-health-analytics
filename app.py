@@ -8,7 +8,7 @@ import plotly.io as pio
 
 app = dash.Dash(__name__, title='Fga Health Analytics', update_title='Carregando...')
 #Defindo Dataframe
-df_global = pd.read_excel('covid_global.xlsx')
+df_global = pd.read_excel('planilha_covid.xlsx')
 
 df_global = df_global[df_global['location']=='Afghanistan']
 
@@ -51,6 +51,22 @@ app.layout = html.Div(children=[
             html.Img(src='/assets/logo_fga.png'),
             html.P('Hello Dash'),
         ]
+    ),
+     
+    dcc.Dropdown(id = 'escolha_de_pais',
+        options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
+        
+        optionHeight = 35,            #Espaço entre as opções do dropdown
+        value  = 'World',             #Opção padrão ao iniciar a página
+        disabled = False,             #Capacidade de interagir com o dropdown
+        multi = False,                #Permitir múltiplas escolhas 
+        searchable = True,            #Permitir digitar para procurar valor
+        placeholder = 'Selecione...', #Frase que aparece quando nada foi selecionado
+        clearable = True,             #Permitir que seja apagado o valor escolhido
+        style = {'width' : '45%', 'display' : 'inline-block'},    #Estilização
+       #classname = '',               #Extrai a calsse de algum documento css dentro da pasata assets
+        persistence = True,           #Mantem o valor até que , no type memory, a página dê um refresh
+        persistence_type = 'memory',
     ),
 
     dcc.Graph(
