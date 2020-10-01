@@ -19,7 +19,6 @@ fig_bar_global = go.Figure( data = [
 ])
 fig_bar_global.update_layout(
     barmode='overlay',
-    height=275,
     margin=dict(
         l=25,
         r=25,
@@ -35,7 +34,6 @@ fig_bar_global_2 = go.Figure( data = [
 ])
 fig_bar_global_2.update_layout(
     barmode='overlay',
-    height=275,
     margin=dict(
         l=25,
         r=25,
@@ -63,38 +61,80 @@ app.layout = html.Div(children=[
     html.Div(
         id='seccao_filtros',
         children=[
-            dcc.Dropdown(id = 'escolha_de_pais',
-                options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
+            html.Div(
+                id='pt_1',
+                children=[
+                    dcc.Dropdown(id = 'escolha_de_pais',
+                        options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
 
-                optionHeight = 35,            #Espaço entre as opções do dropdown
-                value  = 'World',             #Opção padrão ao iniciar a página
-                disabled = False,             #Capacidade de interagir com o dropdown
-                multi = False,                #Permitir múltiplas escolhas 
-                searchable = True,            #Permitir digitar para procurar valor
-                placeholder = 'Selecione...', #Frase que aparece quando nada foi selecionado
-                clearable = True,             #Permitir que seja apagado o valor escolhido
-                style = {'width' : '200px', 'display' : 'inline-block'},    #Estilização
-               #classname = '',               #Extrai a calsse de algum documento css dentro da pasata assets
-                persistence = True,           #Mantem o valor até que , no type memory, a página dê um refresh
-                persistence_type = 'memory',
+                        optionHeight = 35,            #Espaço entre as opções do dropdown
+                        value  = 'World',             #Opção padrão ao iniciar a página
+                        disabled = False,             #Capacidade de interagir com o dropdown
+                        multi = False,                #Permitir múltiplas escolhas 
+                        searchable = True,            #Permitir digitar para procurar valor
+                        placeholder = 'Selecione...', #Frase que aparece quando nada foi selecionado
+                        clearable = True,             #Permitir que seja apagado o valor escolhido
+                        style = {'width' : '200px', 'display' : 'inline-block'},    #Estilização
+                       #classname = '',               #Extrai a calsse de algum documento css dentro da pasata assets
+                        persistence = True,           #Mantem o valor até que , no type memory, a página dê um refresh
+                        persistence_type = 'memory',
+                    ),
+                    dcc.Dropdown(id = 'decidir_input', #Falta decidir o valor que será colocado nessa label.
+                        options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
+
+                        optionHeight = 35,            #Espaço entre as opções do dropdown
+                        value  = 'World',             #Opção padrão ao iniciar a página
+                        disabled = False,             #Capacidade de interagir com o dropdown
+                        multi = False,                #Permitir múltiplas escolhas 
+                        searchable = True,            #Permitir digitar para procurar valor
+                        placeholder = 'Selecione...', #Frase que aparece quando nada foi selecionado
+                        clearable = True,             #Permitir que seja apagado o valor escolhido
+                        style = {'width' : '200px', 'display' : 'inline-block'},    #Estilização
+                       #classname = '',               #Extrai a calsse de algum documento css dentro da pasata assets
+                        persistence = True,           #Mantem o valor até que , no type memory, a página dê um refresh
+                        persistence_type = 'memory',
+                    ),
+                ]
             ),
-            dcc.Dropdown(id = 'decidir_input', #Falta decidir o valor que será colocado nessa label.
-                options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
 
-                optionHeight = 35,            #Espaço entre as opções do dropdown
-                value  = 'World',             #Opção padrão ao iniciar a página
-                disabled = False,             #Capacidade de interagir com o dropdown
-                multi = False,                #Permitir múltiplas escolhas 
-                searchable = True,            #Permitir digitar para procurar valor
-                placeholder = 'Selecione...', #Frase que aparece quando nada foi selecionado
-                clearable = True,             #Permitir que seja apagado o valor escolhido
-                style = {'width' : '200px', 'display' : 'inline-block'},    #Estilização
-               #classname = '',               #Extrai a calsse de algum documento css dentro da pasata assets
-                persistence = True,           #Mantem o valor até que , no type memory, a página dê um refresh
-                persistence_type = 'memory',
+            html.Div(
+                id='pt_2',
+                children=[
+                    dcc.Dropdown(id = 'dado_3',
+                        options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
+
+                        optionHeight = 35,            #Espaço entre as opções do dropdown
+                        value  = 'World',             #Opção padrão ao iniciar a página
+                        disabled = False,             #Capacidade de interagir com o dropdown
+                        multi = False,                #Permitir múltiplas escolhas 
+                        searchable = True,            #Permitir digitar para procurar valor
+                        placeholder = 'Selecione...', #Frase que aparece quando nada foi selecionado
+                        clearable = True,             #Permitir que seja apagado o valor escolhido
+                        style = {'width' : '200px', 'display' : 'inline-block'},    #Estilização
+                       #classname = '',               #Extrai a calsse de algum documento css dentro da pasata assets
+                        persistence = True,           #Mantem o valor até que , no type memory, a página dê um refresh
+                        persistence_type = 'memory',
+                    ),
+                    dcc.Dropdown(id = 'dado_4', #Falta decidir o valor que será colocado nessa label.
+                        options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
+
+                        optionHeight = 35,            #Espaço entre as opções do dropdown
+                        value  = 'World',             #Opção padrão ao iniciar a página
+                        disabled = False,             #Capacidade de interagir com o dropdown
+                        multi = False,                #Permitir múltiplas escolhas 
+                        searchable = True,            #Permitir digitar para procurar valor
+                        placeholder = 'Selecione...', #Frase que aparece quando nada foi selecionado
+                        clearable = True,             #Permitir que seja apagado o valor escolhido
+                        style = {'width' : '200px', 'display' : 'inline-block'},    #Estilização
+                       #classname = '',               #Extrai a calsse de algum documento css dentro da pasata assets
+                        persistence = True,           #Mantem o valor até que , no type memory, a página dê um refresh
+                        persistence_type = 'memory',
+                    ),
+                ]
             ),
         ]
     ),
+
 
     dcc.Graph(
         id='example-graph',

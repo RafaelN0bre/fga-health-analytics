@@ -2,12 +2,15 @@
 #example-graph{
     width: 65%;
     padding: 12px 12px 12px 12px;
+    height: 275px;
+    display: inline-block;
 }
 
 /* Gráfico 2 */
 #example-graph_2{
     width: 65%;
     padding: 12px 12px 12px 12px;
+    height: 275px;
 }
 
 /* Cabeçalho --> Aonde fica nosaa logo e o ícone de menu */
@@ -43,11 +46,18 @@ body{
 
 #escolha_de_pais{
     padding-right: 10px;
+    display: inline-block;
 }
 
 #seccao_filtros{
     padding-top: 12px;
     padding-left: 12px;
+    vertical-align: top;
+    display: inline-block;
 }
 
+#dado_3{
+    padding-right: 10px;
+    display: inline-block;
+}
 /* Trabalhar layout do header e padding dos gráficos
