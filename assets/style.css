@@ -1,15 +1,13 @@
-/* Gráfico 1  --> Atenção para o float right ele está alterando a estrutura do body.*/
+/* Gráfico 1 */
 #example-graph{
     width: 65%;
-    padding: 7px 7px 7px 7px;
-    float: right;
+    padding: 12px 12px 12px 12px;
 }
 
-/* Gráfico 2 --> Mesma situação que o gráfico 1*/
+/* Gráfico 2 */
 #example-graph_2{
     width: 65%;
-    padding: 7px 7px 7px 7px;
-    float: right;
+    padding: 12px 12px 12px 12px;
 }
 
 /* Cabeçalho --> Aonde fica nosaa logo e o ícone de menu */
@@ -23,8 +21,10 @@
 #header p{
     margin: 0;
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: top;
     color: #FCFCFC;
+    font-family: 'Courier New', Courier, monospace;
+    padding-top: 25px;
 }
 
 /* Logo da nosso dashboard*/
@@ -33,10 +33,21 @@
     width: 4.16%;
     height: 5.37%;
     display: inline-block;
-    padding: 12px 0px 0px 20px;
-}
+    padding: 12px 12px 12px 20px;
+} 
 
 body{
     background-color: #C5D5FD;
     margin: 0;
 }
+
+#escolha_de_pais{
+    padding-right: 10px;
+}
+
+#seccao_filtros{
+    padding-top: 12px;
+    padding-left: 12px;
+}
+
+/* Trabalhar layout do header e padding dos gráficos
