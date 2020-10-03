@@ -10,12 +10,12 @@ app = dash.Dash(__name__, title='Fga Health Analytics', update_title='Carregando
 #Defindo Dataframe
 df_global = pd.read_excel('covid_global.xlsx')
 
-df_global = df_global[df_global['location']=='Afghanistan']
+#df_global = df_global[df_global['location']=='Afghanistan']
 
 #Definindo Gráfico 1 
 fig_bar_global = go.Figure( data = [
-    go.Bar(x = df_global['date'], y = df_global['total_cases'], name ='Casos', marker_color = "yellow"),
-    go.Bar(x = df_global['date'], y = df_global['total_deaths'], name ='Mortes', marker_color = "red"),
+    go.Bar(x = df_global[df_global['location']=='Afghanistan']['date'], y = df_global[df_global['location']=='Afghanistan']['total_cases'], name ='Casos', marker_color = "yellow"),
+    go.Bar(x = df_global[df_global['location']=='Afghanistan']['date'], y = df_global[df_global['location']=='Afghanistan']['total_deaths'], name ='Mortes', marker_color = "red"),
 ])
 fig_bar_global.update_layout(
     barmode='overlay',
@@ -29,8 +29,8 @@ fig_bar_global.update_layout(
 
 #Definindo Gráfico 2
 fig_bar_global_2 = go.Figure( data = [
-    go.Bar(x = df_global['date'], y = df_global['total_cases'], name ='Casos', marker_color = "yellow"),
-    go.Bar(x = df_global['date'], y = df_global['total_deaths'], name ='Mortes', marker_color = "red"),
+    go.Bar(x = df_global[df_global['location']=='Afghanistan']['date'], y = df_global[df_global['location']=='Afghanistan']['total_cases'], name ='Casos', marker_color = "yellow"),
+    go.Bar(x = df_global[df_global['location']=='Afghanistan']['date'], y = df_global[df_global['location']=='Afghanistan']['total_deaths'], name ='Mortes', marker_color = "red"),
 ])
 fig_bar_global_2.update_layout(
     barmode='overlay',
