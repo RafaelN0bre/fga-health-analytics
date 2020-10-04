@@ -5,6 +5,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
 import plotly.io as pio
+from dash.dependencies import Input, Output
 
 app = dash.Dash(__name__, title='Fga Health Analytics', update_title='Carregando...')
 #Defindo Dataframe
@@ -90,7 +91,7 @@ app.layout = html.Div(children=[
                             html.P('Gráfico 2'), # texto inserido dentro do html.P
                         ]
                     ),
-                    dcc.Dropdown(id = 'escolha_de_pais',
+                    dcc.Dropdown(id = 'escolha_de_pais', #muda o local dod dois gráficos.
                         options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
 
                         optionHeight = 35,            #Espaço entre as opções do dropdown
@@ -105,7 +106,7 @@ app.layout = html.Div(children=[
                         persistence = True,           #Mantem o valor até que , no type memory, a página dê um refresh
                         persistence_type = 'memory',
                     ),
-                    dcc.Dropdown(id = 'decidir_input', #Falta decidir o valor que será colocado nessa label.
+                    dcc.Dropdown(id = 'dado_2', #Falta decidir o valor que será colocado nessa label.
                         options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
 
                         optionHeight = 35,
@@ -189,6 +190,43 @@ app.layout = html.Div(children=[
         figure=fig_bar_global_2
     )
 ])
+@app.callback(
+[Output('example-graph_2', 'figure'),  #primeiro o id do gráfico, dps a propriedade q será mudada pelo imput
+Output('example-graph', 'figure')],
+[Input('escolha_de_pais', 'value')]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
+def update_figure(selected_location):
+    newlocation_df = df_global[df_global.location == selected_location] #redefinindo o dataframe
+
+    fig_bar_global_2 = go.Figure( data = [    #arrumando o gráfico de acordo com o imput e o novo dataframe
+        go.Bar(x = newlocation_df['date'], y = newlocation_df['total_cases'], name ='Casos', marker_color = "yellow"),
+        go.Bar(x = newlocation_df['date'], y = newlocation_df['total_deaths'], name ='Mortes', marker_color = "red"),
+    ])
+    fig_bar_global_2.update_layout(
+        barmode='overlay',
+        margin=dict(
+            l=25,
+            r=25,
+            b=25,
+            t=25,
+        ),
+        showlegend=False,
+        
+)
+    fig_bar_global = go.Figure( data = [
+        go.Bar(x = newlocation_df['date'], y = newlocation_df['total_cases'], name ='Casos', marker_color = "yellow"),
+        go.Bar(x = newlocation_df['date'], y = newlocation_df['total_deaths'], name ='Mortes', marker_color = "red"),
+    ])
+    fig_bar_global.update_layout(
+        barmode='overlay',
+        margin=dict(
+            l=25,
+            r=25,
+            b=25,
+            t=25,
+    ),
+        showlegend=False,
+)
+    return fig_bar_global_2, fig_bar_global  #devolvendo os gráficos que o usuario pediu no imput
 
 
 
