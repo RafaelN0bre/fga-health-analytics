@@ -25,6 +25,7 @@ fig_bar_global.update_layout(
         b=25,
         t=25,
     ),
+    showlegend=False,
 )
 
 #Definindo Gráfico 2
@@ -48,13 +49,19 @@ app.layout = html.Div(children=[
         id='header',
         children=[
             html.Img(
-                src='/assets/logo_fga.png'
+                id='logo_1',
+                src='/assets/logo_fga.png',
             ),
 
             html.P('FGA Health Analytics'),
 
             html.Img(
-                src='/assets/logo_fga.png'
+                id='logo_2',
+                src='/assets/logo_fga.png',
+            ),
+            html.Nav(
+                id='navbar',
+
             ),
         ]
     ),
@@ -151,11 +158,31 @@ app.layout = html.Div(children=[
         ]
     ),
 
-
-    dcc.Graph(
-        id='example-graph',
-        figure=fig_bar_global
+    html.Div( #Nessa div foi adicionado os três blocos responsáveis pelo resumo geral.
+        className='resumo_geral',
+        children=[
+            html.Div(
+                id='resumo_casos'
+            ),
+            html.Div(
+                id='colocar_algo'
+            ),
+            html.Div(
+                id='resumo_obitos'
+            ),
+        ],
     ),
+
+    html.Div(
+        id='grafico_1',
+        children=[
+            dcc.Graph(
+                id='example-graph',
+                figure=fig_bar_global
+            ),
+        ],
+    ),
+    
 
     dcc.Graph(
         id='example-graph_2',
