@@ -27,6 +27,7 @@
     vertical-align: top;
     color: #FCFCFC;
     font-family: 'Courier New', Courier, monospace;
+    font-size: x-large;
     padding-top: 25px;
 }
 
@@ -47,17 +48,47 @@ body{
 #escolha_de_pais{
     padding-right: 10px;
     display: inline-block;
+    color: #C5D5FD;
 }
 
 #seccao_filtros{
     padding-top: 12px;
     padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 12px;
+    margin-top: 12px;
+    margin-left: 12px;
     vertical-align: top;
+    background-color: #FFFFFF;
     display: inline-block;
+    border-radius: 10px;
+}
+
+#seccao_filtros p{
+    font-size: x-large;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 300;
 }
 
 #dado_3{
     padding-right: 10px;
     display: inline-block;
+}
+
+#oq_deseja_ver{
+    text-align: center;
+    margin: 0px;
+}
+
+#grafico_1_filtro_text{
+    text-align: center;
+    width: 450px;
+    margin-right: 1px;
+}
+
+#grafico_2_filtro_text{
+    text-align: center;
+    width: 150px;
+    margin-right: 1px;
 }
 /* Trabalhar layout do header e padding dos gráficos

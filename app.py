@@ -40,6 +40,7 @@ fig_bar_global_2.update_layout(
         b=25,
         t=25,
     ),
+    paper_bgcolor='#C5D5FD',
 )
 
 app.layout = html.Div(children=[
@@ -61,9 +62,27 @@ app.layout = html.Div(children=[
     html.Div(
         id='seccao_filtros',
         children=[
-            html.Div(
+            html.Div( #Div inserida dentro da secção de filtros, para lidar com o texto "O que deseja ver?"
                 id='pt_1',
                 children=[
+                    html.Div(
+                        id = "oq_deseja_ver", #id de referência para estilizaçao no css
+                        children=[
+                            html.P('O que deseja ver ?'), #texto inserido dentro do html.P
+                        ]
+                    ),
+                    html.Div( # Div inserida para colocar o texto "Gráfico 1"
+                        id="grafico_1_filtro_text", #id para estilização no css
+                        children=[
+                            html.P('Gráfico 1'), # texto inserido dentro do html.P
+                        ]
+                    ),
+                    html.Div( # Div inserida para colocar o texto "Gráfico 2"
+                        id="grafico_2_filtro_text", #id para estilização no css
+                        children=[
+                            html.P('Gráfico 2'), # texto inserido dentro do html.P
+                        ]
+                    ),
                     dcc.Dropdown(id = 'escolha_de_pais',
                         options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
 
