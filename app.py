@@ -68,10 +68,10 @@ app.layout = html.Div(children=[
     ),
     
     html.Div(
-        id='seccao_filtros',
+        id='block_1',
         children=[
             html.Div( #Div inserida dentro da secção de filtros, para lidar com o texto "O que deseja ver?"
-                id='pt_1',
+                id='seccao_filtros',
                 children=[
                     html.Div(
                         id = "oq_deseja_ver", #id de referência para estilizaçao no css
@@ -120,12 +120,6 @@ app.layout = html.Div(children=[
                         persistence = True,
                         persistence_type = 'memory',
                     ),
-                ]
-            ),
-
-            html.Div(
-                id='pt_2',
-                children=[
                     dcc.Dropdown(id = 'dado_3',
                         options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
 
@@ -156,10 +150,17 @@ app.layout = html.Div(children=[
                     ),
                 ]
             ),
+
+            html.Div(
+                id='top_3',
+                children=[
+                    
+                ],
+            ),
         ]
     ),
 
-    html.Div( #Nessa div foi adicionado os três blocos responsáveis pelo resumo geral.
+    html.Div( #Bloco de divs da direita --> Resumo geral, grafico 1 e grafico 2.
         className='resumo_geral',
         children=[
             html.Div(
@@ -171,24 +172,29 @@ app.layout = html.Div(children=[
             html.Div(
                 id='resumo_obitos'
             ),
-        ],
-    ),
 
-    html.Div(
-        id='grafico_1',
-        children=[
-            dcc.Graph(
-                id='example-graph',
-                figure=fig_bar_global
+            html.Div(
+                id='grafico_1',
+                children=[
+                    dcc.Graph(
+                        id='example-graph',
+                        figure=fig_bar_global
+                    ),
+                ],
+            ),
+
+            html.Div(
+                id='grafico_2',
+                children=[
+                    dcc.Graph(
+                        id='example-graph_2',
+                        figure=fig_bar_global_2
+                    ),
+                ],
             ),
         ],
     ),
-    
 
-    dcc.Graph(
-        id='example-graph_2',
-        figure=fig_bar_global_2
-    )
 ])
 @app.callback(
 [Output('example-graph_2', 'figure'),  #primeiro o id do gráfico, dps a propriedade q será mudada pelo imput

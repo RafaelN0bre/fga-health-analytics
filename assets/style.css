@@ -1,16 +1,9 @@
-/* Gráfico 2 */
-#example-graph_2{
-    width: 65%;
-    padding: 12px 12px 12px 12px;
-    height: 275px;
-}
-
 /* Cabeçalho --> Aonde fica nosaa logo e o ícone de menu */
 #header{
     height: 78px;
     background-color: #5E60CE;
     margin: 0;
-    width: 1440px;
+    width: 1425px;
 }
 
 /* Escrita Fga Health Analytics */
@@ -34,29 +27,47 @@
     color: #FFFFFF;
 }
 
-#seccao_filtros{
+#block_1{
     width: 407px;
-    height: 864px;
+    height: 870px;
     display: inline-block;
-    background-color: #FFFFFF;
     vertical-align: top;
     border-radius: 30px;
     margin-top: 33px;
     margin-left: 20px;
-    padding-top: 12px;
-    padding-left: 12px;
     padding-right: 12px;
-    padding-bottom: 12px;
+    margin-bottom: 20px;
 }
 
-#seccao_filtros p{
+#block_1 p{
     font-size: x-large;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 300;
 }
 
+#seccao_filtros{
+    width: 407px;
+    height: 420px;
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 30px;
+    background-color: #FFFFFF;
+    padding-left: 12px;
+}
+
+#top_3{
+    width: 407px;
+    height: 418px;
+    display: inline-block;
+    border-radius: 30px;
+    background-color: #FFFFFF;
+    margin-top: 32px;
+    padding-left: 12px;
+}
+
 .resumo_geral{
     display: inline-block;
+    margin-bottom: 20px;
 }
 
 #resumo_casos{
@@ -94,6 +105,16 @@
 #example-graph{
     width: 940px;
     height: 281px;
+    margin-left: 20px;
+    margin-top: 33px;
+}
+
+/* Gráfico 2 */
+#example-graph_2{
+    width: 940px;
+    height: 281px;
+    margin-left: 20px;
+    margin-top: 33px;
 }
 
 body{
