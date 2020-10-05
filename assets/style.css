@@ -53,6 +53,7 @@
     border-radius: 30px;
     background-color: #FFFFFF;
     padding-left: 12px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
 }
 
 #top_3{
@@ -63,6 +64,7 @@
     background-color: #FFFFFF;
     margin-top: 32px;
     padding-left: 12px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
 }
 
 .resumo_geral{
@@ -78,6 +80,7 @@
     background-color: #FFFFFF;
     margin-top: 33px;
     margin-left: 20px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
 }
 
 #colocar_algo{
@@ -88,6 +91,7 @@
     background-color: #FFFFFF;
     margin-top: 33px;
     margin-left: 20px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
 }
 
 #resumo_obitos{
@@ -99,6 +103,7 @@
     margin-top: 33px;
     margin-left: 20px;
     position: absolute;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
 }
 
 /* Gráfico 1 */
@@ -107,6 +112,7 @@
     height: 281px;
     margin-left: 20px;
     margin-top: 33px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
 }
 
 /* Gráfico 2 */
@@ -115,6 +121,7 @@
     height: 281px;
     margin-left: 20px;
     margin-top: 33px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
 }
 
 body{
