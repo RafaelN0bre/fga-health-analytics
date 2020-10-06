@@ -164,13 +164,33 @@ app.layout = html.Div(children=[
         className='resumo_geral',
         children=[
             html.Div(
-                id='resumo_casos'
+                id='resumo_casos',
+                children=[
+                    html.Div(
+                        id='icon_circle_casos',
+                    ),
+
+                    html.Img(
+                        id='icon_casos',
+                        src='/assets/icon_casos.svg',
+                    ),
+                ],
             ),
             html.Div(
-                id='colocar_algo'
+                id='colocar_algo',
             ),
             html.Div(
-                id='resumo_obitos'
+                id='resumo_obitos',
+                children=[
+                    html.Div(
+                        id='icon_circle_obitos',
+                    ),
+
+                    html.Img(
+                        id='icon_obitos',
+                        src='/assets/icon_deaths.svg',
+                    ),
+                ],
             ),
 
             html.Div(
