@@ -28,7 +28,7 @@
 }
 
 #block_1{
-    width: 407px;
+    width: 420px;
     height: 870px;
     display: inline-block;
     vertical-align: top;
@@ -46,7 +46,7 @@
 }
 
 #seccao_filtros{
-    width: 407px;
+    width: 420px;
     height: 420px;
     display: inline-block;
     vertical-align: top;
@@ -56,8 +56,104 @@
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
 }
 
+#oq_deseja_ver{
+    text-align: center;
+    margin: 0px;
+}
+
+#grafico_1_filtro_text{
+    position: absolute;
+    width: 150px;
+    margin-top: -20px;
+}
+
+#grafico_2_filtro_text{
+    text-align: center;
+    width: 150px;
+    margin-left: 270px;
+    position: absolute;
+    margin-top: -20px;
+}
+
+#escolha_de_pais{
+    padding-right: 10px;
+    display: inline-block;
+    color: #000000;
+    position: absolute;
+    margin-top: 50px;
+    width: 200px;
+}
+
+#casos_mortes{
+    display: inline-block;
+    color: #000000;
+    position: absolute;
+    margin-top: 100px;
+    width: 200px;
+    
+}
+
+#grafico1_dado3{
+    padding-right: 10px;
+    display: inline-block;
+    position: absolute;
+    margin-top: 150px;
+    width: 200px;
+}
+
+#grafico2_dado1{
+    padding-right: 10px;
+    display: inline-block;
+    position: absolute;
+    margin-top: 50px;
+    margin-left: 210px;
+    width: 200px;
+}
+
+#grafico2_dado2{
+    padding-right: 10px;
+    display: inline-block;
+    position: absolute;
+    margin-top: 100px;
+    margin-left: 210px;
+    width: 200px;
+}
+
+#grafico2_dado3{
+    padding-right: 10px;
+    display: inline-block;
+    position: absolute;
+    margin-top: 150px;
+    margin-left: 210px;
+    width: 200px;
+}
+
+#filtros_gerais_text{
+    display: inline-block;
+    position: absolute;
+    margin-top: 200px;
+    margin-left: 100px;
+}
+
+#dado_7{
+    padding-right: 10px;
+    display: inline-block;
+    position: absolute;
+    margin-top: 275px;
+    width: 200px;
+}
+
+#dado_8{
+    padding-right: 10px;
+    display: inline-block;
+    position: absolute;
+    margin-top: 275px;
+    margin-left: 210px;
+    width: 200px;
+}
+
 #top_3{
-    width: 407px;
+    width: 420px;
     height: 418px;
     display: inline-block;
     border-radius: 30px;
@@ -164,33 +260,5 @@
 body{
     background-color: #C5D5FD;
     margin: 0;
-}
-
-#escolha_de_pais{
-    padding-right: 10px;
-    display: inline-block;
-    color: #C5D5FD;
-}
-
-#dado_3{
-    padding-right: 10px;
-    display: inline-block;
-}
-
-#oq_deseja_ver{
-    text-align: center;
-    margin: 0px;
-}
-
-#grafico_1_filtro_text{
-    text-align: center;
-    width: 450px;
-    margin-right: 1px;
-}
-
-#grafico_2_filtro_text{
-    text-align: center;
-    width: 150px;
-    margin-right: 1px;
 }
 /* Trabalhar layout do header e padding dos gráficos

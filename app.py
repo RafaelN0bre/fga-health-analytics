@@ -103,7 +103,6 @@ app.layout = html.Div(children=[
                         searchable = True,            #Permitir digitar para procurar valor
                         placeholder = 'Selecione...', #Frase que aparece quando nada foi selecionado
                         clearable = True,             #Permitir que seja apagado o valor escolhido
-                        style = {'width' : '200px', 'display' : 'inline-block'},    #Estilização
                        #classname = '',               #Extrai a calsse de algum documento css dentro da pasata assets
                         persistence = True,           #Mantem o valor até que , no type memory, a página dê um refresh
                         persistence_type = 'memory',
@@ -117,14 +116,13 @@ app.layout = html.Div(children=[
                         value  = ['grafico_casos', 'grafico_mortes'],
                         disabled = False,
                         multi = True,
-                        searchable = True,
+                        searchable = False,
                         placeholder = 'Selecione...',
                         clearable = True,
-                        style = {'width' : '200px', 'display' : 'inline-block'},
                         persistence = True,
                         persistence_type = 'memory',
                     ),
-                    dcc.Dropdown(id = 'dado_3',
+                    dcc.Dropdown(id = 'grafico1_dado3',
                         options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
 
                         optionHeight = 35,
@@ -134,11 +132,11 @@ app.layout = html.Div(children=[
                         searchable = True,
                         placeholder = 'Selecione...',
                         clearable = True,
-                        style = {'width' : '200px', 'display' : 'inline-block'},
                         persistence = True,
                         persistence_type = 'memory',
                     ),
-                    dcc.Dropdown(id = 'dado_4', #Falta decidir o valor que será colocado nessa label.
+
+                    dcc.Dropdown(id = 'grafico2_dado1', #Falta decidir o valor que será colocado nessa label.
                         options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
 
                         optionHeight = 35,
@@ -148,7 +146,69 @@ app.layout = html.Div(children=[
                         searchable = True,
                         placeholder = 'Selecione...',
                         clearable = True,
-                        style = {'width' : '200px', 'display' : 'inline-block'},
+                        persistence = True,
+                        persistence_type = 'memory',
+                    ),
+
+                    dcc.Dropdown(id = 'grafico2_dado2', #Falta decidir o valor que será colocado nessa label.
+                        options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
+
+                        optionHeight = 35,
+                        value  = 'World',
+                        disabled = False,
+                        multi = False,                
+                        searchable = True,
+                        placeholder = 'Selecione...',
+                        clearable = True,
+                        persistence = True,
+                        persistence_type = 'memory',
+                    ),
+
+                    dcc.Dropdown(id = 'grafico2_dado3', #Falta decidir o valor que será colocado nessa label.
+                        options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
+
+                        optionHeight = 35,
+                        value  = 'World',
+                        disabled = False,
+                        multi = False,                
+                        searchable = True,
+                        placeholder = 'Selecione...',
+                        clearable = True,
+                        persistence = True,
+                        persistence_type = 'memory',
+                    ),
+
+                    html.Div(
+                        id='filtros_gerais_text',
+                        children=[
+                            html.P('Filtros Gerais'),
+                        ],
+                    ),
+
+                    dcc.Dropdown(id = 'dado_7', #Falta decidir o valor que será colocado nessa label.
+                        options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
+
+                        optionHeight = 35,
+                        value  = 'World',
+                        disabled = False,
+                        multi = False,                
+                        searchable = True,
+                        placeholder = 'Selecione...',
+                        clearable = True,
+                        persistence = True,
+                        persistence_type = 'memory',
+                    ),
+
+                    dcc.Dropdown(id = 'dado_8', #Falta decidir o valor que será colocado nessa label.
+                        options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
+
+                        optionHeight = 35,
+                        value  = 'World',
+                        disabled = False,
+                        multi = False,                
+                        searchable = True,
+                        placeholder = 'Selecione...',
+                        clearable = True,
                         persistence = True,
                         persistence_type = 'memory',
                     ),
