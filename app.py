@@ -238,6 +238,21 @@ app.layout = html.Div(children=[
                         id='icon_casos',
                         src='/assets/icon_casos.svg',
                     ),
+
+                    html.P(
+                        'Casos Confirmados',
+                        id='casos_confirmados_text',
+                    ),
+
+                    html.P(
+                        'Acumulado',
+                        id='acumulado_casos_text',
+                    ),
+
+                    html.P(
+                        'Novos Casos',
+                        id='novos_casos_text',
+                    ),
                 ],
             ),
             html.Div(
@@ -253,6 +268,26 @@ app.layout = html.Div(children=[
                     html.Img(
                         id='icon_obitos',
                         src='/assets/icon_deaths.svg',
+                    ),
+
+                    html.P(
+                        'Óbitos Confirmados',
+                        id='obitos_confirmados',
+                    ),
+
+                    html.P(
+                        'Acumulado',
+                        id='acumulado_obitos_text',
+                    ),
+
+                    html.P(
+                        'Letalidade',
+                        id='letalidade_text',
+                    ),
+
+                    html.P(
+                        'Novos Óbitos',
+                        id='novos_obitos_text'
                     ),
                 ],
             ),

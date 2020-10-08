@@ -198,6 +198,30 @@
     position: absolute;
 }
 
+#casos_confirmados_text{
+    position: absolute;
+    margin-left: 79px;
+    margin-top: 33px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: larger;
+}
+
+#acumulado_casos_text{
+    position: absolute;
+    margin-left: 79px;
+    margin-top: 130px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+}
+
+#novos_casos_text{
+    position: absolute;
+    margin-left: 79px;
+    margin-top: 190px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+}
+
 #colocar_algo{
     width: 300px;
     height: 232px;
@@ -237,6 +261,38 @@
     margin-left: 22.98px;
     margin-top: 24px;
     position: absolute;
+}
+
+#obitos_confirmados{
+    position: absolute;
+    margin-left: 77px;
+    margin-top: 33px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: larger;
+}
+
+#acumulado_obitos_text{
+    position: absolute;
+    margin-left: 12px;
+    margin-top: 130px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+}
+
+#letalidade_text{
+    position: absolute;
+    margin-left: 12px;
+    margin-top: 187px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+}
+
+#novos_obitos_text{
+    position: absolute;
+    margin-left: 150px;
+    margin-top: 130px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
 }
 
 /* Gráfico 1 */
