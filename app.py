@@ -151,12 +151,14 @@ app.layout = html.Div(children=[
                     ),
 
                     dcc.Dropdown(id = 'grafico2_dado2', #Falta decidir o valor que será colocado nessa label.
-                        options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
+                         options = [
+                            {'label': 'Casos', 'value':'grafico_casos' },
+                            {'label': 'Mortes', 'value': 'grafico_mortes'}], 
 
                         optionHeight = 35,
-                        value  = 'World',
+                        value  = ['grafico_casos', 'grafico_mortes'],
                         disabled = False,
-                        multi = False,                
+                        multi = True,                
                         searchable = True,
                         placeholder = 'Selecione...',
                         clearable = True,
@@ -316,18 +318,17 @@ app.layout = html.Div(children=[
 
 ])
 @app.callback(
-[Output('example-graph_2', 'figure'),  #primeiro o id do gráfico, dps a propriedade q será mudada pelo imput
-Output('example-graph', 'figure')],
+[Output('example-graph_2', 'figure')],
 [Input('escolha_de_pais', 'value'),
 Input('casos_mortes', 'value')]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
 def update_figure(selected_location, selected_bars):
-    newlocation_df = df_global[df_global.location == selected_location] #redefinindo o dataframe
+    newlocation_df1 = df_global[df_global.location == selected_location] #redefinindo o dataframe
     if not selected_bars:
         raise PreventUpdate
 
     elif selected_bars == ['grafico_casos']:
         fig_bar_global_2 = go.Figure( data = [    #arrumando o gráfico de acordo com o imput e o novo dataframe
-            go.Bar(x = newlocation_df['date'], y = newlocation_df['total_cases'], name ='Casos', marker_color = "yellow"),
+            go.Bar(x = newlocation_df1['date'], y = newlocation_df1['total_cases'], name ='Casos', marker_color = "yellow"),
         ])
         fig_bar_global_2.update_layout(
             barmode='overlay',
@@ -340,8 +341,60 @@ def update_figure(selected_location, selected_bars):
             showlegend=False,
         
     )
+        
+        return [fig_bar_global_2]  #devolvendo os gráficos que o usuario pediu no imput
+
+    elif selected_bars == ['grafico_mortes']:
+        fig_bar_global_2 = go.Figure( data = [    #arrumando o gráfico de acordo com o imput e o novo dataframe
+            go.Bar(x = newlocation_df1['date'], y = newlocation_df1['total_deaths'], name ='Mortes', marker_color = "red"),
+        ])
+        fig_bar_global_2.update_layout(
+            barmode='overlay',
+            margin=dict(
+                l=25,
+                r=25,
+                b=25,
+                t=25,
+            ),
+                showlegend=False,
+        
+        )
+       
+        return [fig_bar_global_2] #devolvendo os gráficos que o usuario pediu no imput
+
+    if selected_bars == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']:
+        fig_bar_global_2 = go.Figure( data = [    #arrumando o gráfico de acordo com o imput e o novo dataframe
+            go.Bar(x = newlocation_df1['date'], y = newlocation_df1['total_cases'], name ='Casos', marker_color = "yellow"),
+            go.Bar(x = newlocation_df1['date'], y = newlocation_df1['total_deaths'], name ='Mortes', marker_color = "red")
+        ])
+        fig_bar_global_2.update_layout(
+            barmode='overlay',
+            margin=dict(
+                l=25,
+                r=25,
+                b=25,
+                t=25,
+            ),
+                showlegend=False,
+        
+        )
+        
+        return [fig_bar_global_2] #devolvendo os gráficos que o usuario pediu no imput
+
+
+@app.callback(
+[Output('example-graph', 'figure'),],
+[Input('grafico2_dado1', 'value'),
+Input('grafico2_dado2', 'value')]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
+def update_figure2(selected_location2, selected_bars2):
+    newlocation_df2 = df_global[df_global['location'] == selected_location2] #redefinindo o dataframe
+    if not selected_bars2:
+        raise PreventUpdate
+
+    elif selected_bars2 == ['grafico_casos']:
+        
         fig_bar_global = go.Figure( data = [
-            go.Bar(x = newlocation_df['date'], y = newlocation_df['total_cases'], name ='Casos', marker_color = "yellow"),
+            go.Bar(x = newlocation_df2['date'], y = newlocation_df2['total_cases'], name ='Casos', marker_color = "yellow"),
         ])
         fig_bar_global.update_layout(
             barmode='overlay',
@@ -353,25 +406,12 @@ def update_figure(selected_location, selected_bars):
         ),
             showlegend=False,
     )
-        return fig_bar_global_2, fig_bar_global  #devolvendo os gráficos que o usuario pediu no imput
+        return [fig_bar_global]  #devolvendo os gráficos que o usuario pediu no imput
 
-    elif selected_bars == ['grafico_mortes']:
-        fig_bar_global_2 = go.Figure( data = [    #arrumando o gráfico de acordo com o imput e o novo dataframe
-            go.Bar(x = newlocation_df['date'], y = newlocation_df['total_deaths'], name ='Mortes', marker_color = "red"),
-        ])
-        fig_bar_global_2.update_layout(
-            barmode='overlay',
-            margin=dict(
-                l=25,
-                r=25,
-                b=25,
-                t=25,
-            ),
-                showlegend=False,
+    elif selected_bars2 == ['grafico_mortes']:
         
-        )
         fig_bar_global = go.Figure( data = [
-            go.Bar(x = newlocation_df['date'], y = newlocation_df['total_deaths'], name ='Mortes', marker_color = "red"),
+            go.Bar(x = newlocation_df2['date'], y = newlocation_df2['total_deaths'], name ='Mortes', marker_color = "red"),
         ])
         fig_bar_global.update_layout(
             barmode='overlay',
@@ -383,27 +423,13 @@ def update_figure(selected_location, selected_bars):
             ),
                 showlegend=False,
         )
-        return fig_bar_global_2, fig_bar_global  #devolvendo os gráficos que o usuario pediu no imput
+        return [fig_bar_global]  #devolvendo os gráficos que o usuario pediu no imput
 
-    if selected_bars == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']:
-        fig_bar_global_2 = go.Figure( data = [    #arrumando o gráfico de acordo com o imput e o novo dataframe
-            go.Bar(x = newlocation_df['date'], y = newlocation_df['total_cases'], name ='Casos', marker_color = "yellow"),
-            go.Bar(x = newlocation_df['date'], y = newlocation_df['total_deaths'], name ='Mortes', marker_color = "red")
-        ])
-        fig_bar_global_2.update_layout(
-            barmode='overlay',
-            margin=dict(
-                l=25,
-                r=25,
-                b=25,
-                t=25,
-            ),
-                showlegend=False,
-        
-        )
+    if selected_bars2 == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']:
+       
         fig_bar_global = go.Figure( data = [
-            go.Bar(x = newlocation_df['date'], y = newlocation_df['total_cases'], name ='Casos', marker_color = "yellow"),
-            go.Bar(x = newlocation_df['date'], y = newlocation_df['total_deaths'], name ='Mortes', marker_color = "red")
+            go.Bar(x = newlocation_df2['date'], y = newlocation_df2['total_cases'], name ='Casos', marker_color = "yellow"),
+            go.Bar(x = newlocation_df2['date'], y = newlocation_df2['total_deaths'], name ='Mortes', marker_color = "red")
             ])
         fig_bar_global.update_layout(
             barmode='overlay',
@@ -416,6 +442,7 @@ def update_figure(selected_location, selected_bars):
                 showlegend=False,
         
         )
-        return fig_bar_global_2, fig_bar_global  #devolvendo os gráficos que o usuario pediu no imput
+        return [fig_bar_global]  #devolvendo os gráficos que o usuario pediu no imput
+
 if __name__=="__main__":
     app.run_server(debug=True) 
