@@ -75,80 +75,83 @@
     margin-top: -20px;
 }
 
+#Primeira_linha{
+    display: block;
+}
+
+#Segunda_linha{
+    display: block;
+}
+
+#Terceira_linha{
+    display: block;
+}
+
+#Quarta_linha{
+    display: block;
+}
 #escolha_de_pais{
     padding-right: 10px;
     display: inline-block;
     color: #000000;
-    position: absolute;
-    margin-top: 50px;
+    position: relative;
     width: 200px;
 }
 
 #casos_mortes{
     display: inline-block;
     color: #000000;
-    position: absolute;
-    margin-top: 100px;
+    position: relative;
     width: 200px;
-    
+    padding-right: 10px;
 }
 
 #grafico1_dado3{
     padding-right: 10px;
     display: inline-block;
-    position: absolute;
-    margin-top: 150px;
+    position: relative;
     width: 200px;
 }
 
 #grafico2_dado1{
     padding-right: 10px;
     display: inline-block;
-    position: absolute;
-    margin-top: 50px;
-    margin-left: 210px;
+    position: relative;
     width: 200px;
 }
 
 #grafico2_dado2{
     padding-right: 10px;
     display: inline-block;
-    position: absolute;
-    margin-top: 100px;
-    margin-left: 210px;
+    position: relative;
     width: 200px;
 }
 
 #grafico2_dado3{
     padding-right: 10px;
     display: inline-block;
-    position: absolute;
-    margin-top: 150px;
-    margin-left: 210px;
+    position: relative;
     width: 200px;
 }
 
 #filtros_gerais_text{
     display: inline-block;
-    position: absolute;
-    margin-top: 200px;
+    position: relative;
+    margin-top: 0px;
     margin-left: 100px;
 }
 
 #dado_7{
     padding-right: 10px;
     display: inline-block;
-    position: absolute;
-    margin-top: 275px;
+    position: relative;
     width: 200px;
 }
 
 #dado_8{
     padding-right: 10px;
     display: inline-block;
-    position: absolute;
-    margin-top: 275px;
-    margin-left: 210px;
+    position: relative;
     width: 200px;
 }
 
