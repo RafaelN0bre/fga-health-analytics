@@ -11,42 +11,8 @@ from dash.exceptions import PreventUpdate
 
 app = dash.Dash(__name__, title='Fga Health Analytics', update_title='Carregando...')
 #Defindo Dataframe
+
 df_global = pd.read_excel('covid_global.xlsx')
-
-#df_global = df_global[df_global['location']=='Afghanistan']
-
-#Definindo Gráfico 1 (O gráfico 1 não será mais definido aqui, mas sim no callback)
-# fig_bar_global = go.Figure( data = [
-#     go.Bar(x = df_global[df_global['location']=='Afghanistan']['date'], y = df_global[df_global['location']=='Afghanistan']['total_cases'], name ='Casos', marker_color = "yellow"),
-#     go.Bar(x = df_global[df_global['location']=='Afghanistan']['date'], y = df_global[df_global['location']=='Afghanistan']['total_deaths'], name ='Mortes', marker_color = "red"),
-# ])
-# fig_bar_global.update_layout(
-#     barmode='overlay',
-#     margin=dict(
-#         l=25,
-#         r=25,
-#         b=25,
-#         t=25,
-#     ),
-#     showlegend=False,
-# )
-
-#Definindo Gráfico 2 (O gráfico 2 não será mais definido aqui, mas sim no callback)
-# fig_bar_global_2 = go.Figure( data = [
-#     go.Bar(x = df_global[df_global['location']=='Afghanistan']['date'], y = df_global[df_global['location']=='Afghanistan']['total_cases'], name ='Casos', marker_color = "yellow"),
-#     go.Bar(x = df_global[df_global['location']=='Afghanistan']['date'], y = df_global[df_global['location']=='Afghanistan']['total_deaths'], name ='Mortes', marker_color = "red"),
-# ])
-# fig_bar_global_2.update_layout(
-#     barmode='overlay',
-#     margin=dict(
-#         l=25,
-#         r=25,
-#         b=25,
-#         t=25,
-#     ),
-#     paper_bgcolor='#C5D5FD',
-# )
-
 app.layout = html.Div(children=[
     html.Div(
         id='header',
@@ -99,7 +65,7 @@ app.layout = html.Div(children=[
                     html.Div(
                         id='Primeira_linha',
                         children=[
-                            dcc.Dropdown(id = 'escolha_de_pais', #muda o local dod dois gráficos.
+                            dcc.Dropdown(id = 'pais_grafico_1', #antes escolha de pais
                                 options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
 
                                 optionHeight = 35,            #Espaço entre as opções do dropdown
@@ -117,7 +83,7 @@ app.layout = html.Div(children=[
                                 },
                             ),
 
-                            dcc.Dropdown(id = 'grafico2_dado1', #Falta decidir o valor que será colocado nessa label.
+                            dcc.Dropdown(id = 'pais_grafico_2', #Antes grafico2_dado1
                                 options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
         
                                 optionHeight = 35,
@@ -139,7 +105,7 @@ app.layout = html.Div(children=[
                     html.Div(
                         id='Segunda_linha',
                         children=[
-                            dcc.Dropdown(id = 'casos_mortes', #Falta decidir o valor que será colocado nessa label.
+                            dcc.Dropdown(id = 'casos_mortes_grafico_1', #Antes casos_mortes
                                 options = [
                                     {'label': 'Casos', 'value':'grafico_casos' },
                                     {'label': 'Mortes', 'value': 'grafico_mortes'}], 
@@ -158,7 +124,7 @@ app.layout = html.Div(children=[
                                 },
                             ),
 
-                            dcc.Dropdown(id = 'grafico2_dado2', #Falta decidir o valor que será colocado nessa label.
+                            dcc.Dropdown(id = 'casos_mortes_grafico_2', #Antes grafico2_dado2
                                 options = [
                                     {'label': 'Casos', 'value':'grafico_casos' },
                                     {'label': 'Mortes', 'value': 'grafico_mortes'}], 
@@ -167,7 +133,7 @@ app.layout = html.Div(children=[
                                 value  = ['grafico_casos', 'grafico_mortes'],
                                 disabled = False,
                                 multi = True,                
-                                searchable = True,
+                                searchable = False,
                                 placeholder = 'Selecione...',
                                 clearable = False,
                                 persistence = True,
@@ -187,7 +153,7 @@ app.layout = html.Div(children=[
 
                                 optionHeight = 35,
                                 value  = 'World',
-                                disabled = False,
+                                disabled = True, #Alterar esse valor para False quando for usar esse dropdown
                                 multi = False,
                                 searchable = True,
                                 placeholder = 'Selecione...',
@@ -204,7 +170,7 @@ app.layout = html.Div(children=[
 
                                 optionHeight = 35,
                                 value  = 'World',
-                                disabled = False,
+                                disabled = True, #Alterar esse valor para False quando for usar esse dropdown
                                 multi = False,                
                                 searchable = True,
                                 placeholder = 'Selecione...',
@@ -233,7 +199,7 @@ app.layout = html.Div(children=[
 
                                 optionHeight = 35,
                                 value  = 'World',
-                                disabled = False,
+                                disabled = True, #Alterar esse valor para False quando for usar esse dropdown
                                 multi = False,                
                                 searchable = True,
                                 placeholder = 'Selecione...',
@@ -250,7 +216,7 @@ app.layout = html.Div(children=[
 
                                 optionHeight = 35,
                                 value  = 'World',
-                                disabled = False,
+                                disabled = True, #Alterar esse valor para False quando for usar esse dropdown
                                 multi = False,                
                                 searchable = True,
                                 placeholder = 'Selecione...',
@@ -347,7 +313,7 @@ app.layout = html.Div(children=[
                 id='grafico_1',
                 children=[
                     dcc.Graph(
-                        id='example-graph',
+                        id='grafico-1', #Antes example-graph
                         # figure=fig_bar_global - A figura será definida no callback.
                     ),
                 ],
@@ -357,7 +323,7 @@ app.layout = html.Div(children=[
                 id='grafico_2',
                 children=[
                     dcc.Graph(
-                        id='example-graph_2',
+                        id='grafico-2', #Antes example-graph_2
                         #figure=fig_bar_global_2 - A figura será definida no callback.
                     ),
                 ],
@@ -367,19 +333,19 @@ app.layout = html.Div(children=[
 
 ])
 @app.callback(
-[Output('example-graph_2', 'figure')],
-[Input('escolha_de_pais', 'value'),
-Input('casos_mortes', 'value')]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
+[Output('grafico-1', 'figure')],
+[Input('pais_grafico_1', 'value'),
+Input('casos_mortes_grafico_1', 'value')]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
 def update_figure(selected_location, selected_bars):
     newlocation_df1 = df_global[df_global.location == selected_location] #redefinindo o dataframe
     if not selected_bars:
         raise PreventUpdate
 
     elif selected_bars == ['grafico_casos']:
-        fig_bar_global_2 = go.Figure( data = [    #arrumando o gráfico de acordo com o imput e o novo dataframe
+        fig_bar_global_1 = go.Figure( data = [    #arrumando o gráfico de acordo com o imput e o novo dataframe
             go.Bar(x = newlocation_df1['date'], y = newlocation_df1['total_cases'], name ='Casos', marker_color = "yellow"),
         ])
-        fig_bar_global_2.update_layout(
+        fig_bar_global_1.update_layout(
             barmode='overlay',
             margin=dict(
                 l=25,
@@ -391,13 +357,13 @@ def update_figure(selected_location, selected_bars):
         
     )
         
-        return [fig_bar_global_2]  #devolvendo os gráficos que o usuario pediu no imput
+        return [fig_bar_global_1]  #devolvendo os gráficos que o usuario pediu no imput
 
     elif selected_bars == ['grafico_mortes']:
-        fig_bar_global_2 = go.Figure( data = [    #arrumando o gráfico de acordo com o imput e o novo dataframe
+        fig_bar_global_1 = go.Figure( data = [    #arrumando o gráfico de acordo com o imput e o novo dataframe
             go.Bar(x = newlocation_df1['date'], y = newlocation_df1['total_deaths'], name ='Mortes', marker_color = "red"),
         ])
-        fig_bar_global_2.update_layout(
+        fig_bar_global_1.update_layout(
             barmode='overlay',
             margin=dict(
                 l=25,
@@ -409,14 +375,14 @@ def update_figure(selected_location, selected_bars):
         
         )
        
-        return [fig_bar_global_2] #devolvendo os gráficos que o usuario pediu no imput
+        return [fig_bar_global_1] #devolvendo os gráficos que o usuario pediu no imput
 
-    if selected_bars == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']:
-        fig_bar_global_2 = go.Figure( data = [    #arrumando o gráfico de acordo com o imput e o novo dataframe
+    elif selected_bars == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']:
+        fig_bar_global_1 = go.Figure( data = [    #arrumando o gráfico de acordo com o imput e o novo dataframe
             go.Bar(x = newlocation_df1['date'], y = newlocation_df1['total_cases'], name ='Casos', marker_color = "yellow"),
             go.Bar(x = newlocation_df1['date'], y = newlocation_df1['total_deaths'], name ='Mortes', marker_color = "red")
         ])
-        fig_bar_global_2.update_layout(
+        fig_bar_global_1.update_layout(
             barmode='overlay',
             margin=dict(
                 l=25,
@@ -428,13 +394,13 @@ def update_figure(selected_location, selected_bars):
         
         )
         
-        return [fig_bar_global_2] #devolvendo os gráficos que o usuario pediu no imput
+        return [fig_bar_global_1] #devolvendo os gráficos que o usuario pediu no imput
 
 
 @app.callback(
-[Output('example-graph', 'figure'),],
-[Input('grafico2_dado1', 'value'),
-Input('grafico2_dado2', 'value')]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
+[Output('grafico-2', 'figure'),],
+[Input('pais_grafico_2', 'value'),
+Input('casos_mortes_grafico_2', 'value')]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
 def update_figure2(selected_location2, selected_bars2):
     newlocation_df2 = df_global[df_global['location'] == selected_location2] #redefinindo o dataframe
     if not selected_bars2:
@@ -442,10 +408,10 @@ def update_figure2(selected_location2, selected_bars2):
 
     elif selected_bars2 == ['grafico_casos']:
         
-        fig_bar_global = go.Figure( data = [
+        fig_bar_global_2 = go.Figure( data = [
             go.Bar(x = newlocation_df2['date'], y = newlocation_df2['total_cases'], name ='Casos', marker_color = "yellow"),
         ])
-        fig_bar_global.update_layout(
+        fig_bar_global_2.update_layout(
             barmode='overlay',
             margin=dict(
                 l=25,
@@ -455,14 +421,14 @@ def update_figure2(selected_location2, selected_bars2):
         ),
             showlegend=False,
     )
-        return [fig_bar_global]  #devolvendo os gráficos que o usuario pediu no imput
+        return [fig_bar_global_2]  #devolvendo os gráficos que o usuario pediu no imput
 
     elif selected_bars2 == ['grafico_mortes']:
         
-        fig_bar_global = go.Figure( data = [
+        fig_bar_global_2 = go.Figure( data = [
             go.Bar(x = newlocation_df2['date'], y = newlocation_df2['total_deaths'], name ='Mortes', marker_color = "red"),
         ])
-        fig_bar_global.update_layout(
+        fig_bar_global_2.update_layout(
             barmode='overlay',
             margin=dict(
                 l=25,
@@ -472,15 +438,15 @@ def update_figure2(selected_location2, selected_bars2):
             ),
                 showlegend=False,
         )
-        return [fig_bar_global]  #devolvendo os gráficos que o usuario pediu no imput
+        return [fig_bar_global_2]  #devolvendo os gráficos que o usuario pediu no imput
 
-    if selected_bars2 == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']:
+    elif selected_bars2 == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']:
        
-        fig_bar_global = go.Figure( data = [
+        fig_bar_global_2 = go.Figure( data = [
             go.Bar(x = newlocation_df2['date'], y = newlocation_df2['total_cases'], name ='Casos', marker_color = "yellow"),
             go.Bar(x = newlocation_df2['date'], y = newlocation_df2['total_deaths'], name ='Mortes', marker_color = "red")
             ])
-        fig_bar_global.update_layout(
+        fig_bar_global_2.update_layout(
             barmode='overlay',
             margin=dict(
                 l=25,
@@ -491,7 +457,7 @@ def update_figure2(selected_location2, selected_bars2):
                 showlegend=False,
         
         )
-        return [fig_bar_global]  #devolvendo os gráficos que o usuario pediu no imput
+        return [fig_bar_global_2]  #devolvendo os gráficos que o usuario pediu no imput
 
 if __name__=="__main__":
     app.run_server(debug=True) 

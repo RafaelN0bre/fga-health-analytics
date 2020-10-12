@@ -90,7 +90,7 @@
 #Quarta_linha{
     display: block;
 }
-#escolha_de_pais{
+#pais_grafico_1{
     padding-right: 10px;
     display: inline-block;
     color: #000000;
@@ -98,7 +98,7 @@
     width: 200px;
 }
 
-#casos_mortes{
+#casos_mortes_grafico_1{
     display: inline-block;
     color: #000000;
     position: relative;
@@ -113,14 +113,14 @@
     width: 200px;
 }
 
-#grafico2_dado1{
+#pais_grafico_2{
     padding-right: 10px;
     display: inline-block;
     position: relative;
     width: 200px;
 }
 
-#grafico2_dado2{
+#casos_mortes_grafico_2{
     padding-right: 10px;
     display: inline-block;
     position: relative;
@@ -299,7 +299,7 @@
 }
 
 /* Gráfico 1 */
-#example-graph{
+#grafico-1{
     width: 940px;
     height: 281px;
     margin-left: 20px;
@@ -308,7 +308,7 @@
 }
 
 /* Gráfico 2 */
-#example-graph_2{
+#grafico-2{
     width: 940px;
     height: 281px;
     margin-left: 20px;
