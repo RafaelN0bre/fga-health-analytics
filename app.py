@@ -13,6 +13,17 @@ app = dash.Dash(__name__, title='Fga Health Analytics', update_title='Carregando
 #Defindo Dataframe
 
 df_global = pd.read_excel('covid_global.xlsx')
+
+df_global_top3 = df_global[['location','date','total_deaths']].sort_values( by=['date','total_deaths'],ascending=False).drop(45580, axis=0).dropna().head(3)
+data = [go.Bar(x =df_global_top3['location'], y=df_global_top3['total_deaths'] , textposition='auto', marker_color='red')]
+
+conf_layout = go.Layout( title='Top Mortes',
+                    yaxis={'title':'Mortes'},
+                    xaxis={'title':'Paises'})
+
+fig_bar_global_top3 = go.Figure(data = data, layout=conf_layout)
+
+
 app.layout = html.Div(children=[
     html.Div(
         id='header',
@@ -235,7 +246,10 @@ app.layout = html.Div(children=[
             html.Div(
                 id='top_3',
                 children=[
-                    
+                    dcc.Graph(
+                        id='top3_global',
+                        figure = fig_bar_global_top3,
+                    ),
                 ],
             ),
         ]
