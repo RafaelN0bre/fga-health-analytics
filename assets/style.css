@@ -141,32 +141,28 @@
     margin-left: 100px;
 }
 
-#dado_7{
-    padding-right: 10px;
-    display: inline-block;
-    position: relative;
-    width: 200px;
-}
-
-#dado_8{
-    padding-right: 10px;
-    display: inline-block;
-    position: relative;
-    width: 200px;
+#escolha_data{
+    margin-left: 55px;
+    margin-top: -10px;
 }
 
 #top_3{
-    width: 420px;
+    width: 432px;
     height: 418px;
     display: inline-block;
-    border-radius: 30px;
     margin-top: 32px;
-    padding-left: 12px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
+}
+
+#top3_global{
+    height: 418px;
+    border-radius: 30px;
 }
 
 .resumo_geral{
     display: inline-block;
     margin-bottom: 20px;
+    position: absolute;
 }
 
 #resumo_casos{

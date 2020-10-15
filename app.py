@@ -5,8 +5,10 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
 import plotly.io as pio
+import re
 from dash.dependencies import Input, Output
 from dash.exceptions import PreventUpdate
+from datetime import date
 
 
 app = dash.Dash(__name__, title='Fga Health Analytics', update_title='Carregando...')
@@ -17,9 +19,22 @@ df_global = pd.read_excel('covid_global.xlsx')
 df_global_top3 = df_global[['location','date','total_deaths']].sort_values( by=['date','total_deaths'],ascending=False).drop(45580, axis=0).dropna().head(3)
 data = [go.Bar(x =df_global_top3['location'], y=df_global_top3['total_deaths'] , textposition='auto', marker_color='red')]
 
-conf_layout = go.Layout( title='Top Mortes',
-                    yaxis={'title':'Mortes'},
-                    xaxis={'title':'Paises'})
+conf_layout = go.Layout( 
+    title={
+        'text':'Top 3 Mortes',
+        'x':0.5,
+        'y':0.98,
+        'font.size':30,
+    },
+    font_family="Courier New",
+    font_size=14,
+    margin=dict(
+                l=25,
+                r=25,
+                b=25,
+                t=40,
+        ),
+    )
 
 fig_bar_global_top3 = go.Figure(data = data, layout=conf_layout)
 
@@ -204,40 +219,20 @@ app.layout = html.Div(children=[
 
                     html.Div(
                         id='Quarta_linha',
+                        style={
+                            'fontSize':'1px',
+                        },
                         children=[
-                            dcc.Dropdown(id = 'dado_7', #Falta decidir o valor que será colocado nessa label.
-                                options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
-
-                                optionHeight = 35,
-                                value  = 'World',
-                                disabled = True, #Alterar esse valor para False quando for usar esse dropdown
-                                multi = False,                
-                                searchable = True,
-                                placeholder = 'Selecione...',
-                                clearable = True,
-                                persistence = True,
-                                persistence_type = 'memory',
-                                style={
-                                    'margin-top':'0px',
-                                },
+                            dcc.DatePickerRange(
+                                id='escolha_data',
+                                min_date_allowed=date(1995, 8, 5),
+                                max_date_allowed=date(2017, 9, 19),
+                                initial_visible_month=date(2017, 8, 5),
+                                end_date=date(2017, 8, 25)
                             ),
+    
+                            html.Div(id='output-container-date-picker-range'),
 
-                            dcc.Dropdown(id = 'dado_8', #Falta decidir o valor que será colocado nessa label.
-                                options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
-
-                                optionHeight = 35,
-                                value  = 'World',
-                                disabled = True, #Alterar esse valor para False quando for usar esse dropdown
-                                multi = False,                
-                                searchable = True,
-                                placeholder = 'Selecione...',
-                                clearable = True,
-                                persistence = True,
-                                persistence_type = 'memory',
-                                style={
-                                    'margin-top':'0px',
-                                },
-                            ),
                         ],
                     ),         
                 ],
@@ -249,6 +244,14 @@ app.layout = html.Div(children=[
                     dcc.Graph(
                         id='top3_global',
                         figure = fig_bar_global_top3,
+                        config={
+                            'displayModeBar': False,
+                            'displaylogo': False,
+                            'modeBarButtonsToRemove': [
+                                'zoom2d', 'pan2d', 'lasso2d', 'select2d', 'zoomIn2d', 'zoomOut2d',
+                                'toggleSpikelines',
+                            ],
+                        },
                     ),
                 ],
             ),
@@ -472,6 +475,25 @@ def update_figure2(selected_location2, selected_bars2):
         
         )
         return [fig_bar_global_2]  #devolvendo os gráficos que o usuario pediu no imput
+
+@app.callback(
+    dash.dependencies.Output('output-container-date-picker-range', 'children'),
+    [dash.dependencies.Input('escolha_data', 'start_date'),
+     dash.dependencies.Input('escolha_data', 'end_date')])
+def update_output(start_date, end_date):
+    string_prefix = 'You have selected: '
+    if start_date is not None:
+        start_date_object = date.fromisoformat(start_date)
+        start_date_string = start_date_object.strftime('%B %d, %Y')
+        string_prefix = string_prefix + 'Start Date: ' + start_date_string + ' | '
+    if end_date is not None:
+        end_date_object = date.fromisoformat(end_date)
+        end_date_string = end_date_object.strftime('%B %d, %Y')
+        string_prefix = string_prefix + 'End Date: ' + end_date_string
+    if len(string_prefix) == len('You have selected: '):
+        return 'Select a date to see it displayed here'
+    else:
+        return string_prefix
 
 if __name__=="__main__":
     app.run_server(debug=True) 
