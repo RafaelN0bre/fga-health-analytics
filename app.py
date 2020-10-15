@@ -225,10 +225,10 @@ app.layout = html.Div(children=[
                         children=[
                             dcc.DatePickerRange(
                                 id='escolha_data',
-                                min_date_allowed=date(1995, 8, 5),
-                                max_date_allowed=date(2017, 9, 19),
-                                initial_visible_month=date(2017, 8, 5),
-                                end_date=date(2017, 8, 25)
+                                min_date_allowed=date(2020, 2, 1),
+                                max_date_allowed=date(2020, 9, 24),
+                                initial_visible_month=date(2020, 3, 10),
+                                end_date=date(2020, 3, 15)
                             ),
     
                             html.Div(id='output-container-date-picker-range'),
@@ -355,7 +355,7 @@ app.layout = html.Div(children=[
 Input('casos_mortes_grafico_1', 'value')]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
 def update_figure(selected_location, selected_bars):
     newlocation_df1 = df_global[df_global.location == selected_location] #redefinindo o dataframe
-    if not selected_bars:
+    if not selected_bars or not selected_location:
         raise PreventUpdate
 
     elif selected_bars == ['grafico_casos']:
@@ -371,8 +371,7 @@ def update_figure(selected_location, selected_bars):
                 t=25,
             ),
             showlegend=False,
-        
-    )
+        )
         
         return [fig_bar_global_1]  #devolvendo os gráficos que o usuario pediu no imput
 
@@ -389,8 +388,7 @@ def update_figure(selected_location, selected_bars):
                 t=25,
             ),
                 showlegend=False,
-        
-        )
+        ),
        
         return [fig_bar_global_1] #devolvendo os gráficos que o usuario pediu no imput
 
@@ -420,7 +418,7 @@ def update_figure(selected_location, selected_bars):
 Input('casos_mortes_grafico_2', 'value')]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
 def update_figure2(selected_location2, selected_bars2):
     newlocation_df2 = df_global[df_global['location'] == selected_location2] #redefinindo o dataframe
-    if not selected_bars2:
+    if not selected_bars2 or not selected_location2:
         raise PreventUpdate
 
     elif selected_bars2 == ['grafico_casos']:
