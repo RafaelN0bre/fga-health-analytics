@@ -8,6 +8,7 @@ import plotly.io as pio
 import re
 from dash.dependencies import Input, Output
 from dash.exceptions import PreventUpdate
+import datetime
 from datetime import date
 
 
@@ -228,6 +229,7 @@ app.layout = html.Div(children=[
                                 min_date_allowed=date(2020, 2, 1),
                                 max_date_allowed=date(2020, 9, 24),
                                 initial_visible_month=date(2020, 3, 10),
+                                start_date=date(2020, 2, 1),
                                 end_date=date(2020, 3, 15)
                             ),
     
@@ -410,19 +412,46 @@ def update_figure(selected_location, selected_bars):
         )
         
         return [fig_bar_global_1] #devolvendo os gráficos que o usuario pediu no imput
-
-
+#EM PROCESSO DE TESTE DE INTEGRAÇÃO DE DATA NO GRÁFICO
 @app.callback(
-[Output('grafico-2', 'figure'),],
-[Input('pais_grafico_2', 'value'),
-Input('casos_mortes_grafico_2', 'value')]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
-def update_figure2(selected_location2, selected_bars2):
+    [Output('grafico-2', 'figure'),],
+    [Input('pais_grafico_2', 'value'),
+    Input('casos_mortes_grafico_2', 'value'), 
+    dash.dependencies.Input('escolha_data', 'start_date'),
+    dash.dependencies.Input('escolha_data', 'end_date'),]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
+def update_figure2(selected_location2, selected_bars2, start_date, end_date):
     newlocation_df2 = df_global[df_global['location'] == selected_location2] #redefinindo o dataframe
     if not selected_bars2 or not selected_location2:
         raise PreventUpdate
 
     elif selected_bars2 == ['grafico_casos']:
         
+        start_date_object = date.fromisoformat(start_date)
+        start_dia_string = start_date_object.strftime('%d')
+        if(start_dia_string != "10" or start_dia_string != "20" or start_dia_string != "30"):
+            start_dia_string = start_dia_string.replace("0", "")
+        start_dia = int(start_dia_string)
+
+        start_mes_string = start_date_object.strftime('%m')
+        start_mes_string = start_mes_string.replace("0", "")
+        start_mes = int(start_mes_string)
+
+        start_ano_string = start_date_object.strftime('%Y')
+        start_ano = int(start_ano_string)
+
+        end_date_object = date.fromisoformat(end_date)
+        end_dia_string = end_date_object.strftime('%d')
+        if(end_dia_string != "10" or end_dia_string != "20" or end_dia_string != "30"):
+            end_dia_string = end_dia_string.replace("0", "")
+        end_dia = int(end_dia_string)
+
+        end_mes_string = end_date_object.strftime('%m')
+        end_mes_string = end_mes_string.replace("0", "")
+        end_mes = int(end_mes_string)
+
+        end_ano_string = end_date_object.strftime('%Y')
+        end_ano = int(end_ano_string)
+
         fig_bar_global_2 = go.Figure( data = [
             go.Bar(x = newlocation_df2['date'], y = newlocation_df2['total_cases'], name ='Casos', marker_color = "yellow"),
         ])
@@ -433,9 +462,14 @@ def update_figure2(selected_location2, selected_bars2):
                 r=25,
                 b=25,
                 t=25,
-        ),
+            ),
             showlegend=False,
-    )
+            xaxis_range=[
+                datetime.datetime(start_ano, start_mes, start_dia),
+                datetime.datetime(end_ano, end_mes, end_dia)
+            ]
+        )
+
         return [fig_bar_global_2]  #devolvendo os gráficos que o usuario pediu no imput
 
     elif selected_bars2 == ['grafico_mortes']:
@@ -453,6 +487,7 @@ def update_figure2(selected_location2, selected_bars2):
             ),
                 showlegend=False,
         )
+
         return [fig_bar_global_2]  #devolvendo os gráficos que o usuario pediu no imput
 
     elif selected_bars2 == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']:
@@ -470,28 +505,9 @@ def update_figure2(selected_location2, selected_bars2):
                 t=25,
             ),
                 showlegend=False,
-        
         )
-        return [fig_bar_global_2]  #devolvendo os gráficos que o usuario pediu no imput
 
-@app.callback(
-    dash.dependencies.Output('output-container-date-picker-range', 'children'),
-    [dash.dependencies.Input('escolha_data', 'start_date'),
-     dash.dependencies.Input('escolha_data', 'end_date')])
-def update_output(start_date, end_date):
-    string_prefix = 'You have selected: '
-    if start_date is not None:
-        start_date_object = date.fromisoformat(start_date)
-        start_date_string = start_date_object.strftime('%B %d, %Y')
-        string_prefix = string_prefix + 'Start Date: ' + start_date_string + ' | '
-    if end_date is not None:
-        end_date_object = date.fromisoformat(end_date)
-        end_date_string = end_date_object.strftime('%B %d, %Y')
-        string_prefix = string_prefix + 'End Date: ' + end_date_string
-    if len(string_prefix) == len('You have selected: '):
-        return 'Select a date to see it displayed here'
-    else:
-        return string_prefix
+        return [fig_bar_global_2]  #devolvendo os gráficos que o usuario pediu no imput
 
 if __name__=="__main__":
     app.run_server(debug=True) 
