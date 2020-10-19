@@ -365,12 +365,15 @@ def update_figure(selected_location, selected_bars):
             go.Bar(x = newlocation_df1['date'], y = newlocation_df1['total_cases'], name ='Casos', marker_color = "yellow"),
         ])
         fig_bar_global_1.update_layout(
+            title_text='Gráfico 1 - Total de casos',
+            title_font_size=22,
+            title_font_family='Courier New',
             barmode='overlay',
             margin=dict(
                 l=25,
                 r=25,
                 b=25,
-                t=25,
+                t=50,
             ),
             showlegend=False,
         )
@@ -382,12 +385,15 @@ def update_figure(selected_location, selected_bars):
             go.Bar(x = newlocation_df1['date'], y = newlocation_df1['total_deaths'], name ='Mortes', marker_color = "red"),
         ])
         fig_bar_global_1.update_layout(
+            title_text='Gráfico 1 - Total de mortes',
+            title_font_size=22,
+            title_font_family='Courier New',
             barmode='overlay',
             margin=dict(
                 l=25,
                 r=25,
                 b=25,
-                t=25,
+                t=50,
             ),
                 showlegend=False,
         ),
@@ -400,12 +406,15 @@ def update_figure(selected_location, selected_bars):
             go.Bar(x = newlocation_df1['date'], y = newlocation_df1['total_deaths'], name ='Mortes', marker_color = "red")
         ])
         fig_bar_global_1.update_layout(
+            title_text='Gráfico 1 - Total de casos e mortes',
+            title_font_size=22,
+            title_font_family='Courier New',
             barmode='overlay',
             margin=dict(
                 l=25,
                 r=25,
                 b=25,
-                t=25,
+                t=50,
             ),
                 showlegend=False,
         
@@ -456,12 +465,15 @@ def update_figure2(selected_location2, selected_bars2, start_date, end_date):
             go.Bar(x = newlocation_df2['date'], y = newlocation_df2['total_cases'], name ='Casos', marker_color = "yellow"),
         ])
         fig_bar_global_2.update_layout(
+            title_text='Gráfico 2 - Total de casos',
+            title_font_size=22,
+            title_font_family='Courier New',
             barmode='overlay',
             margin=dict(
                 l=25,
                 r=25,
                 b=25,
-                t=25,
+                t=50,
             ),
             showlegend=False,
             xaxis_range=[
@@ -478,12 +490,15 @@ def update_figure2(selected_location2, selected_bars2, start_date, end_date):
             go.Bar(x = newlocation_df2['date'], y = newlocation_df2['total_deaths'], name ='Mortes', marker_color = "red"),
         ])
         fig_bar_global_2.update_layout(
+            title_text='Gráfico 2- Total de mortes',
+            title_font_size=22,
+            title_font_family='Courier New',
             barmode='overlay',
             margin=dict(
                 l=25,
                 r=25,
                 b=25,
-                t=25,
+                t=50,
             ),
                 showlegend=False,
         )
@@ -497,12 +512,15 @@ def update_figure2(selected_location2, selected_bars2, start_date, end_date):
             go.Bar(x = newlocation_df2['date'], y = newlocation_df2['total_deaths'], name ='Mortes', marker_color = "red")
             ])
         fig_bar_global_2.update_layout(
+            title_text='Gráfico 2 - Total de casos e mortes',
+            title_font_size=22,
+            title_font_family='Courier New',
             barmode='overlay',
             margin=dict(
                 l=25,
                 r=25,
                 b=25,
-                t=25,
+                t=50,
             ),
                 showlegend=False,
         )
