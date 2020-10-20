@@ -366,6 +366,8 @@ def update_figure(selected_location, selected_bars):
         ])
         fig_bar_global_1.update_layout(
             title_text='Gráfico 1 - Total de casos',
+            title={'x':0.5, 'y':0.95,},
+            xaxis_tickangle=-30,
             title_font_size=22,
             title_font_family='Courier New',
             barmode='overlay',
@@ -386,6 +388,8 @@ def update_figure(selected_location, selected_bars):
         ])
         fig_bar_global_1.update_layout(
             title_text='Gráfico 1 - Total de mortes',
+            title={'x':0.5, 'y':0.95,},
+            xaxis_tickangle=-30,
             title_font_size=22,
             title_font_family='Courier New',
             barmode='overlay',
@@ -407,8 +411,10 @@ def update_figure(selected_location, selected_bars):
         ])
         fig_bar_global_1.update_layout(
             title_text='Gráfico 1 - Total de casos e mortes',
+            title={'x':0.5, 'y':0.95,},
             title_font_size=22,
             title_font_family='Courier New',
+            xaxis_tickangle=-30,
             barmode='overlay',
             margin=dict(
                 l=25,
@@ -466,6 +472,8 @@ def update_figure2(selected_location2, selected_bars2, start_date, end_date):
         ])
         fig_bar_global_2.update_layout(
             title_text='Gráfico 2 - Total de casos',
+            title={'x':0.5, 'y':0.95,},
+            xaxis_tickangle=-30,
             title_font_size=22,
             title_font_family='Courier New',
             barmode='overlay',
@@ -491,6 +499,8 @@ def update_figure2(selected_location2, selected_bars2, start_date, end_date):
         ])
         fig_bar_global_2.update_layout(
             title_text='Gráfico 2- Total de mortes',
+            title={'x':0.5, 'y':0.95,},
+            xaxis_tickangle=-30,
             title_font_size=22,
             title_font_family='Courier New',
             barmode='overlay',
@@ -513,6 +523,8 @@ def update_figure2(selected_location2, selected_bars2, start_date, end_date):
             ])
         fig_bar_global_2.update_layout(
             title_text='Gráfico 2 - Total de casos e mortes',
+            title={'x':0.5, 'y':0.95,},
+            xaxis_tickangle=-30,
             title_font_size=22,
             title_font_family='Courier New',
             barmode='overlay',
