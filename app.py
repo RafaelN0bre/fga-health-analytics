@@ -238,7 +238,7 @@ app.layout = html.Div(children=[
                                 max_date_allowed=date(2020, 9, 24),
                                 initial_visible_month=date(2020, 3, 10),
                                 start_date=date(2020, 2, 1),
-                                end_date=date(2020, 3, 15)
+                                end_date=date(2020, 6, 20)
                             ),
     
                             html.Div(id='output-container-date-picker-range'),
@@ -340,8 +340,14 @@ app.layout = html.Div(children=[
                 id='grafico_1',
                 children=[
                     dcc.Graph(
-                        id='grafico-1', #Antes example-graph
-                        # figure=fig_bar_global - A figura será definida no callback.
+                        id='grafico-1',
+                        config={
+                            'displaylogo': False,
+                            'modeBarButtonsToRemove':[
+                                'lasso2d', 'select2d', 'zoomIn2d', 'zoomOut2d',
+                                'toggleSpikelines',
+                            ],
+                        }, 
                     ),
                 ],
             ),
@@ -350,8 +356,14 @@ app.layout = html.Div(children=[
                 id='grafico_2',
                 children=[
                     dcc.Graph(
-                        id='grafico-2', #Antes example-graph_2
-                        #figure=fig_bar_global_2 - A figura será definida no callback.
+                        id='grafico-2',
+                        config={
+                            'displaylogo': False,
+                            'modeBarButtonsToRemove':[
+                                'lasso2d', 'select2d', 'zoomIn2d', 'zoomOut2d',
+                                'toggleSpikelines',
+                            ],
+                        }, 
                     ),
                 ],
             ),
@@ -361,10 +373,18 @@ app.layout = html.Div(children=[
 ])
 @app.callback(
 Output('grafico-1', 'figure'),
-[Input('pais_grafico_1', 'value'), Input('casos_mortes_grafico_1', 'value')],
+[Input('pais_grafico_1', 'value'), 
+Input('casos_mortes_grafico_1', 'value'),
+dash.dependencies.Input('escolha_data', 'start_date'),
+dash.dependencies.Input('escolha_data', 'end_date')],
 [State('tipo_grafico_1', 'value')]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
-def update_figure(selected_location, selected_info, selected_graph):
+def update_figure(selected_location, selected_info, start_date, end_date, selected_graph):
+    start_date_object = date.fromisoformat(start_date)
+    start_date_string = start_date_object.strftime('%d/%m/%Y')
+    end_date_object = date.fromisoformat(end_date)
+    end_date_string = end_date_object.strftime('%d/%m/%Y')
     newlocation_df1 = df_global[df_global.location == selected_location] #redefinindo o dataframe
+    new_end_date_df1 = df_global[df_global.date == end_date_string]
     if not selected_info or not selected_location:
         raise PreventUpdate
 
@@ -687,7 +707,127 @@ def update_figure(selected_location, selected_info, selected_graph):
 
             return fig_scatter_global_1
 
+    elif selected_graph == "grafico_mapa":
+
+        if selected_info == ['grafico_casos']:
+            fig_map_global_1 = go.Figure(data=go.Choropleth(
+                locations = new_end_date_df1['iso_code'],
+                z =  new_end_date_df1['total_cases'],  
+                zmax = 8000000,
+                zmin = 0,
+                text = new_end_date_df1['location'],
+                colorscale = [[0, 'rgb(255, 250, 173)'], [1, 'rgb(255,220,0)']],
+                autocolorscale = False,
+                reversescale = False,
+                marker_line_color = 'black',
+                marker_line_width = 0.5,
+                colorbar = dict(
+                    bordercolor = "black",
+                    borderwidth = 1,
+                    tickprefix = '',
+                    x = 0.8,
+                ),
+                hoverlabel = dict(
+                    bgcolor = '#C5D5FD',
+                    bordercolor = 'black',
+                    font = dict(
+                        family = 'Courier New',
+                        color = 'black',
+                    ),
+                ),
+                hovertemplate = " Data: %{text_2} <br> País: %{text} <br> Casos: %{z} <extra></extra>",  
+                #Modificar data dps     
+            ))
+
+            fig_map_global_1.update_layout(
+                geo = dict(
+                    showframe=False,
+                    showcoastlines=False,
+                    projection_type='natural earth',
+                    bgcolor = "#C5D5FD",
+                ),
+                title={
+                    'text':'Gráfico de mapa de casos global',
+                    'font.size': 22,
+                    'x': 0.5,
+                    'y': 0.97,
+                },
+                xaxis_tickangle=-30,
+                font_family="Courier New",
+                font_size=12,
+                barmode='overlay',
+                margin=dict(
+                    l=25,
+                    r=25,
+                    b=25,
+                    t=45,  
+                ),
+                showlegend=False,
+                plot_bgcolor = "#C5D5FD",    
+            ),
+
+            return fig_map_global_1
+
+        elif selected_info == ['grafico_mortes']:
+            fig_map_global_1 = go.Figure(data=go.Choropleth(
+                locations = new_end_date_df1['iso_code'], 
+                z =  new_end_date_df1['total_deaths'],  
+                zmax = 300000,
+                zmin = 0,
+                text = new_end_date_df1['location'],
+                colorscale = [[0, 'rgb(250, 127, 114)'], [1, 'rgb(139, 0, 0)']],
+                autocolorscale = False,
+                reversescale = False,
+                marker_line_color = 'black',
+                marker_line_width = 0.5,
+                colorbar = dict(
+                    bordercolor = "black",
+                    borderwidth = 1,
+                    tickprefix = '',
+                    x = 0.8,
+                ),
+                hoverlabel = dict(
+                    bgcolor = '#C5D5FD',
+                    bordercolor = 'black',
+                    font = dict(
+                        family = 'Courier New',
+                        color = 'black',
+                    ),
+                ),
+                hovertemplate = " Data: 23 Set 2020 <br> País: %{text} <br> Mortes: %{z} <extra></extra>",  
+                #Modificar data dps  
+            ))
+
+            fig_map_global_1.update_layout(
+                title_text = 'Mortes por COVID-19',
+                geo = dict(
+                    showframe = False,
+                    showcoastlines = False,
+                    projection_type = 'natural earth',
+                    bgcolor = "#C5D5FD",
+                ),
+                title={
+                    'text':'Gráfico de mapa de mortes global',
+                    'font.size': 22,
+                    'x': 0.5,
+                    'y': 0.97,
+                },
+                xaxis_tickangle=-30,
+                font_family="Courier New",
+                font_size=12,
+                margin=dict(
+                    l=25,
+                    r=25,
+                    b=25,
+                    t=45,  
+                ),
+                showlegend=False,
+                plot_bgcolor = "#C5D5FD",    
+            ),
+
+            return fig_map_global_1
 #Analisar questão de inserir data limite no mapa
+#Inserir button de confirmação 
 
 
 #EM PROCESSO DE TESTE DE INTEGRAÇÃO DE DATA NO GRÁFICO
