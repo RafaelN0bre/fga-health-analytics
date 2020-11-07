@@ -359,12 +359,13 @@ layout = html.Div(children=[
 ])
 @app.callback(
 Output('grafico-1', 'figure'),
-[Input('pais_grafico_1', 'value'), 
-Input('casos_mortes_grafico_1', 'value'),
-dash.dependencies.Input('escolha_data', 'start_date'),
-dash.dependencies.Input('escolha_data', 'end_date')],
-[State('tipo_grafico_1', 'value')]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
-def update_figure(selected_location, selected_info, start_date, end_date, selected_graph):
+Input('Submit_button', 'n_clicks'), 
+[State('pais_grafico_1', 'value'),
+State('casos_mortes_grafico_1', 'value'),
+State('escolha_data', 'start_date'),
+State('escolha_data', 'end_date'),
+State('tipo_grafico_1', 'value'),]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
+def update_figure(confirm_action, selected_location, selected_info, start_date, end_date, selected_graph):
     start_date_object = date.fromisoformat(start_date)
     start_date_string = start_date_object.strftime('%d/%m/%Y')
     end_date_object = date.fromisoformat(end_date)
@@ -818,19 +819,467 @@ def update_figure(selected_location, selected_info, start_date, end_date, select
 
 #EM PROCESSO DE TESTE DE INTEGRAÇÃO DE DATA NO GRÁFICO
 @app.callback(
-    Output('grafico-2', 'figure'),
-    [Input('pais_grafico_2', 'value'),
-    Input('casos_mortes_grafico_2', 'value'), 
-    dash.dependencies.Input('escolha_data', 'start_date'),
-    dash.dependencies.Input('escolha_data', 'end_date'),]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
-def update_figure2(selected_location2, selected_bars2, start_date, end_date):
-    newlocation_df2 = df_global[df_global['location'] == selected_location2] #redefinindo o dataframe
-    if not selected_bars2 or not selected_location2:
+Output('grafico-2', 'figure'),
+Input('Submit_button', 'n_clicks'), 
+[State('pais_grafico_2', 'value'),
+State('casos_mortes_grafico_2', 'value'),
+State('escolha_data', 'start_date'),
+State('escolha_data', 'end_date'),
+State('tipo_grafico_2', 'value'),]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
+def update_figure_2(confirm_action, selected_location, selected_info, start_date, end_date, selected_graph):
+    start_date_object = date.fromisoformat(start_date)
+    start_date_string = start_date_object.strftime('%d/%m/%Y')
+    end_date_object = date.fromisoformat(end_date)
+    end_date_string = end_date_object.strftime('%d/%m/%Y')
+    newlocation_df1 = df_global[df_global.location == selected_location] #redefinindo o dataframe
+    new_end_date_df1 = df_global[df_global.date == end_date_string]
+    if not selected_info or not selected_location:
         raise PreventUpdate
 
-    elif selected_bars2 == ['grafico_casos']:
+    elif selected_graph == "grafico_barra":
         
-        start_date_object = date.fromisoformat(start_date)
+        if selected_info == ['grafico_casos'] :
+
+            fig_bar_global_2 = go.Figure( data = [
+                go.Bar(
+                    y = newlocation_df1['total_cases'],
+                    x = newlocation_df1['date'],
+                    marker = dict(
+                        autocolorscale = True,
+                        color = 'rgb(255, 220, 0)',
+                        line = dict(
+                            color = 'black',
+                            width = 1,
+                        ), 
+                    ),
+                    hoverlabel = dict(
+                        bgcolor = '#C5D5FD',
+                        bordercolor = 'black',
+                        font = dict(
+                            family = 'Courier New',
+                            color = 'black',
+                        ),
+                    ),
+                    hovertemplate = " Data: %{x} <br> Casos: %{y} <extra></extra>", 
+                ),
+            ])
+
+            fig_bar_global_2.update_layout(
+                title={
+                    'text':'Gráfico de barras casos global',
+                    'font.size': 22,
+                    'x': 0.5,
+                    'y': 0.97,
+                },
+                xaxis_tickangle=-30,
+                font_family="Courier New",
+                font_size=12,
+                barmode='overlay',
+                margin=dict(
+                    l=25,
+                    r=25,
+                    b=25,
+                    t=45,  
+                ),
+                showlegend=False,
+                plot_bgcolor = "#C5D5FD",
+            ), 
+
+            return fig_bar_global_2  #devolvendo os gráficos que o usuario pediu no imput
+
+        elif selected_info == ['grafico_mortes'] :
+            fig_bar_global_2 = go.Figure( data = [
+                go.Bar(
+                    y = newlocation_df1['total_deaths'],
+                    x = newlocation_df1['date'],
+                    marker = dict(
+                        autocolorscale = True,
+                        color = 'rgb(255, 72, 0)',
+                        line = dict(
+                            color = 'black',
+                            width = 1,
+                        ), 
+                    ),
+                    hoverlabel = dict(
+                        bgcolor = '#C5D5FD',
+                        bordercolor = 'black',
+                        font = dict(
+                            family = 'Courier New',
+                            color = 'black',
+                        ),
+                    ),
+                    hovertemplate = " Data: %{x} <br> Óbitos: %{y} <extra></extra>", 
+                ),
+            ])
+
+            fig_bar_global_2.update_layout(
+                title={
+                    'text':'Gráfico de barras mortes global',
+                    'font.size': 22,
+                    'x': 0.5,
+                    'y': 0.97,
+                },
+                xaxis_tickangle=-30,
+                font_family="Courier New",
+                font_size=12,
+                barmode='overlay',
+                margin=dict(
+                    l=25,
+                    r=25,
+                    b=25,
+                    t=45,  
+                ),
+                showlegend=False,
+                plot_bgcolor = "#C5D5FD",
+            ),
+
+            return fig_bar_global_2 #devolvendo os gráficos que o usuario pediu no imput
+
+        elif (selected_info == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']):
+            fig_bar_global_2 = go.Figure( data = [
+                go.Bar(
+                    y = newlocation_df1['total_cases'], 
+                    x = newlocation_df1['date'],
+                    marker =  dict(
+                        autocolorscale = True,
+                        color = 'rgb(255, 220, 0)',
+                        line = dict(
+                            color = 'black',
+                            width = 1,
+                        ),
+                    ),
+                    hoverlabel = dict(
+                        bgcolor = '#C5D5FD',
+                        bordercolor = 'black',
+                        font = dict(
+                            family = 'Courier New',
+                            color = 'black',
+                        ),
+                    ),
+                    hovertemplate = " Data: %{x} <br> Casos: %{y} <extra></extra>",  
+                ),
+                go.Bar(
+                    y = newlocation_df1['total_deaths'],
+                    x = newlocation_df1['date'],
+                    marker = dict(
+                        autocolorscale = True,
+                        color = 'rgb(255, 72, 0)',
+                        line = dict(
+                            color = 'black',
+                            width = 1,
+                        ), 
+                    ),
+                    hoverlabel = dict(
+                        bgcolor = '#C5D5FD',
+                        bordercolor = 'black',
+                        font = dict(
+                            family = 'Courier New',
+                            color = 'black',
+                        ),
+                    ),
+                    hovertemplate = " Data: %{x} <br> Óbitos: %{y} <extra></extra>", 
+                ),
+            ])
+
+            fig_bar_global_2.update_layout(
+                title={
+                    'text':'Gráfico de barras casos e mortes global',
+                    'font.size': 22,
+                    'x': 0.5,
+                    'y': 0.97,
+                },
+                xaxis_tickangle=-30,
+                font_family="Courier New",
+                font_size=12,
+                barmode='overlay',
+                margin=dict(
+                    l=25,
+                    r=25,
+                    b=25,
+                    t=45,  
+                ),
+                showlegend=False,
+                plot_bgcolor = "#C5D5FD",
+            ), 
+
+            return fig_bar_global_2 #devolvendo os gráficos que o usuario pediu no imput
+    
+    elif selected_graph == "grafico_linha":
+        
+        if selected_info == ['grafico_casos']:
+            fig_scatter_global_2 = go.Figure( data = [
+                go.Scatter(
+                    x = newlocation_df1["date"],    
+                    y = newlocation_df1["total_cases"],
+                    line = dict(
+                        color = "rgb(255, 220, 0)",
+                        width = 4,
+                    ),
+                    hoverlabel = dict(
+                        bgcolor = '#C5D5FD',
+                        bordercolor = 'black',
+                        font = dict(
+                            family = 'Courier New',
+                            color = 'black',
+                        ),
+                    ),
+                    hovertemplate = " Data: %{x} <br> Casos: %{y} <extra></extra>", 
+                ),
+            ])
+
+            fig_scatter_global_2.update_layout(
+                title={
+                    'text':'Gráfico de linhas casos e mortes global',
+                    'font.size': 22,
+                    'x': 0.5,
+                    'y': 0.97,
+                },
+                xaxis_tickangle=-30,
+                font_family="Courier New",
+                font_size=12,
+                margin=dict(
+                    l=25,
+                    r=25,
+                    b=25,
+                    t=45,  
+                ),
+                showlegend=False,
+                plot_bgcolor = "#C5D5FD",
+            ), 
+
+            return fig_scatter_global_2
+        
+        elif selected_info == ['grafico_mortes']:
+            fig_scatter_global_2 = go.Figure( data = [
+                go.Scatter(
+                    x = newlocation_df1["date"], 
+                    y = newlocation_df1["total_deaths"],
+                    line = dict(
+                        color = "rgb(255, 72, 0)",
+                        width = 4,
+                    ),
+                    mode = "lines",
+                    hoverlabel = dict(
+                        bgcolor = '#C5D5FD',
+                        bordercolor = 'black',
+                        font = dict(
+                            family = 'Courier New',
+                            color = 'black',
+                        ),
+                    ),
+                    hovertemplate = " Data: %{x} <br> Óbitos: %{y} <extra></extra>", 
+                ),
+            ])
+
+            fig_scatter_global_2.update_layout(
+                title={
+                    'text':'Gráfico de linhas casos e mortes global',
+                    'font.size': 22,
+                    'x': 0.5,
+                    'y': 0.97,
+                },
+                xaxis_tickangle=-30,
+                font_family="Courier New",
+                font_size=12,
+                margin=dict(
+                    l=25,
+                    r=25,
+                    b=25,
+                    t=45,  
+                ),
+                showlegend=False,
+                plot_bgcolor = "#C5D5FD",
+            ),
+
+            return fig_scatter_global_2
+
+        elif (selected_info == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']):
+            fig_scatter_global_2 = go.Figure( data = [
+                go.Scatter(
+                    x = newlocation_df1["date"],    
+                    y = newlocation_df1["total_cases"],
+                    line = dict(
+                        color = "rgb(255, 220, 0)",
+                        width = 4,
+                    ),
+                    hoverlabel = dict(
+                        bgcolor = '#C5D5FD',
+                        bordercolor = 'black',
+                        font = dict(
+                            family = 'Courier New',
+                            color = 'black',
+                        ),
+                    ),
+                    hovertemplate = " Data: %{x} <br> Casos: %{y} <extra></extra>", 
+                ),
+
+                go.Scatter(
+                    x = newlocation_df1["date"], 
+                    y = newlocation_df1["total_deaths"],
+                    line = dict(
+                        color = "rgb(255, 72, 0)",
+                        width = 4,
+                    ),
+                    mode = "lines",
+                    hoverlabel = dict(
+                        bgcolor = '#C5D5FD',
+                        bordercolor = 'black',
+                        font = dict(
+                            family = 'Courier New',
+                            color = 'black',
+                        ),
+                    ),
+                    hovertemplate = " Data: %{x} <br> Óbitos: %{y} <extra></extra>", 
+                ),
+            ])
+
+            fig_scatter_global_2.update_layout(
+                title={
+                    'text':'Gráfico de linhas casos e mortes global',
+                    'font.size': 22,
+                    'x': 0.5,
+                    'y': 0.97,
+                },
+                xaxis_tickangle=-30,
+                font_family="Courier New",
+                font_size=12,
+                margin=dict(
+                    l=25,
+                    r=25,
+                    b=25,
+                    t=45,  
+                ),
+                showlegend=False,
+                plot_bgcolor = "#C5D5FD",
+            ),
+
+            return fig_scatter_global_2
+
+    elif selected_graph == "grafico_mapa":
+
+        if selected_info == ['grafico_casos']:
+            fig_map_global_2 = go.Figure(data=go.Choropleth(
+                locations = new_end_date_df1['iso_code'],
+                z =  new_end_date_df1['total_cases'],  
+                zmax = 8000000,
+                zmin = 0,
+                text = new_end_date_df1['location'],
+                colorscale = [[0, 'rgb(255, 250, 173)'], [1, 'rgb(255,220,0)']],
+                autocolorscale = False,
+                reversescale = False,
+                marker_line_color = 'black',
+                marker_line_width = 0.5,
+                colorbar = dict(
+                    bordercolor = "black",
+                    borderwidth = 1,
+                    tickprefix = '',
+                    x = 0.8,
+                ),
+                hoverlabel = dict(
+                    bgcolor = '#C5D5FD',
+                    bordercolor = 'black',
+                    font = dict(
+                        family = 'Courier New',
+                        color = 'black',
+                    ),
+                ),
+                hovertemplate = " Data: %{text_2} <br> País: %{text} <br> Casos: %{z} <extra></extra>",  
+                #Modificar data dps     
+            ))
+
+            fig_map_global_2.update_layout(
+                geo = dict(
+                    showframe=False,
+                    showcoastlines=False,
+                    projection_type='natural earth',
+                    bgcolor = "#C5D5FD",
+                ),
+                title={
+                    'text':'Gráfico de mapa de casos global',
+                    'font.size': 22,
+                    'x': 0.5,
+                    'y': 0.97,
+                },
+                xaxis_tickangle=-30,
+                font_family="Courier New",
+                font_size=12,
+                barmode='overlay',
+                margin=dict(
+                    l=25,
+                    r=25,
+                    b=25,
+                    t=45,  
+                ),
+                showlegend=False,
+                plot_bgcolor = "#C5D5FD",    
+            ),
+
+            return fig_map_global_2
+
+        elif selected_info == ['grafico_mortes']:
+            fig_map_global_2 = go.Figure(data=go.Choropleth(
+                locations = new_end_date_df1['iso_code'], 
+                z =  new_end_date_df1['total_deaths'],  
+                zmax = 300000,
+                zmin = 0,
+                text = new_end_date_df1['location'],
+                colorscale = [[0, 'rgb(250, 127, 114)'], [1, 'rgb(139, 0, 0)']],
+                autocolorscale = False,
+                reversescale = False,
+                marker_line_color = 'black',
+                marker_line_width = 0.5,
+                colorbar = dict(
+                    bordercolor = "black",
+                    borderwidth = 1,
+                    tickprefix = '',
+                    x = 0.8,
+                ),
+                hoverlabel = dict(
+                    bgcolor = '#C5D5FD',
+                    bordercolor = 'black',
+                    font = dict(
+                        family = 'Courier New',
+                        color = 'black',
+                    ),
+                ),
+                hovertemplate = " Data: 23 Set 2020 <br> País: %{text} <br> Mortes: %{z} <extra></extra>",  
+                #Modificar data dps  
+            ))
+
+            fig_map_global_2.update_layout(
+                title_text = 'Mortes por COVID-19',
+                geo = dict(
+                    showframe = False,
+                    showcoastlines = False,
+                    projection_type = 'natural earth',
+                    bgcolor = "#C5D5FD",
+                ),
+                title={
+                    'text':'Gráfico de mapa de mortes global',
+                    'font.size': 22,
+                    'x': 0.5,
+                    'y': 0.97,
+                },
+                xaxis_tickangle=-30,
+                font_family="Courier New",
+                font_size=12,
+                margin=dict(
+                    l=25,
+                    r=25,
+                    b=25,
+                    t=45,  
+                ),
+                showlegend=False,
+                plot_bgcolor = "#C5D5FD",    
+            ),
+
+            return fig_map_global_2
+
+'''
+        Esse código é uma tentativa de inserir o intervalo de data para gráfico de barra
+        Funciona porém faltar melhorar
+
+       start_date_object = date.fromisoformat(start_date)
         start_dia_string = start_date_object.strftime('%d')
         if(start_dia_string != "10" or start_dia_string != "20" or start_dia_string != "30"):
             start_dia_string = start_dia_string.replace("0", "")
@@ -855,75 +1304,4 @@ def update_figure2(selected_location2, selected_bars2, start_date, end_date):
 
         end_ano_string = end_date_object.strftime('%Y')
         end_ano = int(end_ano_string)
-
-        fig_bar_global_2 = go.Figure( data = [
-            go.Bar(x = newlocation_df2['date'], y = newlocation_df2['total_cases'], name ='Casos', marker_color = "yellow"),
-        ])
-        fig_bar_global_2.update_layout(
-            title_text='Gráfico 2 - Total de casos',
-            title={'x':0.5, 'y':0.95,},
-            xaxis_tickangle=-30,
-            title_font_size=22,
-            title_font_family='Courier New',
-            barmode='overlay',
-            margin=dict(
-                l=25,
-                r=25,
-                b=25,
-                t=50,
-            ),
-            showlegend=False,
-            xaxis_range=[
-                datetime.datetime(start_ano, start_mes, start_dia),
-                datetime.datetime(end_ano, end_mes, end_dia)
-            ]
-        )
-
-        return fig_bar_global_2  #devolvendo os gráficos que o usuario pediu no imput
-
-    elif selected_bars2 == ['grafico_mortes']:
-        
-        fig_bar_global_2 = go.Figure( data = [
-            go.Bar(x = newlocation_df2['date'], y = newlocation_df2['total_deaths'], name ='Mortes', marker_color = "red"),
-        ])
-        fig_bar_global_2.update_layout(
-            title_text='Gráfico 2- Total de mortes',
-            title={'x':0.5, 'y':0.95,},
-            xaxis_tickangle=-30,
-            title_font_size=22,
-            title_font_family='Courier New',
-            barmode='overlay',
-            margin=dict(
-                l=25,
-                r=25,
-                b=25,
-                t=50,
-            ),
-                showlegend=False,
-        )
-
-        return fig_bar_global_2  #devolvendo os gráficos que o usuario pediu no imput
-
-    elif selected_bars2 == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']:
-       
-        fig_bar_global_2 = go.Figure( data = [
-            go.Bar(x = newlocation_df2['date'], y = newlocation_df2['total_cases'], name ='Casos', marker_color = "yellow"),
-            go.Bar(x = newlocation_df2['date'], y = newlocation_df2['total_deaths'], name ='Mortes', marker_color = "red")
-            ])
-        fig_bar_global_2.update_layout(
-            title_text='Gráfico 2 - Total de casos e mortes',
-            title={'x':0.5, 'y':0.95,},
-            xaxis_tickangle=-30,
-            title_font_size=22,
-            title_font_family='Courier New',
-            barmode='overlay',
-            margin=dict(
-                l=25,
-                r=25,
-                b=25,
-                t=50,
-            ),
-                showlegend=False,
-        )
-
-        return fig_bar_global_2  #devolvendo os gráficos que o usuario pediu no imput
+'''
