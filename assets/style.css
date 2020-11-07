@@ -1,3 +1,4 @@
+/* Até linha 318 trata-se do arquivo dashboard_global.py
 /* Cabeçalho --> Aonde fica nosaa logo e o ícone de menu */
 #header{
     height: 78px;
@@ -315,3 +316,27 @@ body{
     margin: 0;
 }
 /* Trabalhar layout do header e padding dos gráficos
+
+/* Secção para estilização da secção Referências */
+#logo_referencias_bloco{
+    margin-left: 662px;
+}
+
+#logo_referencias_imagem{
+    width: 100px;
+    height: 100px;
+}
+
+#section_referencias{
+    background-image: url("bg_referencias.jpg");
+    margin-left: 23px;
+    margin-right: 23px;
+    width: 1379px;
+    border-radius: 30px;
+}
+
+#referencias_text_block_1{
+    height: 200px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 30px;
+}
