@@ -28,6 +28,26 @@
     color: #FFFFFF;
 }
 
+/* Navbar */
+#navbar{
+    background-color: #5E60CE;
+    width: 1425px;
+    padding-bottom: 5px;
+}
+
+#navbar_global_selection, #navbar_local_selection, #navbar_referencias_selection{
+    margin-left: 20px;
+    text-decoration: none;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
+    font-size: large;
+}
+
+#navbar_global_selection:hover, #navbar_local_selection:hover, #navbar_referencias_selection:hover{
+    color: black;
+}
+
 #block_1{
     width: 420px;
     height: 870px;
@@ -90,7 +110,22 @@
 
 #Quarta_linha{
     display: block;
+    width: fit-content;
 }
+
+#Submit_button{
+    background-color: rgb(82, 217, 82);
+    border-radius: 50%;
+    height: 40px;
+    position: absolute;
+    margin-top: -45px;
+    margin-left: 360px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
+    font-size: medium;
+    cursor: pointer;
+}
+
 #pais_grafico_1{
     padding-right: 10px;
     display: inline-block;
@@ -151,7 +186,7 @@
     width: 432px;
     height: 418px;
     display: inline-block;
-    margin-top: 32px;
+    margin-top: 29px;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
 }
 
@@ -333,10 +368,24 @@ body{
     margin-right: 23px;
     width: 1379px;
     border-radius: 30px;
+    box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 97px;
 }
 
-#referencias_text_block_1{
+#referencias_text_block_1, #referencias_text_block_2, #referencias_text_block_3{
     height: 200px;
     background: rgba(255, 255, 255, 0.85);
     border-radius: 30px;
+    box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.3);
+    margin-top: 38px;
+}
+
+#text_referencias_1, #text_referencias_2, #text_referencias_3{
+    margin-left: 27px;
+    margin-right: 100px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
+    font-size: x-large;
+    text-align: justify;
+    text-justify: inter-word;
 }

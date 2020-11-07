@@ -25,17 +25,16 @@ app.layout = html.Div(children=[
                 id='logo_2',
                 src='/assets/logo_fga.png',
             ),
-            html.Nav(
-                id='navbar',
-
-            ),
         ]
     ),
-    html.Div([
-        dcc.Link('Global |', href='/apps/dashboard_global'),
-        dcc.Link('Local |', href='/apps/dashboard_local'),
-        dcc.Link('Referencias |', href='/apps/referencias'),
-    ]),
+    html.Div(
+        id='navbar',
+        children=[
+            dcc.Link('Global', href='/apps/dashboard_global', id='navbar_global_selection'),
+            dcc.Link('Local', href='/apps/dashboard_local', id='navbar_local_selection'),
+            dcc.Link('Referencias', href='/apps/referencias', id='navbar_referencias_selection'),
+        ]
+    ),
     dcc.Location(id='url', refresh=False, pathname='/apps/dashboard_global'),
     html.Div(id='page-content', children=[]),
 ])

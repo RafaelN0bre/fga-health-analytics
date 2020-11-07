@@ -220,9 +220,17 @@ layout = html.Div(children=[
                             ),
     
                             html.Div(id='output-container-date-picker-range'),
-
                         ],
-                    ),         
+                    ),
+                    html.Div(
+                        children=[
+                            html.Button(
+                                'GO!',
+                                id='Submit_button',
+                                n_clicks=0,
+                            ),
+                        ],
+                    ),
                 ],
             ),
 
