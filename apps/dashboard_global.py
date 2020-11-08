@@ -813,6 +813,10 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
             ),
 
             return fig_map_global_1
+        
+        elif (selected_info == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']):
+            raise PreventUpdate
+
 #Analisar questão de inserir data limite no mapa
 #Inserir button de confirmação 
 
@@ -1274,6 +1278,9 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
             ),
 
             return fig_map_global_2
+
+        elif (selected_info == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']):
+            raise PreventUpdate
 
 '''
         Esse código é uma tentativa de inserir o intervalo de data para gráfico de barra
