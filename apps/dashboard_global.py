@@ -19,27 +19,8 @@ PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath("../datasets").resolve()
 df_global = pd.read_excel(DATA_PATH.joinpath("covid_global.xlsx"))
 
-df_global_top3 = df_global[['location','date','total_deaths']].sort_values( by=['date','total_deaths'],ascending=False).drop(45580, axis=0).dropna().head(3)
-data = [go.Bar(x =df_global_top3['location'], y=df_global_top3['total_deaths'] , textposition='auto', marker_color='red')]
-
-conf_layout = go.Layout( 
-    title={
-        'text':'Top 3 Mortes',
-        'x':0.5,
-        'y':0.98,
-        'font.size':30,
-    },
-    font_family="Courier New",
-    font_size=14,
-    margin=dict(
-                l=25,
-                r=25,
-                b=25,
-                t=40,
-        ),
-    )
-
-fig_bar_global_top3 = go.Figure(data = data, layout=conf_layout)
+#Fonte Original Do código do joao paulo
+#df_global_top3 = df_global[['location','date','total_deaths']].sort_values( by=['date','total_deaths'],ascending=False).drop(45580, axis=0).dropna().head(3)
 
 layout = html.Div(children=[    
     html.Div(
@@ -212,9 +193,9 @@ layout = html.Div(children=[
                         children=[
                             dcc.DatePickerRange(
                                 id='escolha_data',
-                                min_date_allowed=date(2020, 2, 1),
-                                max_date_allowed=date(2020, 9, 24),
-                                initial_visible_month=date(2020, 3, 10),
+                                min_date_allowed=date(2020, 1, 1),
+                                max_date_allowed=date(2020, 12, 24),
+                                #initial_visible_month=date(2020, 3, 10),
                                 start_date=date(2020, 2, 1),
                                 end_date=date(2020, 6, 20)
                             ),
@@ -239,7 +220,6 @@ layout = html.Div(children=[
                 children=[
                     dcc.Graph(
                         id='top3_global',
-                        figure = fig_bar_global_top3,
                         config={
                             'displayModeBar': False,
                             'displaylogo': False,
@@ -248,6 +228,7 @@ layout = html.Div(children=[
                                 'toggleSpikelines',
                             ],
                         },
+                        style = {'border-radius': 30,},
                     ),
                 ],
             ),
@@ -410,7 +391,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                     'x': 0.5,
                     'y': 0.97,
                 },
-                xaxis_tickangle=-30,
+                xaxis_tickangle=-15,
                 font_family="Courier New",
                 font_size=12,
                 barmode='overlay',
@@ -458,7 +439,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                     'x': 0.5,
                     'y': 0.97,
                 },
-                xaxis_tickangle=-30,
+                xaxis_tickangle=-15,
                 font_family="Courier New",
                 font_size=12,
                 barmode='overlay',
@@ -527,7 +508,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                     'x': 0.5,
                     'y': 0.97,
                 },
-                xaxis_tickangle=-30,
+                xaxis_tickangle=-15,
                 font_family="Courier New",
                 font_size=12,
                 barmode='overlay',
@@ -573,7 +554,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                     'x': 0.5,
                     'y': 0.97,
                 },
-                xaxis_tickangle=-30,
+                xaxis_tickangle=-15,
                 font_family="Courier New",
                 font_size=12,
                 margin=dict(
@@ -617,7 +598,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                     'x': 0.5,
                     'y': 0.97,
                 },
-                xaxis_tickangle=-30,
+                xaxis_tickangle=-15,
                 font_family="Courier New",
                 font_size=12,
                 margin=dict(
@@ -679,7 +660,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                     'x': 0.5,
                     'y': 0.97,
                 },
-                xaxis_tickangle=-30,
+                xaxis_tickangle=-15,
                 font_family="Courier New",
                 font_size=12,
                 margin=dict(
@@ -739,7 +720,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                     'x': 0.5,
                     'y': 0.97,
                 },
-                xaxis_tickangle=-30,
+                xaxis_tickangle=-15,
                 font_family="Courier New",
                 font_size=12,
                 barmode='overlay',
@@ -799,7 +780,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                     'x': 0.5,
                     'y': 0.97,
                 },
-                xaxis_tickangle=-30,
+                xaxis_tickangle=-15,
                 font_family="Courier New",
                 font_size=12,
                 margin=dict(
@@ -875,7 +856,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                     'x': 0.5,
                     'y': 0.97,
                 },
-                xaxis_tickangle=-30,
+                xaxis_tickangle=-15,
                 font_family="Courier New",
                 font_size=12,
                 barmode='overlay',
@@ -923,7 +904,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                     'x': 0.5,
                     'y': 0.97,
                 },
-                xaxis_tickangle=-30,
+                xaxis_tickangle=-15,
                 font_family="Courier New",
                 font_size=12,
                 barmode='overlay',
@@ -992,7 +973,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                     'x': 0.5,
                     'y': 0.97,
                 },
-                xaxis_tickangle=-30,
+                xaxis_tickangle=-15,
                 font_family="Courier New",
                 font_size=12,
                 barmode='overlay',
@@ -1038,7 +1019,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                     'x': 0.5,
                     'y': 0.97,
                 },
-                xaxis_tickangle=-30,
+                xaxis_tickangle=-15,
                 font_family="Courier New",
                 font_size=12,
                 margin=dict(
@@ -1082,7 +1063,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                     'x': 0.5,
                     'y': 0.97,
                 },
-                xaxis_tickangle=-30,
+                xaxis_tickangle=-15,
                 font_family="Courier New",
                 font_size=12,
                 margin=dict(
@@ -1144,7 +1125,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                     'x': 0.5,
                     'y': 0.97,
                 },
-                xaxis_tickangle=-30,
+                xaxis_tickangle=-15,
                 font_family="Courier New",
                 font_size=12,
                 margin=dict(
@@ -1204,7 +1185,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                     'x': 0.5,
                     'y': 0.97,
                 },
-                xaxis_tickangle=-30,
+                xaxis_tickangle=-15,
                 font_family="Courier New",
                 font_size=12,
                 barmode='overlay',
@@ -1264,7 +1245,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                     'x': 0.5,
                     'y': 0.97,
                 },
-                xaxis_tickangle=-30,
+                xaxis_tickangle=-15,
                 font_family="Courier New",
                 font_size=12,
                 margin=dict(
@@ -1282,6 +1263,70 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
         elif (selected_info == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']):
             raise PreventUpdate
 
+#Callback com erro por causa da data
+#Perguntar João Paulo
+@app.callback(
+    Output('top3_global', 'figure'),
+    Input('Submit_button', 'n_clicks'),
+    State('escolha_data', 'end_date'),
+)
+def update_top_3_global(confirm_action, end_date):
+    end_date_object = date.fromisoformat(end_date)
+    end_date_string = end_date_object.strftime('%d/%m/%Y')
+    print(end_date_string)
+    new_end_date_df1 = df_global[df_global.date == end_date_string]
+    
+    df_global_top3 = new_end_date_df1[['location','date','total_deaths']].sort_values( by=['total_deaths'],ascending=False).dropna().head(3)
+
+    if not end_date:
+        raise PreventUpdate
+
+    else:
+        fig_bar_global_top3 = go.Figure( data = [
+            go.Bar(
+                x= df_global_top3['location'], 
+                y = df_global_top3['total_deaths'],
+                textposition = 'auto',
+                marker =  dict(
+                    autocolorscale = True,
+                    color = 'rgb(255, 72, 0)',
+                    line = dict(
+                        color = 'black',
+                        width = 2,
+                    ),
+                ),        
+                hoverlabel = dict(
+                    bgcolor = '#C5D5FD',
+                    bordercolor = 'black',
+                    font = dict(
+                        family = 'Courier New',
+                        color = 'black',
+                    ),
+                ),
+                hovertemplate = " País: %{x} <br> Óbitos: %{y} <extra></extra>", 
+            ),
+        ])
+        fig_bar_global_top3.update_layout(
+            title={
+                'text':'Top 3',
+                'font.size': 22,
+                'x': 0.5,
+                'y': 0.97,
+            },
+            xaxis_tickangle=-15,
+            font_family="Courier New",
+            font_size=12,
+            margin=dict(
+                l=25,
+                r=25,
+                b=10,
+                t=45,  
+            ),
+            showlegend=False,
+            plot_bgcolor = "#C5D5FD",
+        ),
+
+        return fig_bar_global_top3
 '''
         Esse código é uma tentativa de inserir o intervalo de data para gráfico de barra
         Funciona porém faltar melhorar
