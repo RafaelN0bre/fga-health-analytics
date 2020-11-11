@@ -48,6 +48,33 @@
     color: black;
 }
 
+#pop_up_global_message{
+    background-color: white;
+    border: solid black 3px;
+    border-radius: 30px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
+    width: 400px;
+    position: absolute;
+    margin-left: 600px;
+    margin-top: 300px;
+    z-index: 100;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#title_global_pop_up{
+    margin-left: 150px;
+}
+
+#text_global_pop_up{
+    margin-left: 20px;
+    padding-bottom: 10px;
+}
+
+#close_global_pop_up{
+    margin-left: 350px;
+    margin-bottom: 10px;
+}
+
 #block_1{
     width: 420px;
     height: 870px;

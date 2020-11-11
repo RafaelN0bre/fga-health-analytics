@@ -22,7 +22,22 @@ df_global = pd.read_excel(DATA_PATH.joinpath("covid_global.xlsx"))
 #Fonte Original Do código do joao paulo
 #df_global_top3 = df_global[['location','date','total_deaths']].sort_values( by=['date','total_deaths'],ascending=False).drop(45580, axis=0).dropna().head(3)
 
-layout = html.Div(children=[    
+layout = html.Div(children=[
+    html.Div(
+        id='pop_up_global_message',
+        children=[
+            html.H1('Aviso!',
+                id='title_global_pop_up',
+            ),
+            html.P('Blalalalalal',
+                id='text_global_pop_up',
+            ),
+            html.Button('X',
+                id='close_global_pop_up',
+            ),
+        ],
+        hidden=False,
+    ),
     html.Div(
         id='block_1',
         children=[
@@ -1273,7 +1288,6 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
 def update_top_3_global(confirm_action, end_date):
     end_date_object = date.fromisoformat(end_date)
     end_date_string = end_date_object.strftime('%d/%m/%Y')
-    print(end_date_string)
     new_end_date_df1 = df_global[df_global.date == end_date_string]
     
     df_global_top3 = new_end_date_df1[['location','date','total_deaths']].sort_values( by=['total_deaths'],ascending=False).dropna().head(3)
@@ -1327,6 +1341,7 @@ def update_top_3_global(confirm_action, end_date):
         ),
 
         return fig_bar_global_top3
+
 '''
         Esse código é uma tentativa de inserir o intervalo de data para gráfico de barra
         Funciona porém faltar melhorar
