@@ -15,6 +15,7 @@ import pathlib
 from app import app
 
 #Definindo dataframe
+#Definição do caminho para o dataset necessário e em seguida a leitura dele
 PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath("../datasets").resolve()
 df_global = pd.read_excel(DATA_PATH.joinpath("covid_global.xlsx"))
@@ -24,7 +25,7 @@ df_global = pd.read_excel(DATA_PATH.joinpath("covid_global.xlsx"))
 
 layout = html.Div(children=[
     html.Div(
-        id='pop_up_global_message',
+        id='pop_up_global_message', #Div utilizada para avisar usuários de seleções que não são permitidas
         children=[
             html.H1('Aviso!',
                 id='title_global_pop_up',
@@ -33,7 +34,7 @@ layout = html.Div(children=[
                 id='text_global_pop_up',
             ),
         ],
-        hidden=True,
+        hidden=True, #Até ser alterada para False essa div não é plotada
     ),
     html.Div(
         id='block_1',
@@ -42,28 +43,28 @@ layout = html.Div(children=[
                 id='seccao_filtros',
                 children=[
                     html.Div(
-                        id = "oq_deseja_ver", #id de referência para estilizaçao no css
+                        id = "oq_deseja_ver", #Texto o que deseja ver?
                         children=[
-                            html.P('O que deseja ver ?'), #texto inserido dentro do html.P
+                            html.P('O que deseja ver ?'), #Como o usuário verá
                         ]
                     ),
                     html.Div( # Div inserida para colocar o texto "Gráfico 1"
-                        id="grafico_1_filtro_text", #id para estilização no css
+                        id="grafico_1_filtro_text",
                         children=[
-                            html.P('Gráfico 1'), # texto inserido dentro do html.P
+                            html.P('Gráfico 1'), #Como o usuário verá
                         ]
                     ),
                     html.Div( # Div inserida para colocar o texto "Gráfico 2"
-                        id="grafico_2_filtro_text", #id para estilização no css
+                        id="grafico_2_filtro_text",
                         children=[
-                            html.P('Gráfico 2'), # texto inserido dentro do html.P
+                            html.P('Gráfico 2'), #Como o usuário verá
                         ]
                     ),
                     
                     html.Div(
                         id='Primeira_linha',
                         children=[
-                            dcc.Dropdown(id = 'pais_grafico_1', #antes escolha de pais
+                            dcc.Dropdown(id = 'pais_grafico_1',
                                 options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
 
                                 optionHeight = 35,            #Espaço entre as opções do dropdown
@@ -83,7 +84,7 @@ layout = html.Div(children=[
 
                             dcc.Dropdown(id = 'pais_grafico_2', #Antes grafico2_dado1
                                 options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
-        
+                                #options: Leitura da coluna location da planilha, para evitar repetição o unique
                                 optionHeight = 35,
                                 value  = 'World',
                                 disabled = False,
@@ -103,7 +104,7 @@ layout = html.Div(children=[
                     html.Div(
                         id='Segunda_linha',
                         children=[
-                            dcc.Dropdown(id = 'casos_mortes_grafico_1', #Antes casos_mortes
+                            dcc.Dropdown(id = 'casos_mortes_grafico_1',
                                 options = [
                                     {'label': 'Casos', 'value':'grafico_casos' },
                                     {'label': 'Mortes', 'value': 'grafico_mortes'}], 
@@ -122,7 +123,7 @@ layout = html.Div(children=[
                                 },
                             ),
 
-                            dcc.Dropdown(id = 'casos_mortes_grafico_2', #Antes grafico2_dado2
+                            dcc.Dropdown(id = 'casos_mortes_grafico_2', 
                                 options = [
                                     {'label': 'Casos', 'value':'grafico_casos' },
                                     {'label': 'Mortes', 'value': 'grafico_mortes'}], 
@@ -155,7 +156,7 @@ layout = html.Div(children=[
 
                                 optionHeight = 35,
                                 value  = 'grafico_barra',
-                                disabled = False, #Alterar esse valor para False quando for usar esse dropdown
+                                disabled = False, 
                                 multi = False,
                                 searchable = False,
                                 placeholder = 'Selecione...',
@@ -176,7 +177,7 @@ layout = html.Div(children=[
 
                                 optionHeight = 35,
                                 value  = 'grafico_barra',
-                                disabled = False, #Alterar esse valor para False quando for usar esse dropdown
+                                disabled = False, 
                                 multi = False,
                                 searchable = False,
                                 placeholder = 'Selecione...',
@@ -198,7 +199,7 @@ layout = html.Div(children=[
                     ),
 
                     html.Div(
-                        id='Quarta_linha',
+                        id='Quarta_linha', 
                         style={
                             'fontSize':'1px',
                         },
@@ -363,9 +364,13 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
     start_date_string = start_date_object.strftime('%d/%m/%Y')
     end_date_object = date.fromisoformat(end_date)
     end_date_string = end_date_object.strftime('%d/%m/%Y')
-    newlocation_df1 = df_global[df_global.location == selected_location] #redefinindo o dataframe
+
+    #Restrição do dataframe
+    newlocation_df1 = df_global[df_global.location == selected_location]
     new_end_date_df1 = df_global[df_global.date == end_date_string]
-    if not selected_info or not selected_location:
+
+    #Se a opção de tipo de informação ou tipo de localização estiver vazia, impedir atualização do gráfico 1
+    if not selected_info or not selected_location: 
         raise PreventUpdate
 
     elif selected_graph == "grafico_barra":
