@@ -68,6 +68,8 @@
 #text_global_pop_up{
     margin-left: 20px;
     padding-bottom: 10px;
+    text-align: justify;
+    padding-right: 20px;
 }
 
 

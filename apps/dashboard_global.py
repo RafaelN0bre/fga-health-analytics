@@ -29,7 +29,7 @@ layout = html.Div(children=[
             html.H1('Aviso!',
                 id='title_global_pop_up',
             ),
-            html.P('Blalalalalal',
+            html.P(' ',
                 id='text_global_pop_up',
             ),
         ],
@@ -823,7 +823,9 @@ State('casos_mortes_grafico_2', 'value'),
 State('escolha_data', 'start_date'),
 State('escolha_data', 'end_date'),
 State('tipo_grafico_2', 'value'),]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
-def update_figure_2(confirm_action, selected_location, selected_info, start_date, end_date, selected_graph):
+def update_figure_2(confirm_action, selected_location, selected_info, start_date, 
+                    end_date, selected_graph):
+
     start_date_object = date.fromisoformat(start_date)
     start_date_string = start_date_object.strftime('%d/%m/%Y')
     end_date_object = date.fromisoformat(end_date)
@@ -1342,23 +1344,37 @@ def update_top_3_global(confirm_action, end_date):
 #SITUAÇÃO 1 --> SELECIONAR MAPA TIPO CASO POP UP APARECE (NÃO DESEJADO)
 #SITUAÇÃO 2 --> SELECIONA MAPA TIPO MORTE POP UP APARECE (NÃO DESEJADO)
 @app.callback(
-    Output('pop_up_global_message', 'hidden'),
+    [Output('pop_up_global_message', 'hidden'),
+    Output('text_global_pop_up', 'children')],
     Input('Submit_button', 'n_clicks'),
-    [State('tipo_grafico_1', 'value'),
+    [State('pais_grafico_1', 'value'),
+    State('tipo_grafico_1', 'value'),
     State('casos_mortes_grafico_1', 'value'),
+    State('pais_grafico_2', 'value'),
     State('tipo_grafico_2', 'value'),
     State('casos_mortes_grafico_2', 'value')]
 )
-def pop_up_message(confirm_action, selected_graph, selected_info, selected_graph_2, selected_info_2):
+def pop_up_message(confirm_action, selected_location, selected_graph, selected_info, 
+                    selected_location_2, selected_graph_2, selected_info_2):
+
     if selected_graph_2 == "grafico_mapa" or selected_graph == "grafico_mapa":
         if ((selected_info_2 == ['grafico_casos', 'grafico_mortes'] or 
             ['grafico_mortes', 'grafico_casos']) or 
             (selected_info == ['grafico_casos', 'grafico_mortes'] or 
             ['grafico_mortes', 'grafico_casos'])):
-            return False
+            return False, 'O gráfico de mapa não pode receber as informações de morte e casos simultaneamente. Selecione casos ou mortes, ou altere o tipo de gráfico e tente novamente.'
+
+    elif((not selected_location or not selected_location_2) and (not selected_info or not selected_info_2)):
+        return False, 'Não é possível gerar gráficos com as opções localização e tipo de informação vazias. Selecione uma localização e um tipo de informação e tente novamente.' 
     
+    elif (not selected_location or not selected_location_2):
+        return False, 'Não é possível gerar gráficos com a opção localização vazia. Selecione uma localização e tente novamente.'
+
+    elif (not selected_info or not selected_info_2):
+        return False, 'Não é possível gerar gráficos com a opção tipo de informação vazia. Selecione casos, morte ou ambos e tente novamente.'
+
     else:
-        return True
+        return True, '...'
 
 
 '''
