@@ -32,11 +32,8 @@ layout = html.Div(children=[
             html.P('Blalalalalal',
                 id='text_global_pop_up',
             ),
-            html.Button('X',
-                id='close_global_pop_up',
-            ),
         ],
-        hidden=False,
+        hidden=True,
     ),
     html.Div(
         id='block_1',
@@ -162,7 +159,7 @@ layout = html.Div(children=[
                                 multi = False,
                                 searchable = False,
                                 placeholder = 'Selecione...',
-                                clearable = True,
+                                clearable = False,
                                 persistence = True,
                                 persistence_type = 'memory',
                                 style={
@@ -183,7 +180,7 @@ layout = html.Div(children=[
                                 multi = False,
                                 searchable = False,
                                 placeholder = 'Selecione...',
-                                clearable = True,
+                                clearable = False,
                                 persistence = True,
                                 persistence_type = 'memory',
                                 style={
@@ -1340,6 +1337,29 @@ def update_top_3_global(confirm_action, end_date):
         ),
 
         return fig_bar_global_top3
+
+#ERRO NO CALLBACK --> POP-UP ACONTECE MESMO QUANDO CONDIÇÃO NÃO SE APLICA.
+#SITUAÇÃO 1 --> SELECIONAR MAPA TIPO CASO POP UP APARECE (NÃO DESEJADO)
+#SITUAÇÃO 2 --> SELECIONA MAPA TIPO MORTE POP UP APARECE (NÃO DESEJADO)
+@app.callback(
+    Output('pop_up_global_message', 'hidden'),
+    Input('Submit_button', 'n_clicks'),
+    [State('tipo_grafico_1', 'value'),
+    State('casos_mortes_grafico_1', 'value'),
+    State('tipo_grafico_2', 'value'),
+    State('casos_mortes_grafico_2', 'value')]
+)
+def pop_up_message(confirm_action, selected_graph, selected_info, selected_graph_2, selected_info_2):
+    if selected_graph_2 == "grafico_mapa" or selected_graph == "grafico_mapa":
+        if ((selected_info_2 == ['grafico_casos', 'grafico_mortes'] or 
+            ['grafico_mortes', 'grafico_casos']) or 
+            (selected_info == ['grafico_casos', 'grafico_mortes'] or 
+            ['grafico_mortes', 'grafico_casos'])):
+            return False
+    
+    else:
+        return True
+
 
 '''
         Esse código é uma tentativa de inserir o intervalo de data para gráfico de barra

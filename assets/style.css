@@ -70,10 +70,6 @@
     padding-bottom: 10px;
 }
 
-#close_global_pop_up{
-    margin-left: 350px;
-    margin-bottom: 10px;
-}
 
 #block_1{
     width: 420px;
@@ -141,7 +137,7 @@
 }
 
 #Submit_button{
-    background-color: rgb(82, 217, 82);
+    background-color: rgb(27, 227, 169);
     border-radius: 50%;
     height: 40px;
     position: absolute;
@@ -151,6 +147,8 @@
     font-weight: 500;
     font-size: medium;
     cursor: pointer;
+    border: none;
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.40);
 }
 
 #pais_grafico_1{
