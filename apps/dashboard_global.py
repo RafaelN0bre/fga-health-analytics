@@ -120,6 +120,7 @@ layout = html.Div(children=[
                                 persistence_type = 'memory',
                                 style={
                                     'margin-top':'10px',
+                                    'font-size':'15px',
                                 },
                             ),
 
@@ -139,6 +140,7 @@ layout = html.Div(children=[
                                 persistence_type = 'memory',
                                 style={
                                     'margin-top':'10px',
+                                    'font-size':'15px',
                                 },
                             ),
                         ],
@@ -210,7 +212,7 @@ layout = html.Div(children=[
                                 max_date_allowed=date(2020, 12, 24),
                                 #initial_visible_month=date(2020, 3, 10),
                                 start_date=date(2020, 2, 1),
-                                end_date=date(2020, 6, 20)
+                                end_date=date(2020, 6, 20),
                             ),
     
                             html.Div(id='output-container-date-picker-range'),
