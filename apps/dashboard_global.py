@@ -19,7 +19,7 @@ from app import app
 #Definição do caminho para o dataset necessário e em seguida a leitura dele
 PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath("../datasets").resolve()
-df_global = pd.read_excel(DATA_PATH.joinpath("covid_global.xlsx"))
+df_global = pd.read_excel(DATA_PATH.joinpath("covid_global_trans.xlsx"))
 
 #Fonte Original Do código do joao paulo
 #df_global_top3 = df_global[['location','date','total_deaths']].sort_values( by=['date','total_deaths'],ascending=False).drop(45580, axis=0).dropna().head(3)
@@ -69,7 +69,7 @@ layout = html.Div(children=[
                                 options = [{'label': i, 'value': i} for i in np.sort(df_global.location.unique())], 
 
                                 optionHeight = 35,            #Espaço entre as opções do dropdown
-                                value  = 'World',             #Opção padrão ao iniciar a página
+                                value  = 'Mundo',             #Opção padrão ao iniciar a página
                                 disabled = False,             #Capacidade de interagir com o dropdown
                                 multi = False,                #Permitir múltiplas escolhas 
                                 searchable = True,            #Permitir digitar para procurar valor
@@ -87,7 +87,7 @@ layout = html.Div(children=[
                                 options = [{'label': i, 'value': i} for i in np.sort(df_global.location.unique())], 
                                 #options: Leitura da coluna location da planilha, para evitar repetição o unique
                                 optionHeight = 35,
-                                value  = 'World',
+                                value  = 'Mundo',
                                 disabled = False,
                                 multi = False,                
                                 searchable = True,
@@ -1296,7 +1296,7 @@ def update_top_3_global(confirm_action, end_date):
     end_date_string = end_date_object.strftime('%d/%m/%Y')
     new_end_date_df1 = df_global[df_global.date == end_date_string]
     
-    df_global_top3 = new_end_date_df1[['location','total_deaths']].sort_values( by=['total_deaths'],ascending=False).query('location != "World" & location != "International"').dropna().head(3)
+    df_global_top3 = new_end_date_df1[['location','total_deaths']].sort_values( by=['total_deaths'],ascending=False).query('location != "Mundo"').dropna().head(3)
 
     if not end_date:
         raise PreventUpdate
@@ -1351,6 +1351,8 @@ def update_top_3_global(confirm_action, end_date):
 #ERRO NO CALLBACK --> POP-UP ACONTECE MESMO QUANDO CONDIÇÃO NÃO SE APLICA.
 #SITUAÇÃO 1 --> SELECIONAR MAPA TIPO CASO POP UP APARECE (NÃO DESEJADO)
 #SITUAÇÃO 2 --> SELECIONA MAPA TIPO MORTE POP UP APARECE (NÃO DESEJADO)
+#EM IMPLEMENTAÇÃO
+'''
 @app.callback(
     [Output('pop_up_global_message', 'hidden'),
     Output('text_global_pop_up', 'children')],
@@ -1384,6 +1386,8 @@ def pop_up_message(confirm_action, selected_location, selected_graph, selected_i
     else:
         return True, '...'
 
+'''
+
 @app.callback(
 [Output('acumulado_casos_text', 'children'), 
 Output('novos_casos_text', 'children'),
@@ -1401,7 +1405,7 @@ def resumo_geral(confirm_action, start_date, end_date):
     end_date_object = date.fromisoformat(end_date)
     end_date_string = end_date_object.strftime('%d/%m/%Y')
 
-    newlocation_df1 = df_global[df_global['location'] == 'World']
+    newlocation_df1 = df_global[df_global['location'] == 'Mundo']
     data_resumo_geral_fim = newlocation_df1[newlocation_df1['date'] == end_date_string]
     data_resumo_geral_inicio = newlocation_df1[newlocation_df1['date'] == start_date_string]
     
