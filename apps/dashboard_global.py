@@ -11,6 +11,7 @@ from dash.exceptions import PreventUpdate
 import datetime
 from datetime import date
 import pathlib
+import numpy as np
 
 from app import app
 
@@ -65,7 +66,7 @@ layout = html.Div(children=[
                         id='Primeira_linha',
                         children=[
                             dcc.Dropdown(id = 'pais_grafico_1',
-                                options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
+                                options = [{'label': i, 'value': i} for i in np.sort(df_global.location.unique())], 
 
                                 optionHeight = 35,            #Espaço entre as opções do dropdown
                                 value  = 'World',             #Opção padrão ao iniciar a página
@@ -83,7 +84,7 @@ layout = html.Div(children=[
                             ),
 
                             dcc.Dropdown(id = 'pais_grafico_2', #Antes grafico2_dado1
-                                options = [{'label': i, 'value': i} for i in df_global.location.unique()], 
+                                options = [{'label': i, 'value': i} for i in np.sort(df_global.location.unique())], 
                                 #options: Leitura da coluna location da planilha, para evitar repetição o unique
                                 optionHeight = 35,
                                 value  = 'World',
@@ -211,7 +212,7 @@ layout = html.Div(children=[
                                 min_date_allowed=date(2020, 1, 1),
                                 max_date_allowed=date(2020, 12, 24),
                                 #initial_visible_month=date(2020, 3, 10),
-                                start_date=date(2020, 2, 1),
+                                start_date=date(2020, 2, 14),
                                 end_date=date(2020, 6, 20),
                             ),
     
@@ -1383,7 +1384,39 @@ def pop_up_message(confirm_action, selected_location, selected_graph, selected_i
     else:
         return True, '...'
 
+@app.callback(
+[Output('acumulado_casos_text', 'children'), 
+Output('novos_casos_text', 'children'),
+Output('acumulado_obitos_text', 'children'), 
+Output('novos_obitos_text', 'children'), 
+Output('letalidade_text', 'children')],
+Input('Submit_button', 'n_clicks'),
+[State('escolha_data', 'start_date'),
+State('escolha_data', 'end_date'),]
+)
+def resumo_geral(confirm_action, start_date, end_date):
+    
+    start_date_object = date.fromisoformat(start_date)
+    start_date_string = start_date_object.strftime('%d/%m/%Y')
+    end_date_object = date.fromisoformat(end_date)
+    end_date_string = end_date_object.strftime('%d/%m/%Y')
 
+    newlocation_df1 = df_global[df_global['location'] == 'World']
+    data_resumo_geral_fim = newlocation_df1[newlocation_df1['date'] == end_date_string]
+    data_resumo_geral_inicio = newlocation_df1[newlocation_df1['date'] == start_date_string]
+    
+    var_resumo_casos_fim  = float(data_resumo_geral_fim['total_cases'].values)
+    var_resumo_casos_inicio = float(data_resumo_geral_inicio['total_cases'].values)
+    var_resumo_mortes_fim  = float(data_resumo_geral_fim['total_deaths'].values)
+    var_resumo_mortes_inicio = float(data_resumo_geral_inicio['total_deaths'].values)
+
+    children_casos_acumulado =  'Acumulado: {}'.format(var_resumo_casos_fim)
+    children_casos_novos = 'Novos casos: {}'.format(var_resumo_casos_fim - var_resumo_casos_inicio)
+    children_mortes_acumulado = 'Acumulado: {}'.format(var_resumo_mortes_fim)
+    children_mortes_novos = 'Novos óbitos: {}'.format(var_resumo_mortes_fim - var_resumo_mortes_inicio)
+    children_letalidade = 'Letalidade: {:.2f}%'.format(var_resumo_mortes_fim*100/var_resumo_casos_fim)
+
+    return [children_casos_acumulado, children_casos_novos, children_mortes_acumulado, children_mortes_novos, children_letalidade]
 '''
         Esse código é uma tentativa de inserir o intervalo de data para gráfico de barra
         Funciona porém faltar melhorar

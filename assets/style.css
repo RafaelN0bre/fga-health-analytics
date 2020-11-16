@@ -244,7 +244,7 @@
 #icon_circle_casos{
     width: 61.8px;
     height: 53px;
-    background-color: #FDEC6B;
+    background-color: rgb(255, 220, 0);
     border-radius: 50%;
     position: absolute;
     margin-left: 11px;
@@ -269,7 +269,7 @@
 
 #acumulado_casos_text{
     position: absolute;
-    margin-left: 79px;
+    margin-left: 20px;
     margin-top: 130px;
     font-family: 'Courier New', Courier, monospace;
     font-size: medium;
@@ -277,8 +277,8 @@
 
 #novos_casos_text{
     position: absolute;
-    margin-left: 79px;
-    margin-top: 190px;
+    margin-left: 20px;
+    margin-top: 160px;
     font-family: 'Courier New', Courier, monospace;
     font-size: medium;
 }
@@ -309,7 +309,7 @@
 #icon_circle_obitos{
     width: 61.8px;
     height: 53px;
-    background-color: #FA6868;
+    background-color: rgb(255, 72, 0);
     border-radius: 50%;
     position: absolute;
     margin-left: 12px;
@@ -350,8 +350,9 @@
 
 #novos_obitos_text{
     position: absolute;
-    margin-left: 150px;
-    margin-top: 130px;
+    display: block;
+    margin-left: 12px;
+    margin-top: 160px;
     font-family: 'Courier New', Courier, monospace;
     font-size: medium;
 }
