@@ -35,7 +35,7 @@
     padding-bottom: 5px;
 }
 
-#navbar_global_selection, #navbar_local_selection, #navbar_referencias_selection{
+#navbar_global_selection, #navbar_local_selection, #navbar_referencias_selection, #navbar_sobre_nos_selection{
     margin-left: 20px;
     text-decoration: none;
     color: white;
@@ -44,7 +44,7 @@
     font-size: large;
 }
 
-#navbar_global_selection:hover, #navbar_local_selection:hover, #navbar_referencias_selection:hover{
+#navbar_global_selection:hover, #navbar_local_selection:hover, #navbar_referencias_selection:hover, #navbar_sobre_nos_selection:hover{
     color: black;
 }
 
