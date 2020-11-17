@@ -5,7 +5,7 @@ from dash.dependencies import Input, Output
 from app import app
 from app import server
 
-from apps import dashboard_global, dashboard_local, referencias
+from apps import dashboard_global, dashboard_local, referencias, sobre_nos
 
 
 app.layout = html.Div(children=[
@@ -33,6 +33,7 @@ app.layout = html.Div(children=[
             dcc.Link('Global', href='/apps/dashboard_global', id='navbar_global_selection'),
             dcc.Link('Local', href='/apps/dashboard_local', id='navbar_local_selection'),
             dcc.Link('Referencias', href='/apps/referencias', id='navbar_referencias_selection'),
+            dcc.Link('Sobre Nós', href='/apps/sobre_nos', id='navbar_sobre_nos_selection'),
         ]
     ),
     dcc.Location(id='url', refresh=False, pathname='/apps/dashboard_global'),
@@ -52,6 +53,9 @@ def dispaly_page(pathname):
 
     elif pathname == '/apps/referencias':
         return referencias.layout
+
+    elif pathname == '/apps/sobre_nos':
+        return sobre_nos.layout
 
     else:
         return "404 Page Error! Please choose a link"
