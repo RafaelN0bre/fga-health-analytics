@@ -17,7 +17,7 @@ from app import app
 #Definindo dataframe
 PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath("../datasets").resolve()
-df_global = pd.read_excel(DATA_PATH.joinpath("covid_global.xlsx"))
+df_global = pd.read_excel(DATA_PATH.joinpath("covid_global_trans.xlsx"))
 
 layout = html.Div(children=[
     html.Img(
