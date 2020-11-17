@@ -6,21 +6,26 @@ import plotly.graph_objs as go
 
 from app import app
  
-layout = html.Div([
- 
-    html.Section(id="slideshow", children=[
-        html.Div(id="slideshow-container", children=[
-            html.Img(
-                id="image",
-                src='../assets/Card_Davi.png',
+layout = html.Div(children=[
+    html.Div(
+        id="background_sobre_nos",
+        children=[
+            html.Div(id="slideshow", 
+                children=[
+                    html.Div(id="slideshow-container", children=[
+                        html.Img(
+                            id="carrossel_imagem",
+                            src='../assets/Card_Davi.png',
+                        ),
+                        dcc.Interval(id='interval', interval= 5000)
+                    ])
+                ],
             ),
-            dcc.Interval(id='interval', interval= 5000)
-        ])
-    ])
- 
+        ],
+    ),
 ])
  
-@app.callback(Output('image', 'src'),
+@app.callback(Output('carrossel_imagem', 'src'),
               [Input('interval', 'n_intervals')])
 def display_image(n):
     if n == None or n % 10 == 9:
