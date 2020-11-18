@@ -1296,7 +1296,7 @@ def update_top_3_global(confirm_action, end_date):
     end_date_string = end_date_object.strftime('%d/%m/%Y')
     new_end_date_df1 = df_global[df_global.date == end_date_string]
    
-    # df_global_top3 = new_end_date_df1[['location','total_deaths']].sort_values( by=['total_deaths'],ascending=False).query('location != "Mundo"').dropna().head(3)
+    df_global_top3 = new_end_date_df1[['location','total_deaths']].sort_values( by=['total_deaths'],ascending=False).query('location != "Mundo"').dropna().head(3)
 
     if not end_date:
         raise PreventUpdate
