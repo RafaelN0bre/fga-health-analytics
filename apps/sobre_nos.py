@@ -14,20 +14,25 @@ layout = html.Div(children=[
                 id="unb_gama",
                 children=[
                     html.Img(
-                        id="imagem_unb_gama",
-                        src='../assets/ung-gama.jpg',
+                        src="../assets/unb_gama.jpg",
                     ),
                 ],
             ),
-            html.Div(id="slideshow", 
+            html.Div(id="slideshow-container", 
                 children=[
-                    html.Div(id="slideshow-container", children=[
-                        html.Img(
-                            id="carrossel_imagem",
-                            src='../assets/Card_Davi.png',
-                        ),
-                        dcc.Interval(id='interval', interval= 5000)
-                    ])
+                    html.Img(
+                        id="carrossel_imagem",
+                        src='../assets/Card_Davi.png',
+                    ),
+                    dcc.Interval(id='interval', interval= 5000),       
+                ],
+            ),
+            html.Div(
+                id="unb",
+                children=[
+                    html.Img(
+                        src="../assets/unb.png",
+                    ),
                 ],
             ),
         ],
