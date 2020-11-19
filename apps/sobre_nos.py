@@ -10,6 +10,15 @@ layout = html.Div(children=[
     html.Div(
         id="background_sobre_nos",
         children=[
+            html.Div(
+                id="unb_gama",
+                children=[
+                    html.Img(
+                        id="imagem_unb_gama",
+                        src='../assets/ung-gama.jpg',
+                    ),
+                ],
+            ),
             html.Div(id="slideshow", 
                 children=[
                     html.Div(id="slideshow-container", children=[
