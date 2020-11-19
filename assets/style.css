@@ -460,3 +460,331 @@ body{
     margin-top: 38px;
     width: 500px;
 }
+
+/* Dashboard Local */
+#pop_up_local_message{
+    background-color: white;
+    border: solid black 3px;
+    border-radius: 30px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
+    width: 400px;
+    position: absolute;
+    margin-left: 600px;
+    margin-top: 300px;
+    z-index: 100;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#title_local_pop_up{
+    margin-left: 150px;
+}
+
+#text_local_pop_up{
+    margin-left: 20px;
+    padding-bottom: 10px;
+    text-align: justify;
+    padding-right: 20px;
+}
+
+
+#block_1_local{
+    width: 420px;
+    height: 870px;
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 30px;
+    margin-top: 33px;
+    margin-left: 20px;
+    padding-right: 12px;
+    margin-bottom: 20px;
+}
+
+#block_1_local p{
+    font-size: x-large;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 300;
+}
+
+#seccao_filtros_local{
+    width: 420px;
+    height: 420px;
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 30px;
+    background-color: #FFFFFF;
+    padding-left: 12px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#oq_deseja_ver_local{
+    text-align: center;
+    margin: 0px;
+}
+
+#grafico_1_filtro_text_local{
+    position: absolute;
+    width: 150px;
+    margin-top: -20px;
+}
+
+#grafico_2_filtro_text_local{
+    text-align: center;
+    width: 150px;
+    margin-left: 270px;
+    position: absolute;
+    margin-top: -20px;
+}
+
+#Primeira_linha_local{
+    display: block;
+}
+
+#Segunda_linha_local{
+    display: block;
+}
+
+#Terceira_linha_local{
+    display: block;
+}
+
+#Quarta_linha_local{
+    display: block;
+    width: fit-content;
+}
+
+#Submit_button_local{
+    background-color: rgb(27, 227, 169);
+    border-radius: 50%;
+    height: 40px;
+    position: absolute;
+    margin-top: -45px;
+    margin-left: 360px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
+    font-size: medium;
+    cursor: pointer;
+    border: none;
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.40);
+}
+
+#pais_grafico_1_local{
+    padding-right: 10px;
+    display: inline-block;
+    color: #000000;
+    position: relative;
+    width: 200px;
+}
+
+#casos_mortes_grafico_1_local{
+    display: inline-block;
+    color: #000000;
+    position: relative;
+    width: 200px;
+    padding-right: 10px;
+}
+
+#tipo_grafico_1_local{
+    padding-right: 10px;
+    display: inline-block;
+    position: relative;
+    width: 200px;
+}
+
+#pais_grafico_2_local{
+    padding-right: 10px;
+    display: inline-block;
+    position: relative;
+    width: 200px;
+}
+
+#casos_mortes_grafico_2_local{
+    padding-right: 10px;
+    display: inline-block;
+    position: relative;
+    width: 200px;
+}
+
+#tipo_grafico_2_local{
+    padding-right: 10px;
+    display: inline-block;
+    position: relative;
+    width: 200px;
+}
+
+#filtros_gerais_text_local{
+    display: inline-block;
+    position: relative;
+    margin-top: 0px;
+    margin-left: 100px;
+}
+
+#escolha_data_local{
+    margin-left: 55px;
+    margin-top: -10px;
+}
+
+#top_3_local{
+    width: 432px;
+    height: 418px;
+    display: inline-block;
+    margin-top: 29px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
+}
+
+#top3_local{
+    height: 418px;
+    border-radius: 30px;
+}
+
+.resumo_geral_local{
+    display: inline-block;
+    margin-bottom: 20px;
+    position: absolute;
+}
+
+#resumo_casos_local{
+    width: 300px;
+    height: 232px;
+    display: inline-block;
+    border-radius: 30px;
+    background-color: #FFFFFF;
+    margin-top: 33px;
+    margin-left: 20px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
+    vertical-align: top;
+}
+
+#icon_circle_casos_local{
+    width: 61.8px;
+    height: 53px;
+    background-color: rgb(255, 220, 0);
+    border-radius: 50%;
+    position: absolute;
+    margin-left: 11px;
+    margin-top: 17px;
+}
+
+#icon_casos_local{
+    width: 35px;
+    height: 37px;
+    margin-left: 25.99px;
+    margin-top: 25.5px;
+    position: absolute;
+}
+
+#casos_confirmados_text_local{
+    position: absolute;
+    margin-left: 79px;
+    margin-top: 33px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: larger;
+}
+
+#acumulado_casos_text_local{
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 130px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+}
+
+#novos_casos_text_local{
+    position: absolute;
+    margin-left: 20px;
+    margin-top: 160px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+}
+
+#colocar_algo_local{
+    width: 300px;
+    height: 232px;
+    display: inline-block;
+    border-radius: 30px;
+    background-color: #FFFFFF;
+    margin-top: 33px;
+    margin-left: 20px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
+}
+
+#resumo_obitos_local{
+    width: 300px;
+    height: 232px;
+    display: inline-block;
+    border-radius: 30px;
+    background-color: #FFFFFF;
+    margin-top: 33px;
+    margin-left: 20px;
+    position: absolute;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
+}
+
+#icon_circle_obitos_local{
+    width: 61.8px;
+    height: 53px;
+    background-color: rgb(255, 72, 0);
+    border-radius: 50%;
+    position: absolute;
+    margin-left: 12px;
+    margin-top: 17px;
+}
+
+#icon_obitos_local{
+    width: 39px;
+    height: 39px;
+    margin-left: 22.98px;
+    margin-top: 24px;
+    position: absolute;
+}
+
+#obitos_confirmados_local{
+    position: absolute;
+    margin-left: 77px;
+    margin-top: 33px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: larger;
+}
+
+#acumulado_obitos_text_local{
+    position: absolute;
+    margin-left: 12px;
+    margin-top: 130px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+}
+
+#letalidade_text_local{
+    position: absolute;
+    margin-left: 12px;
+    margin-top: 187px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+}
+
+#novos_obitos_text_local{
+    position: absolute;
+    display: block;
+    margin-left: 12px;
+    margin-top: 160px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+}
+
+/* Gráfico 1 */
+#grafico-1_local{
+    width: 940px;
+    height: 281px;
+    margin-left: 20px;
+    margin-top: 33px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
+}
+
+/* Gráfico 2 */
+#grafico-2_local{
+    width: 940px;
+    height: 281px;
+    margin-left: 20px;
+    margin-top: 33px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
+}
