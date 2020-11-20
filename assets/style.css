@@ -462,6 +462,25 @@ body{
     width: 500px;
 }
 
+#sobre_nos_texto{
+    height: 200px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 30px;
+    box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.3);
+    margin-top: 38px;
+}
+
+#text_sobre_nos{
+    margin-left: 27px;
+    margin-right: 100px;
+    margin-top: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
+    font-size: x-large;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
 /* Dashboard Local */
 #pop_up_local_message{
     background-color: white;
