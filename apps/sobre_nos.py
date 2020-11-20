@@ -35,6 +35,14 @@ layout = html.Div(children=[
                     ),
                 ],
             ),
+            html.Div(
+                id="texto_apresentacao_sobre_nos",
+                children=[
+                    html.P(
+                        "Pão de batata",
+                    ),
+                ],
+            ),
         ],
     ),
 ])

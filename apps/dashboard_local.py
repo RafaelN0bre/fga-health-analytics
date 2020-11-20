@@ -12,6 +12,7 @@ import datetime
 from datetime import date
 import pathlib
 import numpy as np
+import json
 
 from app import app
 
@@ -19,6 +20,14 @@ from app import app
 PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath("../datasets").resolve()
 df_local = pd.read_excel(DATA_PATH.joinpath("covid_brasil.xlsx"))
+
+
+brazil_states = json.load(open('brazil-states.geojson', 'r'))
+
+state_id_map = {}
+for feature in brazil_states['features']:
+    feature['id'] = feature['properties']['id']
+    state_id_map[feature['properties']['sigla']] = feature['id']
 
 layout = html.Div(children=[
     html.Div(
@@ -208,7 +217,7 @@ layout = html.Div(children=[
                                 min_date_allowed=date(2020, 1, 1),
                                 max_date_allowed=date(2020, 12, 24),
                                 #initial_visible_month=date(2020, 3, 10),
-                                start_date=date(2020, 2, 14),
+                                start_date=date(2020, 4, 20),
                                 end_date=date(2020, 6, 20),
                             ),
     
@@ -368,6 +377,8 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
     #Restrição do dataframe
     newlocation_df1 = df_local[df_local.estado == selected_location]
     new_end_date_df1 = df_local[df_local.data == end_date_string]
+    dataframe_mapa_local = new_end_date_df1.dropna(subset = ['estado'])
+    dataframe_mapa_local['id'] = dataframe_mapa_local['estado'].apply(lambda x: state_id_map[x])
 
     #Se a opção de tipo de informação ou tipo de localização estiver vazia, impedir atualização do gráfico 1
     if not selected_info or not selected_location: 
@@ -690,16 +701,16 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
 
             return fig_scatter_local_1
 
-'''
+
     elif selected_graph == "grafico_mapa":
 
         if selected_info == ['grafico_casos']:
-            fig_map_global_1 = go.Figure(data=go.Choropleth(
-                locations = new_end_date_df1['iso_code'],
-                z =  new_end_date_df1['total_cases'],  
-                zmax = 8000000,
+            fig_map_local_1 = go.Figure(data=go.Choropleth(
+                locations = dataframe_mapa_local['id'], 
+                z =  dataframe_mapa_local['casosAcumulado'],  
+                zmax = 200000,
                 zmin = 0,
-                text = new_end_date_df1['location'],
+                text = dataframe_mapa_local['estado'],
                 colorscale = [[0, 'rgb(255, 250, 173)'], [1, 'rgb(255,220,0)']],
                 autocolorscale = False,
                 reversescale = False,
@@ -719,24 +730,30 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                         color = 'black',
                     ),
                 ),
-                hovertemplate = " Data: %{text_2} <br> País: %{text} <br> Casos: %{z} <extra></extra>",  
-                #Modificar data dps     
+                geojson = brazil_states,
+                hovertemplate = " Data: 24 Set 2020 <br> estado: %{text} <br> Casos: %{z} <extra></extra>",
             ))
 
-            fig_map_global_1.update_layout(
+            fig_map_local_1.update_geos(
+                fitbounds = 'locations',
+                visible=False,)
+
+            fig_map_local_1.update_layout(
+                title_text = 'Casos de COVID-19',
                 geo = dict(
-                    showframe=False,
-                    showcoastlines=False,
-                    projection_type='natural earth',
+                    showframe = False,
+                    showcoastlines = False,
+                    projection_type = 'natural earth',
                     bgcolor = "#C5D5FD",
+                    scope = 'south america',
                 ),
                 title={
-                    'text':'Gráfico de mapa de casos global',
+                    'text':'Gráfico de mapa de casos local',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
                 },
-                xaxis_tickangle=-15,
+                xaxis_tickangle=-30,
                 font_family="Courier New",
                 font_size=12,
                 barmode='overlay',
@@ -747,18 +764,19 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                     t=45,  
                 ),
                 showlegend=False,
-                plot_bgcolor = "#C5D5FD",    
-            ),
+                plot_bgcolor = "#C5D5FD",
+            )
 
-            return fig_map_global_1
+
+            return fig_map_local_1
 
         elif selected_info == ['grafico_mortes']:
-            fig_map_global_1 = go.Figure(data=go.Choropleth(
-                locations = new_end_date_df1['iso_code'], 
-                z =  new_end_date_df1['total_deaths'],  
-                zmax = 300000,
+            fig_map_local_1 = go.Figure(data=go.Choropleth(
+                locations = dataframe_mapa_local['id'], 
+                z =  dataframe_mapa_local['obitosAcumulado'],  
+                zmax = 35000,
                 zmin = 0,
-                text = new_end_date_df1['location'],
+                text = dataframe_mapa_local['estado'],
                 colorscale = [[0, 'rgb(250, 127, 114)'], [1, 'rgb(139, 0, 0)']],
                 autocolorscale = False,
                 reversescale = False,
@@ -778,27 +796,33 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                         color = 'black',
                     ),
                 ),
-                hovertemplate = " Data: 23 Set 2020 <br> País: %{text} <br> Mortes: %{z} <extra></extra>",  
-                #Modificar data dps  
+                geojson = brazil_states,
+                hovertemplate = " Data: 23 Set 2020 <br> Estado: %{text} <br> Mortes: %{z} <extra></extra>",
             ))
 
-            fig_map_global_1.update_layout(
-                title_text = 'Mortes por COVID-19',
+            fig_map_local_1.update_geos(
+                fitbounds = 'locations',
+                visible=False,)
+
+            fig_map_local_1.update_layout(
+                title_text = 'Casos de COVID-19',
                 geo = dict(
                     showframe = False,
                     showcoastlines = False,
                     projection_type = 'natural earth',
                     bgcolor = "#C5D5FD",
+                    scope = 'south america',
                 ),
-                title={
-                    'text':'Gráfico de mapa de mortes global',
+                 title={
+                    'text':'Gráfico de mapa de mortes local',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
                 },
-                xaxis_tickangle=-15,
+                xaxis_tickangle=-30,
                 font_family="Courier New",
                 font_size=12,
+                barmode='overlay',
                 margin=dict(
                     l=25,
                     r=25,
@@ -806,14 +830,14 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                     t=45,  
                 ),
                 showlegend=False,
-                plot_bgcolor = "#C5D5FD",    
-            ),
+                plot_bgcolor = "#C5D5FD",
+            )
 
-            return fig_map_global_1
+            return fig_map_local_1
         
         elif (selected_info == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']):
             raise PreventUpdate
-'''
+
 #Analisar questão de inserir data limite no mapa
 #Inserir button de confirmação 
 
@@ -1337,8 +1361,6 @@ def update_top_3_local(confirm_action, end_date):
 
         return fig_bar_local_top3
 
-#Callback com erro
-'''
 @app.callback(
 [Output('acumulado_casos_text_local', 'children'), 
 Output('novos_casos_text_local', 'children'),
@@ -1372,4 +1394,3 @@ def resumo_geral(confirm_action, start_date, end_date):
     children_letalidade = 'Letalidade: {:.2f}%'.format(var_resumo_mortes_fim*100/var_resumo_casos_fim)
 
     return [children_casos_acumulado, children_casos_novos, children_mortes_acumulado, children_mortes_novos, children_letalidade]
-'''
