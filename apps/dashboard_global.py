@@ -8,8 +8,7 @@ import plotly.io as pio
 import re
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
-import datetime
-from datetime import date
+from datetime import date, datetime
 import pathlib
 import numpy as np
 
@@ -209,11 +208,19 @@ layout = html.Div(children=[
                         children=[
                             dcc.DatePickerRange(
                                 id='escolha_data',
-                                min_date_allowed=date(2020, 1, 1),
-                                max_date_allowed=date(2020, 12, 24),
+                                min_date_allowed=datetime(2020, 3, 9),
+                                max_date_allowed=datetime(2020, 9, 20),
                                 #initial_visible_month=date(2020, 3, 10),
-                                start_date=date(2020, 2, 14),
-                                end_date=date(2020, 6, 20),
+                                start_date=datetime(2020, 3, 14).date(),
+                                end_date=datetime(2020, 6, 20).date(),
+                                clearable=True,
+                                start_date_placeholder_text="Data Inicial",
+                                end_date_placeholder_text="Data Final",
+                                display_format="DD/MM/YYYY",
+                                minimum_nights=2,
+                                persistence=True,
+                                persisted_props=['start_date', 'end_date'],
+                                persistence_type="session",
                             ),
     
                             html.Div(id='output-container-date-picker-range'),
