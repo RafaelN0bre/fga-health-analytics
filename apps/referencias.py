@@ -8,14 +8,9 @@ from app import app
 
 layout = html.Div(
     children=[
-        html.Div(
-            id='logo_referencias_bloco',
-            children=[
-                html.Img(
-                    id='logo_referencias_imagem',
-                    src='../assets/book.svg',
-                ),
-            ],
+        html.Img(
+            id='logo_referencias_imagem',
+            src='../assets/book.svg',
         ),
         html.Div(
             id='section_referencias',
@@ -33,8 +28,14 @@ layout = html.Div(
                     id='referencias_text_block_2',
                     children=[
                         html.Br(),
-                        html.P('dlkhkjghkjaasasasddsdsddsdsdsdcceccececec', 
+                        html.P('Acesso para relatório da pandemia em âmbito global: ', 
                             id='text_referencias_2',
+                        ),
+                        dcc.Link(
+                            'Our World In Data',
+                            id="link_covid_global",
+                            href="https://ourworldindata.org/coronavirus-source-data",
+                            target="blank",
                         ),
                     ],
                 ),
@@ -42,8 +43,14 @@ layout = html.Div(
                     id='referencias_text_block_3',
                     children=[
                         html.Br(),
-                        html.P('fhfjkfkfjhfjfhkjfhfkjfkjhfkjrhkjfhrjkhfjkoqooqoqoqoqoqooqoq',
+                        html.P('Acesso para relatório da pandemia no Brasil',
                             id='text_referencias_3',
+                        ),
+                        dcc.Link(
+                            'Dataset Brasil IO',
+                            id="link_covid_brasil",
+                            href="https://brasil.io/dataset/covid19/caso_full/",
+                            target="blank",
                         ),
                     ],
                 ),
