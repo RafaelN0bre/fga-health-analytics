@@ -5,6 +5,7 @@
     background-color: #5E60CE;
     margin: 0;
     width: 100vw;
+    min-width: 400px;
 }
 
 /* Escrita Fga Health Analytics */
@@ -421,57 +422,82 @@ body{
 
 /* Sobre Nós Início */
 #sobre_nos_icon{
-    width: 18.75vw;
-    height: 11vh;
-    margin-left: 40.625vw;
+    width: 10.5vw;
+    height: 12.7vh;
+    margin-left: 44.75vw;
+    min-width: 119px;
+    min-height: 81px;
 }
 
 #background_sobre_nos{
-    height: 75vh;
-    width: 95vw;
+    height: 74vh;
+    width: 95.4vw;
     border-radius: 30px;
     box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.3);
     background-image: url("bg_sobre_nos.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    margin-left: 2.5vw;
+    margin: auto;
+    margin-bottom: 3vh;
+    min-width: 1084px;
+    min-height: 475px;
 }
 
 #unb_gama{
     display: inline-block;
-    margin-left:1.5vw;
+    margin-left: 1vw;
     background-color: rgba(255, 255, 255, 0.6);
-    padding: 15px 15px 15px 15px;
+    padding: 1.8vh 1vw 1.8vh 1vw;
     border-radius: 30px;
     box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.3);
+}
+
+#unb_gama img{
+    width: 14vw;
+    height: 19vh;
+    min-width: 159px;
+    min-height: 125px;
 }
 
 
 #slideshow-container{
     background-color: rgba(255, 255, 255, 0.6);
-    width: 35.3vw;
-    height: 34vh;
+    width: 41.7vw;
+    height: 40vh;
     border-radius: 30px;
     box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.3);
-    margin-top: 30px;
+    margin-top: 3.8vh;
     display: inline-block;
-    margin-left: 12.5vw;
+    margin-left: 10vw;
+    min-width: 474px;
+    min-height: 256px;
 }
 
 #unb{
     display: inline-block;
-    margin-left: 10vw;
+    margin-left: 7.64vw;
     background-color: rgba(255, 255, 255, 0.6);
-    padding: 15px 15px 15px 15px;
+    padding: 1.8vh 1vw 1.8vh 1vw;
     border-radius: 30px;
     box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.3);
 }
 
+#unb img{
+    width: 16vw;
+    height: 19vh;
+    min-width: 181px;
+    min-height: 125px;
+}
+
+
+
 #carrossel_imagem{
-    margin-top: 5.3vh;
-    margin-left: 3vw;
-    width: 29.4vw;
-    height: 24vh;
+    margin-top: 5vh;
+    margin-left: 3.5vw;
+    width: 34.7vw;
+    height: 29.7vh;
+    min-width: 394px;
+    min-height: 190px;
 }
 
 #sobre_nos_texto{
@@ -479,20 +505,22 @@ body{
     background: rgba(255, 255, 255, 0.85);
     border-radius: 30px;
     box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.3);
-    margin-top: 4vh;
+    margin-top: 2vh;
+    min-width: 1084px;
+    min-height: 222px;
 }
 
 #sobre_nos_texto p{
-    margin-left: 1.5vw;
-    margin-right: 3vw;
-    margin-top: 0.5vh;
+    margin-left: 27px;
+    margin-right: 100px;
+    margin-top: 5px;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 500;
-    font-size: x-large;
+    font-size: large;
     text-align: justify;
     text-justify: inter-word;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 1.2vh;
+    padding-bottom: 1.2vh;
 }
 
 /* Dashboard Local */
