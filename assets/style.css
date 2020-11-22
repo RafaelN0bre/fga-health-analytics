@@ -4,7 +4,7 @@
     height: 78px;
     background-color: #5E60CE;
     margin: 0;
-    width: 1425px;
+    width: 100vw;
 }
 
 /* Escrita Fga Health Analytics */
@@ -31,7 +31,7 @@
 /* Navbar */
 #navbar{
     background-color: #5E60CE;
-    width: 1425px;
+    width: 100vw;
     padding-bottom: 5px;
 }
 
@@ -421,26 +421,25 @@ body{
 
 /* Sobre Nós Início */
 #sobre_nos_icon{
-    width: 150px;
-    height: 100px;
-    margin-left: 600px;
+    width: 18.75vw;
+    height: 11vh;
+    margin-left: 40.625vw;
 }
 
 #background_sobre_nos{
-    height: 685px;
-    width: 1374px;
+    height: 75vh;
+    width: 95vw;
     border-radius: 30px;
     box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.3);
     background-image: url("bg_sobre_nos.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    margin-top: 15px;
-    margin-left: 50px;
+    margin-left: 2.5vw;
 }
 
 #unb_gama{
     display: inline-block;
-    margin-left:15px;
+    margin-left:1.5vw;
     background-color: rgba(255, 255, 255, 0.6);
     padding: 15px 15px 15px 15px;
     border-radius: 30px;
@@ -450,19 +449,18 @@ body{
 
 #slideshow-container{
     background-color: rgba(255, 255, 255, 0.6);
-    width: 600px;
-    height: 316px;
+    width: 35.3vw;
+    height: 34vh;
     border-radius: 30px;
     box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.3);
     margin-top: 30px;
     display: inline-block;
-    margin-left: 75px;
-    margin-right: 15px;
+    margin-left: 12.5vw;
 }
 
 #unb{
     display: inline-block;
-    margin-left: 40px;
+    margin-left: 10vw;
     background-color: rgba(255, 255, 255, 0.6);
     padding: 15px 15px 15px 15px;
     border-radius: 30px;
@@ -470,9 +468,10 @@ body{
 }
 
 #carrossel_imagem{
-    margin-top: 38px;
-    margin-left: 50px;
-    width: 500px;
+    margin-top: 5.3vh;
+    margin-left: 3vw;
+    width: 29.4vw;
+    height: 24vh;
 }
 
 #sobre_nos_texto{
@@ -480,13 +479,13 @@ body{
     background: rgba(255, 255, 255, 0.85);
     border-radius: 30px;
     box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.3);
-    margin-top: 38px;
+    margin-top: 4vh;
 }
 
 #sobre_nos_texto p{
-    margin-left: 27px;
-    margin-right: 100px;
-    margin-top: 5px;
+    margin-left: 1.5vw;
+    margin-right: 3vw;
+    margin-top: 0.5vh;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 500;
     font-size: x-large;
