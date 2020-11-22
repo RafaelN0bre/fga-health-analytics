@@ -7,6 +7,10 @@ import plotly.graph_objs as go
 from app import app
  
 layout = html.Div(children=[
+    html.Img(
+        id="sobre_nos_icon",
+        src="../assets/sobre_nos_icon.svg",
+    ),
     html.Div(
         id="background_sobre_nos",
         children=[
@@ -38,10 +42,9 @@ layout = html.Div(children=[
             html.Div(
                     id='sobre_nos_texto',
                     children=[
-                        html.Br(),
-                        html.P('Ese é o projeto FGA Health Analytics, construído pela equipe de saúde da matéria de Algoritmo e Programação de Computadores. Nosso projeto tem a função de difundir de maneiramais divertida e precisa as informações sobre a COVID-19, para que todos possam, em poucos toques, entender o cenário global dessa pandemia. Está preparado para aprender como está nosso planeta? Caso você queira ver só a situação do Brasil, tem aqui também! Basta clicar no ícone de menu, e acessar o dashboard local.',
-                            id='text_sobre_nos',
-                        ),
+                        html.P('Esse é o projeto FGA Health Analytics, construído pela equipe de saúde da matéria de Algoritmo e Programação de Computadores.'),
+                        html.P('Nosso projeto tem a função de difundir de maneira mais rápida e precisa, as informações dessa pandemia, para que todos possam em poucos toques entender o cenário global e nacional dessa pandemia.'),
+                        html.P('Está preparado para entender a situação dessa pandemia? Caso queira verificar os relatórios de covid acesse nossa aba de referências e lá poderá baixar os relatórios.'),
                     ],
                 ),
             ],
