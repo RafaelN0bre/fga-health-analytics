@@ -411,7 +411,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
             )])
             fig_bar_local_1.update_layout(
                 title={
-                    'text':'Gráfico de barras casos local',
+                    'text':'Gráfico 1',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -458,7 +458,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
 
             fig_bar_local_1.update_layout(
                 title={
-                    'text':'Gráfico de barras mortes local',
+                    'text':'Gráfico 1',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -528,7 +528,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
 
             fig_bar_local_1.update_layout(
                 title={
-                    'text':'Gráfico de barras mortes local',
+                    'text':'Gráfico 1',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -575,7 +575,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
             ])
             fig_scatter_local_1.update_layout(
                 title={
-                    'text':'Gráfico de linhas casos e mortes local',
+                    'text':'Gráfico 1',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -619,7 +619,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
 
             fig_scatter_local_1.update_layout(
                 title={
-                    'text':'Gráfico de linhas casos e mortes local',
+                    'text':'Gráfico 1',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -681,7 +681,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
             ])
             fig_scatter_local_1.update_layout(
                 title={
-                    'text':'Gráfico de linhas casos e mortes local',
+                    'text':'Gráfico 1',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -748,7 +748,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                     scope = 'south america',
                 ),
                 title={
-                    'text':'Gráfico de mapa de casos local',
+                    'text':'Gráfico 1',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -814,7 +814,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                     scope = 'south america',
                 ),
                  title={
-                    'text':'Gráfico de mapa de mortes local',
+                    'text':'Gráfico 1',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -860,6 +860,9 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
     end_date_string = end_date_object.strftime('%d/%m/%Y')
     newlocation_df1 = df_local[df_local.estado == selected_location] #redefinindo o dataframe
     new_end_date_df1 = df_local[df_local.data == end_date_string]
+    dataframe_mapa_local = new_end_date_df1.dropna(subset = ['estado'])
+    dataframe_mapa_local['id'] = dataframe_mapa_local['estado'].apply(lambda x: state_id_map[x])
+
     if not selected_info or not selected_location:
         raise PreventUpdate
 
@@ -890,7 +893,7 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
             )])
             fig_bar_local_2.update_layout(
                 title={
-                    'text':'Gráfico de barras casos local',
+                    'text':'Gráfico 2',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -936,7 +939,7 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
 
             fig_bar_local_2.update_layout(
                 title={
-                    'text':'Gráfico de barras mortes local',
+                    'text':'Gráfico 2',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -1005,7 +1008,7 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
 
             fig_bar_local_2.update_layout(
                 title={
-                    'text':'Gráfico de barras mortes local',
+                    'text':'Gráfico 2',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -1050,7 +1053,7 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
             ])
             fig_scatter_local_2.update_layout(
                 title={
-                    'text':'Gráfico de linhas casos e mortes local',
+                    'text':'Gráfico 2',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -1094,7 +1097,7 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
 
             fig_scatter_local_2.update_layout(
                 title={
-                    'text':'Gráfico de linhas casos e mortes local',
+                    'text':'Gráfico 2',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -1155,7 +1158,7 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
             ])
             fig_scatter_local_2.update_layout(
                 title={
-                    'text':'Gráfico de linhas casos e mortes local',
+                    'text':'Gráfico 2',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -1174,16 +1177,16 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
             ),
 
             return fig_scatter_local_2
-'''
+
     elif selected_graph == "grafico_mapa":
 
         if selected_info == ['grafico_casos']:
-            fig_map_global_2 = go.Figure(data=go.Choropleth(
-                locations = new_end_date_df1['iso_code'],
-                z =  new_end_date_df1['total_cases'],  
-                zmax = 8000000,
+            fig_map_local_2 = go.Figure(data=go.Choropleth(
+                locations = dataframe_mapa_local['id'], 
+                z =  dataframe_mapa_local['casosAcumulado'],  
+                zmax = 200000,
                 zmin = 0,
-                text = new_end_date_df1['location'],
+                text = dataframe_mapa_local['estado'],
                 colorscale = [[0, 'rgb(255, 250, 173)'], [1, 'rgb(255,220,0)']],
                 autocolorscale = False,
                 reversescale = False,
@@ -1203,24 +1206,30 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                         color = 'black',
                     ),
                 ),
-                hovertemplate = " Data: %{text_2} <br> País: %{text} <br> Casos: %{z} <extra></extra>",  
-                #Modificar data dps     
+                geojson = brazil_states,
+                hovertemplate = " Data: 24 Set 2020 <br> estado: %{text} <br> Casos: %{z} <extra></extra>",
             ))
 
-            fig_map_global_2.update_layout(
+            fig_map_local_2.update_geos(
+                fitbounds = 'locations',
+                visible=False,)
+
+            fig_map_local_2.update_layout(
+                title_text = 'Casos de COVID-19',
                 geo = dict(
-                    showframe=False,
-                    showcoastlines=False,
-                    projection_type='natural earth',
+                    showframe = False,
+                    showcoastlines = False,
+                    projection_type = 'natural earth',
                     bgcolor = "#C5D5FD",
+                    scope = 'south america',
                 ),
                 title={
-                    'text':'Gráfico de mapa de casos global',
+                    'text':'Gráfico 2',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
                 },
-                xaxis_tickangle=-15,
+                xaxis_tickangle=-30,
                 font_family="Courier New",
                 font_size=12,
                 barmode='overlay',
@@ -1231,18 +1240,19 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                     t=45,  
                 ),
                 showlegend=False,
-                plot_bgcolor = "#C5D5FD",    
-            ),
+                plot_bgcolor = "#C5D5FD",
+            )
 
-            return fig_map_global_2
+
+            return fig_map_local_2
 
         elif selected_info == ['grafico_mortes']:
-            fig_map_global_2 = go.Figure(data=go.Choropleth(
-                locations = new_end_date_df1['iso_code'], 
-                z =  new_end_date_df1['total_deaths'],  
-                zmax = 300000,
+            fig_map_local_2 = go.Figure(data=go.Choropleth(
+                locations = dataframe_mapa_local['id'], 
+                z =  dataframe_mapa_local['obitosAcumulado'],  
+                zmax = 35000,
                 zmin = 0,
-                text = new_end_date_df1['location'],
+                text = dataframe_mapa_local['estado'],
                 colorscale = [[0, 'rgb(250, 127, 114)'], [1, 'rgb(139, 0, 0)']],
                 autocolorscale = False,
                 reversescale = False,
@@ -1262,27 +1272,33 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                         color = 'black',
                     ),
                 ),
-                hovertemplate = " Data: 23 Set 2020 <br> País: %{text} <br> Mortes: %{z} <extra></extra>",  
-                #Modificar data dps  
+                geojson = brazil_states,
+                hovertemplate = " Data: 23 Set 2020 <br> Estado: %{text} <br> Mortes: %{z} <extra></extra>",
             ))
 
-            fig_map_global_2.update_layout(
-                title_text = 'Mortes por COVID-19',
+            fig_map_local_2.update_geos(
+                fitbounds = 'locations',
+                visible=False,)
+
+            fig_map_local_2.update_layout(
+                title_text = 'Casos de COVID-19',
                 geo = dict(
                     showframe = False,
                     showcoastlines = False,
                     projection_type = 'natural earth',
                     bgcolor = "#C5D5FD",
+                    scope = 'south america',
                 ),
-                title={
-                    'text':'Gráfico de mapa de mortes global',
+                 title={
+                    'text':'Gráfico 2',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
                 },
-                xaxis_tickangle=-15,
+                xaxis_tickangle=-30,
                 font_family="Courier New",
                 font_size=12,
+                barmode='overlay',
                 margin=dict(
                     l=25,
                     r=25,
@@ -1290,14 +1306,14 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                     t=45,  
                 ),
                 showlegend=False,
-                plot_bgcolor = "#C5D5FD",    
-            ),
+                plot_bgcolor = "#C5D5FD",
+            )
 
-            return fig_map_global_2
+            return fig_map_local_2
 
         elif (selected_info == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']):
             raise PreventUpdate
-'''
+
 #Callback com erro por causa da data - Datas menores que 10.
 @app.callback(
     Output('top3_local', 'figure'),
