@@ -36,16 +36,18 @@ layout = html.Div(children=[
                 ],
             ),
             html.Div(
-                id="texto_apresentacao_sobre_nos",
-                children=[
-                    html.P(
-                        "Pão de batata",
-                    ),
-                ],
-            ),
-        ],
-    ),
-])
+                    id='sobre_nos_texto',
+                    children=[
+                        html.Br(),
+                        html.P('Ese é o projeto FGA Health Analytics, construído pela equipe de saúde da matéria de Algoritmo e Programação de Computadores. Nosso projeto tem a função de difundir de maneiramais divertida e precisa as informações sobre a COVID-19, para que todos possam, em poucos toques, entender o cenário global dessa pandemia. Está preparado para aprender como está nosso planeta? Caso você queira ver só a situação do Brasil, tem aqui também! Basta clicar no ícone de menu, e acessar o dashboard local.',
+                            id='text_sobre_nos',
+                        ),
+                    ],
+                ),
+            ],
+        ),
+    ]
+)
  
 @app.callback(Output('carrossel_imagem', 'src'),
               [Input('interval', 'n_intervals')])
