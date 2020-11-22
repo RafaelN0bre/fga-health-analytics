@@ -1296,7 +1296,20 @@ def update_top_3_global(confirm_action, end_date):
     end_date_string = end_date_object.strftime('%d/%m/%Y')
     new_end_date_df1 = df_global[df_global.date == end_date_string]
    
-    df_global_top3 = new_end_date_df1[['location','total_deaths']].sort_values( by=['total_deaths'],ascending=False).query('location != "Mundo"').dropna().head(3)
+    df_global_top3 = new_end_date_df1.values.tolist()
+
+    for i in range(len(df_global_top3)):
+        for h in range(0, len(df_global_top3)-i-1 ):
+            if df_global_top3[h][6] < df_global_top3[h+1][6]:
+                df_global_top3[h], df_global_top3[h+1] = df_global_top3[h+1], df_global_top3[h]
+    
+    for i in range(len(df_global_top3)):
+        if df_global_top3[i][2] == "Mundo":
+            df_global_top3[i] = None 
+    
+    df_global_top3 = df_global_top3[1:4]        
+
+    # df_global_top3 = new_end_date_df1[['location','total_deaths']].sort_values( by=['total_deaths'],ascending=False).query('location != "Mundo"').dropna().head(3)
 
     if not end_date:
         raise PreventUpdate
@@ -1304,8 +1317,8 @@ def update_top_3_global(confirm_action, end_date):
     else:
         fig_bar_global_top3 = go.Figure( data = [
             go.Bar(
-                x= df_global_top3['location'], 
-                y = df_global_top3['total_deaths'],
+                x= [df_global_top3[i][2] for i in range(len(df_global_top3))], 
+                y = [df_global_top3[i][6] for i in range(len(df_global_top3))],
                 textposition = 'auto',
                 marker =  dict(
                     autocolorscale = True,
