@@ -19,6 +19,7 @@ from app import app
 PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath("../datasets").resolve()
 df_global = pd.read_excel(DATA_PATH.joinpath("covid_global_trans.xlsx"))
+print(df_global)
 
 #Fonte Original Do código do joao paulo
 #df_global_top3 = df_global[['location','date','total_deaths']].sort_values( by=['date','total_deaths'],ascending=False).drop(45580, axis=0).dropna().head(3)
@@ -1300,9 +1301,9 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
 )
 def update_top_3_global(confirm_action, end_date):
     end_date_object = date.fromisoformat(end_date)
-    end_date_string = end_date_object.strftime('%d/%m/%Y')
-    new_end_date_df1 = df_global[df_global.date == end_date_string]
-   
+    end_date_string = end_date_object.strftime('%Y-%m-%d')
+    new_end_date_df1 = df_global[df_global.date == end_date_string].dropna(subset=['total_deaths'])
+
     df_global_top3 = new_end_date_df1.values.tolist()
 
     for i in range(len(df_global_top3)):
@@ -1407,7 +1408,6 @@ def pop_up_message(confirm_action, selected_location, selected_graph, selected_i
         return True, '...'
 
 '''
-
 @app.callback(
 [Output('acumulado_casos_text', 'children'), 
 Output('novos_casos_text', 'children'),
@@ -1421,13 +1421,17 @@ State('escolha_data', 'end_date'),]
 def resumo_geral(confirm_action, start_date, end_date):
     
     start_date_object = date.fromisoformat(start_date)
-    start_date_string = start_date_object.strftime('%d/%m/%Y')
+    start_date_string = start_date_object.strftime('%Y-%m-%d')
     end_date_object = date.fromisoformat(end_date)
-    end_date_string = end_date_object.strftime('%d/%m/%Y')
+    end_date_string = end_date_object.strftime('%Y-%m-%d')
 
     newlocation_df1 = df_global[df_global['location'] == 'Mundo']
     data_resumo_geral_fim = newlocation_df1[newlocation_df1['date'] == end_date_string]
+    print(data_resumo_geral_fim)
     data_resumo_geral_inicio = newlocation_df1[newlocation_df1['date'] == start_date_string]
+    print(data_resumo_geral_inicio)
+    
+    
     
     var_resumo_casos_fim  = float(data_resumo_geral_fim['total_cases'].values)
     var_resumo_casos_inicio = float(data_resumo_geral_inicio['total_cases'].values)
