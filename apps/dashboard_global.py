@@ -270,7 +270,7 @@ layout = html.Div(children=[
 
                     html.Img(
                         id='icon_casos',
-                        src='/assets/icon_casos.svg',
+                        src='../assets/icone_casos.svg',
                     ),
 
                     html.P(
@@ -288,9 +288,6 @@ layout = html.Div(children=[
                         id='novos_casos_text',
                     ),
                 ],
-            ),
-            html.Div(
-                id='colocar_algo',
             ),
             html.Div(
                 id='resumo_obitos',
