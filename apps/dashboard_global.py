@@ -844,7 +844,8 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
     start_date_object = date.fromisoformat(start_date)
     start_date_string = start_date_object.strftime('%Y-%m-%d')
     end_date_object = date.fromisoformat(end_date)
-    end_d wlocation_df1 = df_global[df_global.location == selected_location] #redefinindo o dataframe
+    end_date_string = end_date_object.strftime('%Y-%m-%d')
+    newlocation_df1 = df_global[df_global.location == selected_location] #redefinindo o dataframe
     new_end_date_df1 = df_global[df_global.date == end_date_string]
     if not selected_info or not selected_location:
         raise PreventUpdate
