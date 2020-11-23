@@ -8,8 +8,7 @@ import plotly.io as pio
 import re
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
-import datetime
-from datetime import date
+from datetime import date, datetime
 import pathlib
 import numpy as np
 import json
@@ -20,7 +19,6 @@ from app import app
 PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath("../datasets").resolve()
 df_local = pd.read_excel(DATA_PATH.joinpath("covid_brasil.xlsx"))
-
 
 brazil_states = json.load(open('brazil-states.geojson', 'r'))
 
@@ -214,13 +212,19 @@ layout = html.Div(children=[
                         children=[
                             dcc.DatePickerRange(
                                 id='escolha_data_local',
-                                min_date_allowed=date(2020, 1, 1),
-                                max_date_allowed=date(2020, 12, 24),
-                                #initial_visible_month=date(2020, 3, 10),
-                                start_date=date(2020, 4, 20),
-                                end_date=date(2020, 6, 20),
+                                min_date_allowed=datetime(2020, 2, 25),
+                                max_date_allowed=datetime(2020, 9, 20),
+                                start_date=datetime(2020, 3, 14).date(),
+                                end_date=datetime(2020, 6, 20).date(),
+                                clearable=True,
+                                start_date_placeholder_text="Data Inicial",
+                                end_date_placeholder_text="Data Final",
+                                display_format="DD/MM/YYYY",
+                                minimum_nights=2,
+                                persistence=True,
+                                persisted_props=['start_date', 'end_date'],
+                                persistence_type="session",
                             ),
-    
                             html.Div(id='output-container-date-picker-range_local'),
                         ],
                     ),
@@ -367,9 +371,9 @@ State('escolha_data_local', 'end_date'),
 State('tipo_grafico_1_local', 'value'),]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
 def update_figure1_local(confirm_action, selected_location, selected_info, start_date, end_date, selected_graph):
     start_date_object = date.fromisoformat(start_date)
-    start_date_string = start_date_object.strftime('%d/%m/%Y')
+    start_date_string = start_date_object.strftime('%Y-%m-%d')
     end_date_object = date.fromisoformat(end_date)
-    end_date_string = end_date_object.strftime('%d/%m/%Y')
+    end_date_string = end_date_object.strftime('%Y-%m-%d')
 
     #Restrição do dataframe
     newlocation_df1 = df_local[df_local.estado == selected_location]
@@ -1319,7 +1323,7 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
 )
 def update_top_3_local(confirm_action, end_date):
     end_date_object = date.fromisoformat(end_date)
-    end_date_string = end_date_object.strftime('%d/%m/%Y')
+    end_date_string = end_date_object.strftime('%Y-%m-%d')
     new_end_date_df1 = df_local[df_local.data == end_date_string]
    
     df_local_top3 = new_end_date_df1[['estado','obitosAcumulado']].sort_values( by=['obitosAcumulado'],ascending=False).dropna().head(3)
@@ -1387,9 +1391,9 @@ State('escolha_data_local', 'end_date'),]
 def resumo_geral(confirm_action, start_date, end_date):
     
     start_date_object = date.fromisoformat(start_date)
-    start_date_string = start_date_object.strftime('%d/%m/%Y')
+    start_date_string = start_date_object.strftime('%Y-%m-%d')
     end_date_object = date.fromisoformat(end_date)
-    end_date_string = end_date_object.strftime('%d/%m/%Y')
+    end_date_string = end_date_object.strftime('%Y-%m-%d')
 
     newlocation_df1 = df_local[df_local['regiao'] == 'Brasil']
     data_resumo_geral_fim = newlocation_df1[newlocation_df1['data'] == end_date_string]
