@@ -362,6 +362,7 @@ layout = html.Div(children=[
     ),
 
 ])
+
 @app.callback(
 Output('grafico-1', 'figure'),
 Input('Submit_button', 'n_clicks'), 
@@ -825,11 +826,6 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
         elif (selected_info == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']):
             raise PreventUpdate
 
-#Analisar questão de inserir data limite no mapa
-#Inserir button de confirmação 
-
-
-#EM PROCESSO DE TESTE DE INTEGRAÇÃO DE DATA NO GRÁFICO
 @app.callback(
 Output('grafico-2', 'figure'),
 Input('Submit_button', 'n_clicks'), 
@@ -1366,11 +1362,6 @@ def update_top_3_global(confirm_action, end_date):
 
         return fig_bar_global_top3
 
-#ERRO NO CALLBACK --> POP-UP ACONTECE MESMO QUANDO CONDIÇÃO NÃO SE APLICA.
-#SITUAÇÃO 1 --> SELECIONAR MAPA TIPO CASO POP UP APARECE (NÃO DESEJADO)
-#SITUAÇÃO 2 --> SELECIONA MAPA TIPO MORTE POP UP APARECE (NÃO DESEJADO)
-#EM IMPLEMENTAÇÃO
-'''
 @app.callback(
     [Output('pop_up_global_message', 'hidden'),
     Output('text_global_pop_up', 'children')],
@@ -1385,12 +1376,35 @@ def update_top_3_global(confirm_action, end_date):
 def pop_up_message(confirm_action, selected_location, selected_graph, selected_info, 
                     selected_location_2, selected_graph_2, selected_info_2):
 
-    if selected_graph_2 == "grafico_mapa" or selected_graph == "grafico_mapa":
-        if ((selected_info_2 == ['grafico_casos', 'grafico_mortes'] or 
-            ['grafico_mortes', 'grafico_casos']) or 
-            (selected_info == ['grafico_casos', 'grafico_mortes'] or 
-            ['grafico_mortes', 'grafico_casos'])):
+    if selected_graph == "grafico_mapa" and selected_graph_2 == "grafico_mapa":
+        if not selected_info or not selected_info_2:
+            return False, 'Não é possível gerar gráficos com a opção tipo de informação vazia. Selecione casos, morte ou ambos e tente novamente.'
+        
+        elif selected_info == ['grafico_casos', 'grafico_mortes'] or selected_info_2 == ['grafico_casos', 'grafico_mortes']:
             return False, 'O gráfico de mapa não pode receber as informações de morte e casos simultaneamente. Selecione casos ou mortes, ou altere o tipo de gráfico e tente novamente.'
+
+        else:
+            return True, '...'
+
+    if selected_graph_2 == "grafico_mapa":
+        if selected_info_2 == ['grafico_casos', 'grafico_mortes']:
+            return False, 'O gráfico de mapa não pode receber as informações de morte e casos simultaneamente. Selecione casos ou mortes, ou altere o tipo de gráfico e tente novamente.'
+        
+        elif selected_info_2 == ['grafico_casos'] or ['grafico_mortes']:
+            return True, '...'
+
+        else:
+            return False, 'Não é possível gerar gráficos com a opção tipo de informação vazia. Selecione casos, morte ou ambos e tente novamente.' 
+
+    if selected_graph == "grafico_mapa":
+        if selected_info == ['grafico_casos', 'grafico_mortes']:
+            return False, 'O gráfico de mapa não pode receber as informações de morte e casos simultaneamente. Selecione casos ou mortes, ou altere o tipo de gráfico e tente novamente.'
+
+        elif selected_info == ['grafico_casos'] or ['grafico_mortes']:
+            return True, '...'
+        
+        elif not selected_info_2 or selected_info:
+            return False, 'Não é possível gerar gráficos com a opção tipo de informação vazia. Selecione casos, morte ou ambos e tente novamente.'
 
     elif((not selected_location or not selected_location_2) and (not selected_info or not selected_info_2)):
         return False, 'Não é possível gerar gráficos com as opções localização e tipo de informação vazias. Selecione uma localização e um tipo de informação e tente novamente.' 
@@ -1404,7 +1418,6 @@ def pop_up_message(confirm_action, selected_location, selected_graph, selected_i
     else:
         return True, '...'
 
-'''
 @app.callback(
 [Output('acumulado_casos_text', 'children'), 
 Output('novos_casos_text', 'children'),

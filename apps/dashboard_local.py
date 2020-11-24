@@ -843,9 +843,6 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
         elif (selected_info == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']):
             raise PreventUpdate
 
-#Analisar questão de inserir data limite no mapa
-#Inserir button de confirmação 
-
 
 #EM PROCESSO DE TESTE DE INTEGRAÇÃO DE DATA NO GRÁFICO
 @app.callback(
