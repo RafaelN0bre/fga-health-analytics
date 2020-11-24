@@ -1380,6 +1380,62 @@ def update_top_3_local(confirm_action, end_date):
         return fig_bar_local_top3
 
 @app.callback(
+    [Output('pop_up_local_message', 'hidden'),
+    Output('text_local_pop_up', 'children')],
+    Input('Submit_button_local', 'n_clicks'),
+    [State('pais_grafico_1_local', 'value'),
+    State('tipo_grafico_1_local', 'value'),
+    State('casos_mortes_grafico_1_local', 'value'),
+    State('pais_grafico_2_local', 'value'),
+    State('tipo_grafico_2_local', 'value'),
+    State('casos_mortes_grafico_2_local', 'value')]
+)
+def pop_up_message(confirm_action, selected_location, selected_graph, selected_info, 
+                    selected_location_2, selected_graph_2, selected_info_2):
+
+    if selected_graph == "grafico_mapa" and selected_graph_2 == "grafico_mapa":
+        if not selected_info or not selected_info_2:
+            return False, 'Não é possível gerar gráficos com a opção tipo de informação vazia. Selecione casos, morte ou ambos e tente novamente.'
+        
+        elif selected_info == ['grafico_casos', 'grafico_mortes'] or selected_info_2 == ['grafico_casos', 'grafico_mortes']:
+            return False, 'O gráfico de mapa não pode receber as informações de morte e casos simultaneamente. Selecione casos ou mortes, ou altere o tipo de gráfico e tente novamente.'
+
+        else:
+            return True, '...'
+
+    if selected_graph_2 == "grafico_mapa":
+        if selected_info_2 == ['grafico_casos', 'grafico_mortes']:
+            return False, 'O gráfico de mapa não pode receber as informações de morte e casos simultaneamente. Selecione casos ou mortes, ou altere o tipo de gráfico e tente novamente.'
+        
+        elif selected_info_2 == ['grafico_casos'] or ['grafico_mortes']:
+            return True, '...'
+
+        else:
+            return False, 'Não é possível gerar gráficos com a opção tipo de informação vazia. Selecione casos, morte ou ambos e tente novamente.' 
+
+    if selected_graph == "grafico_mapa":
+        if selected_info == ['grafico_casos', 'grafico_mortes']:
+            return False, 'O gráfico de mapa não pode receber as informações de morte e casos simultaneamente. Selecione casos ou mortes, ou altere o tipo de gráfico e tente novamente.'
+
+        elif selected_info == ['grafico_casos'] or ['grafico_mortes']:
+            return True, '...'
+        
+        elif not selected_info_2 or selected_info:
+            return False, 'Não é possível gerar gráficos com a opção tipo de informação vazia. Selecione casos, morte ou ambos e tente novamente.'
+
+    elif((not selected_location or not selected_location_2) and (not selected_info or not selected_info_2)):
+        return False, 'Não é possível gerar gráficos com as opções localização e tipo de informação vazias. Selecione uma localização e um tipo de informação e tente novamente.' 
+    
+    elif (not selected_location or not selected_location_2):
+        return False, 'Não é possível gerar gráficos com a opção localização vazia. Selecione uma localização e tente novamente.'
+
+    elif (not selected_info or not selected_info_2):
+        return False, 'Não é possível gerar gráficos com a opção tipo de informação vazia. Selecione casos, morte ou ambos e tente novamente.'
+
+    else:
+        return True, '...'
+
+@app.callback(
 [Output('acumulado_casos_text_local', 'children'), 
 Output('novos_casos_text_local', 'children'),
 Output('acumulado_obitos_text_local', 'children'), 
