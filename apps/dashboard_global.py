@@ -408,7 +408,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Casos: %{y} <extra></extra>", 
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Casos: %{y} <extra></extra>", 
                 ),
             ])
 
@@ -456,7 +456,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Óbitos: %{y} <extra></extra>", 
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Óbitos: %{y} <extra></extra>", 
                 ),
             ])
 
@@ -504,7 +504,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Casos: %{y} <extra></extra>",  
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Casos: %{y} <extra></extra>",  
                 ),
                 go.Bar(
                     y = newlocation_df1['total_deaths'],
@@ -525,7 +525,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Óbitos: %{y} <extra></extra>", 
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Óbitos: %{y} <extra></extra>", 
                 ),
             ])
 
@@ -571,7 +571,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Casos: %{y} <extra></extra>", 
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Casos: %{y} <extra></extra>", 
                 ),
             ])
 
@@ -615,7 +615,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Óbitos: %{y} <extra></extra>", 
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Óbitos: %{y} <extra></extra>", 
                 ),
             ])
 
@@ -658,7 +658,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Casos: %{y} <extra></extra>", 
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Casos: %{y} <extra></extra>", 
                 ),
 
                 go.Scatter(
@@ -677,7 +677,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Óbitos: %{y} <extra></extra>", 
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Óbitos: %{y} <extra></extra>", 
                 ),
             ])
 
@@ -731,7 +731,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                         color = 'black',
                     ),
                 ),
-                hovertemplate = " Data: %{text_2} <br> País: %{text} <br> Casos: %{z} <extra></extra>",  
+                hovertemplate = " País: %{text} <br> Casos: %{z} <extra></extra>",  
                 #Modificar data dps     
             ))
 
@@ -790,8 +790,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                         color = 'black',
                     ),
                 ),
-                hovertemplate = " Data: 23 Set 2020 <br> País: %{text} <br> Mortes: %{z} <extra></extra>",  
-                #Modificar data dps  
+                hovertemplate = " País: %{text} <br> Mortes: %{z} <extra></extra>",  
             ))
 
             fig_map_global_1.update_layout(
@@ -875,7 +874,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Casos: %{y} <extra></extra>", 
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Casos: %{y} <extra></extra>", 
                 ),
             ])
 
@@ -923,7 +922,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Óbitos: %{y} <extra></extra>", 
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Óbitos: %{y} <extra></extra>", 
                 ),
             ])
 
@@ -971,7 +970,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Casos: %{y} <extra></extra>",  
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Casos: %{y} <extra></extra>",  
                 ),
                 go.Bar(
                     y = newlocation_df1['total_deaths'],
@@ -992,7 +991,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Óbitos: %{y} <extra></extra>", 
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Óbitos: %{y} <extra></extra>", 
                 ),
             ])
 
@@ -1038,7 +1037,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Casos: %{y} <extra></extra>", 
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Casos: %{y} <extra></extra>", 
                 ),
             ])
 
@@ -1082,7 +1081,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Óbitos: %{y} <extra></extra>", 
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Óbitos: %{y} <extra></extra>", 
                 ),
             ])
 
@@ -1125,7 +1124,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Casos: %{y} <extra></extra>", 
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Casos: %{y} <extra></extra>", 
                 ),
 
                 go.Scatter(
@@ -1144,7 +1143,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Óbitos: %{y} <extra></extra>", 
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Óbitos: %{y} <extra></extra>", 
                 ),
             ])
 
@@ -1198,8 +1197,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                         color = 'black',
                     ),
                 ),
-                hovertemplate = " Data: %{text_2} <br> País: %{text} <br> Casos: %{z} <extra></extra>",  
-                #Modificar data dps     
+                hovertemplate = " País: %{text} <br> Casos: %{z} <extra></extra>",     
             ))
 
             fig_map_global_2.update_layout(
@@ -1257,8 +1255,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                         color = 'black',
                     ),
                 ),
-                hovertemplate = " Data: 23 Set 2020 <br> País: %{text} <br> Mortes: %{z} <extra></extra>",  
-                #Modificar data dps  
+                hovertemplate = " País: %{text} <br> Mortes: %{z} <extra></extra>",  
             ))
 
             fig_map_global_2.update_layout(
