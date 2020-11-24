@@ -553,8 +553,6 @@ body{
     min-height: 125px;
 }
 
-
-
 #carrossel_imagem{
     margin-top: 5vh;
     margin-left: 3.5vw;
@@ -614,26 +612,28 @@ body{
 
 
 #block_1_local{
-    width: 420px;
-    height: 870px;
+    width: 29vw;
+    height: 110vh;
     display: inline-block;
     vertical-align: top;
     border-radius: 30px;
-    margin-top: 33px;
-    margin-left: 20px;
+    margin-top: 4.17vh;
+    margin-left: 1.39vh;
     padding-right: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 2.53vh;
+    min-width: 417px;
+    min-height: 867px;
 }
 
 #block_1_local p{
-    font-size: x-large;
+    font-size: 3vh;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 300;
 }
 
 #seccao_filtros_local{
-    width: 420px;
-    height: 420px;
+    width: 29.17vw;
+    height: 53.165vh;
     display: inline-block;
     vertical-align: top;
     border-radius: 30px;
@@ -641,25 +641,33 @@ body{
     padding-left: 12px;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
     font-family: 'Courier New', Courier, monospace;
+    min-width: 420px;
+    min-height: 419px;
 }
 
 #oq_deseja_ver_local{
     text-align: center;
-    margin: 0px;
+    margin: auto;
+    min-width: 420px;
+    min-height: 26.9px;
 }
 
 #grafico_1_filtro_text_local{
     position: absolute;
-    width: 150px;
-    margin-top: -20px;
+    width: 10.417vw;
+    margin-top: -2.53vh;
+    min-width: 149.9px;
+    min-height: 74px;
 }
 
 #grafico_2_filtro_text_local{
     text-align: center;
-    width: 150px;
-    margin-left: 270px;
+    width: 10.417vw;
+    margin-left: 18.75vw;
     position: absolute;
-    margin-top: -20px;
+    margin-top: -2.53vh;
+    min-width: 149.9px;
+    min-height: 74px;
 }
 
 #Primeira_linha_local{
@@ -682,13 +690,13 @@ body{
 #Submit_button_local{
     background-color: rgb(27, 227, 169);
     border-radius: 50%;
-    height: 40px;
+    height: 5vh;
     position: absolute;
-    margin-top: -45px;
-    margin-left: 360px;
+    margin-top: -5.7vh;
+    margin-left: 25vw;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 500;
-    font-size: medium;
+    font-size: 2vh;
     cursor: pointer;
     border: none;
     box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.40);
@@ -699,207 +707,253 @@ body{
     display: inline-block;
     color: #000000;
     position: relative;
-    width: 200px;
+    width: 13.8vw;
 }
 
 #casos_mortes_grafico_1_local{
     display: inline-block;
     color: #000000;
     position: relative;
-    width: 200px;
+    width: 13.8vw;
     padding-right: 10px;
+    min-width: 140px;
+    min-height: 45px;
 }
 
 #tipo_grafico_1_local{
     padding-right: 10px;
     display: inline-block;
     position: relative;
-    width: 200px;
+    width: 13.8vw;
+    min-width: 198px;
+    min-height: 45px;
 }
 
 #pais_grafico_2_local{
     padding-right: 10px;
     display: inline-block;
     position: relative;
-    width: 200px;
+    width: 13.8vw;
 }
 
 #casos_mortes_grafico_2_local{
     padding-right: 10px;
     display: inline-block;
     position: relative;
-    width: 200px;
+    width: 13.8vw;
+    min-width: 140px;
+    min-height: 45px;
 }
 
 #tipo_grafico_2_local{
     padding-right: 10px;
     display: inline-block;
     position: relative;
-    width: 200px;
+    width: 13.8vw;
+    min-width: 198px;
+    min-height: 45px;
 }
 
 #filtros_gerais_text_local{
     display: inline-block;
     position: relative;
-    margin-top: 0px;
-    margin-left: 100px;
+    margin-left: 6.94vw;
+    min-width: 198px;
+    min-height: 74px;
 }
 
 #escolha_data_local{
-    margin-left: 55px;
-    margin-top: -10px;
+    margin-left: 2.43vw;
+    margin-top: -1.267vh;
+    min-width: 315.9px;
+    min-height: 47.9px;
 }
 
 #top_3_local{
-    width: 432px;
-    height: 418px;
+    width: 30vw;
+    height: 53vh;
     display: inline-block;
-    margin-top: 29px;
+    margin-top: 3.7vh;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
+    min-width: 431.9px;
+    min-height: 418px;
 }
 
 #top3_local{
-    height: 418px;
+    height: 53vh;
     border-radius: 30px;
+    min-width: 431.9px;
+    min-height: 418px;
 }
 
 .resumo_geral_local{
     display: inline-block;
-    margin-bottom: 20px;
-    position: absolute;
+    margin-bottom: 2.53vh;
+    min-width: 960px;
+    min-height: 900px;
 }
 
 #resumo_casos_local{
-    width: 448px;
-    height: 232px;
+    width: 31.1vw;
+    height: 29.37vh;
     display: inline-block;
     border-radius: 30px;
     background-color: #FFFFFF;
-    margin-top: 33px;
-    margin-left: 20px;
+    margin-top: 4.77vh;
+    margin-left: 1.39vw;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
     vertical-align: top;
+    min-width: 447px;
+    min-height: 231px;
 }
 
 #icon_circle_casos_local{
-    width: 61.8px;
-    height: 53px;
+    width: 4.3vw;
+    height: 6.7vh;
     background-color: rgb(255, 220, 0);
     border-radius: 50%;
     position: absolute;
-    margin-left: 11px;
-    margin-top: 17px;
+    margin-left: 0.76vw;
+    margin-top: 2.15vh;
+    min-width: 61.8px;
+    min-height: 52.7px;
 }
 
 #icon_casos_local{
-    width: 35px;
-    height: 37px;
-    margin-left: 25.99px;
-    margin-top: 25.5px;
+    width: 2.43vw;
+    height: 4.7vh;
+    margin-left: 1.8vw;
+    margin-top: 3.23vh;
     position: absolute;
+    min-width: 34px;
+    min-height: 37px;
 }
 
 #casos_confirmados_text_local{
     position: absolute;
-    margin-left: 79px;
-    margin-top: 33px;
+    margin-left: 5.5vw;
+    margin-top: 4.2vh;
     font-family: 'Courier New', Courier, monospace;
-    font-size: larger;
+    font-size: 2.5vh;
+    min-width: 201px;
+    min-height: 21.9px;
 }
 
 #acumulado_casos_text_local{
     position: absolute;
-    margin-left: 20px;
-    margin-top: 130px;
+    margin-left: 1.39vw;
+    margin-top: 17vh;
     font-family: 'Courier New', Courier, monospace;
-    font-size: medium;
+    font-size: 2vh;
+    min-width: 179px;
+    min-height: 17.9px;
 }
 
 #novos_casos_text_local{
     position: absolute;
-    margin-left: 20px;
-    margin-top: 160px;
+    margin-left: 1.39vw;
+    margin-top: 20.80vh;
     font-family: 'Courier New', Courier, monospace;
     font-size: medium;
+    min-width: 201px;
+    min-height: 17.9px;
 }
 
 #resumo_obitos_local{
-    width: 448px;
-    height: 232px;
+    width: 31.1vw;
+    height: 29.37vh;
     display: inline-block;
     border-radius: 30px;
     background-color: #FFFFFF;
-    margin-top: 33px;
-    margin-left: 43px;
-    position: absolute;
+    margin-top: 4.77vh;
+    margin-left: 3vw;
+    /*position: absolute;*/
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
+    min-width: 447px;
+    min-height: 231px;
 }
 
 #icon_circle_obitos_local{
-    width: 61.8px;
-    height: 53px;
+    width: 4.3vw;
+    height: 6.7vh;
     background-color: rgb(255, 72, 0);
     border-radius: 50%;
     position: absolute;
-    margin-left: 12px;
-    margin-top: 17px;
+    margin-left: 0.76vw;
+    margin-top: 2.15vh;
+    min-width: 61px;
+    min-height: 52px;
 }
 
 #icon_obitos_local{
-    width: 39px;
-    height: 39px;
-    margin-left: 22.98px;
-    margin-top: 24px;
+    width: 2.7vw;
+    height: 5vh;
+    margin-left: 1.6vw;
+    margin-top: 3vh;
     position: absolute;
+    min-width: 38px;
+    min-height: 39px;
 }
 
 #obitos_confirmados_local{
     position: absolute;
-    margin-left: 77px;
-    margin-top: 33px;
+    margin-left: 5.35vw;
+    margin-top: 4.2vh;
     font-family: 'Courier New', Courier, monospace;
-    font-size: larger;
+    font-size: 2.5vh;
+    min-width: 213px;
+    min-height: 21.9px;
 }
 
 #acumulado_obitos_text_local{
     position: absolute;
-    margin-left: 12px;
-    margin-top: 130px;
+    margin-left: 1.39vw;
+    margin-top: 16.45vh;
     font-family: 'Courier New', Courier, monospace;
-    font-size: medium;
+    font-size: 2vh;
+    min-width: 170px;
+    min-height: 17.9px;
 }
 
 #letalidade_text_local{
     position: absolute;
-    margin-left: 12px;
-    margin-top: 187px;
+    margin-left: 1.39vw;
+    margin-top: 23.7vh;
     font-family: 'Courier New', Courier, monospace;
-    font-size: medium;
+    font-size: 2vh;
+    min-width: 160px;
+    min-height: 17.9px;
 }
 
 #novos_obitos_text_local{
     position: absolute;
     display: block;
-    margin-left: 12px;
-    margin-top: 160px;
+    margin-left: 1.39vw;
+    margin-top: 20.25vh;
     font-family: 'Courier New', Courier, monospace;
-    font-size: medium;
+    font-size: 2vh;
+    min-width: 198px;
+    min-height: 17.9px;
 }
 
 /* Gráfico 1 */
 #grafico-1_local{
-    width: 940px;
-    height: 281px;
-    margin-left: 20px;
-    margin-top: 33px;
+    width: 65.28vw;
+    height: 35.57vh;
+    margin-left: 1.39vw;
+    margin-top: 4.18vh;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
+    min-width: 940px;
+    min-height: 280px;
 }
 
 /* Gráfico 2 */
 #grafico-2_local{
-    width: 940px;
-    height: 281px;
-    margin-left: 20px;
-    margin-top: 33px;
+    width: 65.28vw;
+    height: 35.57vh;
+    margin-left: 1.39vw;
+    margin-top: 4.18vh;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
+    min-width: 940px;
+    min-height: 280px;
 }
