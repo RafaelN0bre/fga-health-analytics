@@ -78,7 +78,8 @@ layout = html.Div(children=[
                                 persistence = True,           #Mantem o valor até que , no type memory, a página dê um refresh
                                 persistence_type = 'memory',
                                 style={
-                                    'margin-top':'22px',
+                                    'margin-top':'2.78vh',
+                                    'font-size':'2vh',
                                 },
                             ),
 
@@ -95,7 +96,8 @@ layout = html.Div(children=[
                                 persistence = True,
                                 persistence_type = 'memory',
                                 style={
-                                    'margin-top':'22px',
+                                    'margin-top':'2.78vh',
+                                    'font-size':'2vh',
                                 },
                             ),      
                         ],
@@ -119,8 +121,8 @@ layout = html.Div(children=[
                                 persistence = True,
                                 persistence_type = 'memory',
                                 style={
-                                    'margin-top':'10px',
-                                    'font-size':'15px',
+                                    'margin-top':'1.266vh',
+                                    'font-size':'1.7vh',
                                 },
                             ),
 
@@ -139,8 +141,8 @@ layout = html.Div(children=[
                                 persistence = True,
                                 persistence_type = 'memory',
                                 style={
-                                    'margin-top':'10px',
-                                    'font-size':'15px',
+                                    'margin-top':'1.266vh',
+                                    'font-size':'1.7vh',
                                 },
                             ),
                         ],
@@ -166,7 +168,8 @@ layout = html.Div(children=[
                                 persistence = True,
                                 persistence_type = 'memory',
                                 style={
-                                'margin-top':'10px',
+                                    'margin-top':'1.266vh',
+                                    'font-size':'2vh',
                                 },
                             ),
 
@@ -187,7 +190,8 @@ layout = html.Div(children=[
                                 persistence = True,
                                 persistence_type = 'memory',
                                 style={
-                                'margin-top':'10px',
+                                    'margin-top':'1.266vh',
+                                    'font-size':'2vh',
                                 },
                             ),
                         ],

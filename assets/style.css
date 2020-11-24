@@ -87,7 +87,7 @@
 }
 
 #block_1 p{
-    font-size: x-large;
+    font-size: 3vh;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 300;
 }
@@ -106,21 +106,21 @@
 
 #oq_deseja_ver{
     text-align: center;
-    margin: 0px;
+    margin: auto;
 }
 
 #grafico_1_filtro_text{
     position: absolute;
-    width: 150px;
-    margin-top: -20px;
+    width: 10.417vw;
+    margin-top: -2.53vh;
 }
 
 #grafico_2_filtro_text{
     text-align: center;
-    width: 150px;
-    margin-left: 270px;
+    width: 10.417vw;
+    margin-left: 18.75vw;
     position: absolute;
-    margin-top: -20px;
+    margin-top: -2.53vh;
 }
 
 #Primeira_linha{
@@ -202,13 +202,12 @@
 #filtros_gerais_text{
     display: inline-block;
     position: relative;
-    margin-top: 0px;
-    margin-left: 100px;
+    margin-left: 6.94vw;
 }
 
 #escolha_data{
-    margin-left: 55px;
-    margin-top: -10px;
+    margin-left: 2.43vw;
+    margin-top: -1.267vh;
 }
 
 #top_3{
