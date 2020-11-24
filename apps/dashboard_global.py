@@ -414,7 +414,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
 
             fig_bar_global_1.update_layout(
                 title={
-                    'text':'Gráfico de barras casos global',
+                    'text':'Gráfico 1',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -462,7 +462,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
 
             fig_bar_global_1.update_layout(
                 title={
-                    'text':'Gráfico de barras mortes global',
+                    'text':'Gráfico 1',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -531,7 +531,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
 
             fig_bar_global_1.update_layout(
                 title={
-                    'text':'Gráfico de barras casos e mortes global',
+                    'text':'Gráfico 1',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -577,7 +577,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
 
             fig_scatter_global_1.update_layout(
                 title={
-                    'text':'Gráfico de linhas casos e mortes global',
+                    'text':'Gráfico 1',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -621,7 +621,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
 
             fig_scatter_global_1.update_layout(
                 title={
-                    'text':'Gráfico de linhas casos e mortes global',
+                    'text':'Gráfico 1',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -683,7 +683,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
 
             fig_scatter_global_1.update_layout(
                 title={
-                    'text':'Gráfico de linhas casos e mortes global',
+                    'text':'Gráfico 1',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -743,7 +743,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                     bgcolor = "#C5D5FD",
                 ),
                 title={
-                    'text':'Gráfico de mapa de casos global',
+                    'text':'Gráfico 1',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -802,7 +802,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                     bgcolor = "#C5D5FD",
                 ),
                 title={
-                    'text':'Gráfico de mapa de mortes global',
+                    'text':'Gráfico 1',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -880,7 +880,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
 
             fig_bar_global_2.update_layout(
                 title={
-                    'text':'Gráfico de barras casos global',
+                    'text':'Gráfico 2',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -928,7 +928,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
 
             fig_bar_global_2.update_layout(
                 title={
-                    'text':'Gráfico de barras mortes global',
+                    'text':'Gráfico 2',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -997,7 +997,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
 
             fig_bar_global_2.update_layout(
                 title={
-                    'text':'Gráfico de barras casos e mortes global',
+                    'text':'Gráfico 2',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -1043,7 +1043,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
 
             fig_scatter_global_2.update_layout(
                 title={
-                    'text':'Gráfico de linhas casos e mortes global',
+                    'text':'Gráfico 2',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -1087,7 +1087,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
 
             fig_scatter_global_2.update_layout(
                 title={
-                    'text':'Gráfico de linhas casos e mortes global',
+                    'text':'Gráfico 2',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -1149,7 +1149,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
 
             fig_scatter_global_2.update_layout(
                 title={
-                    'text':'Gráfico de linhas casos e mortes global',
+                    'text':'Gráfico 2',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -1208,7 +1208,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                     bgcolor = "#C5D5FD",
                 ),
                 title={
-                    'text':'Gráfico de mapa de casos global',
+                    'text':'Gráfico 2',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
@@ -1267,7 +1267,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                     bgcolor = "#C5D5FD",
                 ),
                 title={
-                    'text':'Gráfico de mapa de mortes global',
+                    'text':'Gráfico 2',
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,

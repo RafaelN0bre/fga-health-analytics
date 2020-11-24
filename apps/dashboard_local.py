@@ -412,7 +412,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                         color = 'black',
                     ),
                 ),
-                hovertemplate = " Data: %{x} <br> Casos: %{y} <extra></extra>",    
+                hovertemplate = " Data: %{x|%d/%m/%Y} <br> Casos: %{y} <extra></extra>",    
             )])
             fig_bar_local_1.update_layout(
                 title={
@@ -458,7 +458,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                         color = 'black',
                     ),
                 ),
-                hovertemplate = " Data: %{x} <br> Óbitos: %{y} <extra></extra>",    
+                hovertemplate = " Data: %{x|%d/%m/%Y} <br> Óbitos: %{y} <extra></extra>",    
             )])
 
             fig_bar_local_1.update_layout(
@@ -506,7 +506,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Casos: %{y} <extra></extra>",  
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Casos: %{y} <extra></extra>",  
                 ),
                 go.Bar(
                     y = newlocation_df1['obitosAcumulado'],
@@ -527,7 +527,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Óbitos: %{y} <extra></extra>", 
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Óbitos: %{y} <extra></extra>", 
                 ),
             ])
 
@@ -575,7 +575,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Casos: %{y} <extra></extra>", 
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Casos: %{y} <extra></extra>", 
                 ),
             ])
             fig_scatter_local_1.update_layout(
@@ -618,7 +618,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Óbitos: %{y} <extra></extra>", 
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Óbitos: %{y} <extra></extra>", 
                 ),
             ])
 
@@ -662,7 +662,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Casos: %{y} <extra></extra>", 
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Casos: %{y} <extra></extra>", 
                 ),
 
                 go.Scatter(
@@ -681,7 +681,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Óbitos: %{y} <extra></extra>", 
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Óbitos: %{y} <extra></extra>", 
                 ),
             ])
             fig_scatter_local_1.update_layout(
@@ -736,7 +736,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                     ),
                 ),
                 geojson = brazil_states,
-                hovertemplate = " Data: 24 Set 2020 <br> estado: %{text} <br> Casos: %{z} <extra></extra>",
+                hovertemplate = " Estado: %{text} <br> Casos: %{z} <extra></extra>",
             ))
 
             fig_map_local_1.update_geos(
@@ -802,7 +802,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                     ),
                 ),
                 geojson = brazil_states,
-                hovertemplate = " Data: 23 Set 2020 <br> Estado: %{text} <br> Mortes: %{z} <extra></extra>",
+                hovertemplate = " Estado: %{text} <br> Óbitos: %{z} <extra></extra>",
             ))
 
             fig_map_local_1.update_geos(
@@ -894,7 +894,7 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                         color = 'black',
                     ),
                 ),
-                hovertemplate = " Data: %{x} <br> Casos: %{y} <extra></extra>",    
+                hovertemplate = " Data: %{x|%d/%m/%Y} <br> Casos: %{y} <extra></extra>",    
             )])
             fig_bar_local_2.update_layout(
                 title={
@@ -939,7 +939,7 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                         color = 'black',
                     ),
                 ),
-                hovertemplate = " Data: %{x} <br> Óbitos: %{y} <extra></extra>",    
+                hovertemplate = " Data: %{x|%d/%m/%Y} <br> Óbitos: %{y} <extra></extra>",    
             )])
 
             fig_bar_local_2.update_layout(
@@ -986,7 +986,7 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Casos: %{y} <extra></extra>",  
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Casos: %{y} <extra></extra>",  
                 ),
                 go.Bar(
                     y = newlocation_df1['obitosAcumulado'],
@@ -1007,7 +1007,7 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                             color = 'black',
                         ),
                     ),
-                    hovertemplate = " Data: %{x} <br> Óbitos: %{y} <extra></extra>", 
+                    hovertemplate = " Data: %{x|%d/%m/%Y} <br> Óbitos: %{y} <extra></extra>", 
                 ),
             ])
 
@@ -1212,7 +1212,7 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                     ),
                 ),
                 geojson = brazil_states,
-                hovertemplate = " Data: 24 Set 2020 <br> estado: %{text} <br> Casos: %{z} <extra></extra>",
+                hovertemplate = " Estado: %{text} <br> Casos: %{z} <extra></extra>",
             ))
 
             fig_map_local_2.update_geos(
@@ -1278,7 +1278,7 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                     ),
                 ),
                 geojson = brazil_states,
-                hovertemplate = " Data: 23 Set 2020 <br> Estado: %{text} <br> Mortes: %{z} <extra></extra>",
+                hovertemplate = " Estado: %{text} <br> Óbitos: %{z} <extra></extra>",
             ))
 
             fig_map_local_2.update_geos(
