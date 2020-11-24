@@ -75,15 +75,15 @@
 
 
 #block_1{
-    width: 420px;
-    height: 870px;
+    width: 29vw;
+    height: 110vh;
     display: inline-block;
     vertical-align: top;
     border-radius: 30px;
-    margin-top: 33px;
-    margin-left: 20px;
+    margin-top: 4.17vh;
+    margin-left: 1.39vh;
     padding-right: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 2.53vh;
 }
 
 #block_1 p{
@@ -93,8 +93,8 @@
 }
 
 #seccao_filtros{
-    width: 420px;
-    height: 420px;
+    width: 29.17vw;
+    height: 53.165vh;
     display: inline-block;
     vertical-align: top;
     border-radius: 30px;
@@ -212,32 +212,31 @@
 }
 
 #top_3{
-    width: 432px;
-    height: 418px;
+    width: 30vw;
+    height: 53vh;
     display: inline-block;
-    margin-top: 29px;
+    margin-top: 3.7vh;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
 }
 
 #top3_global{
-    height: 418px;
+    height: 53vh;
     border-radius: 30px;
 }
 
 .resumo_geral{
     display: inline-block;
-    margin-bottom: 20px;
-    position: absolute;
+    margin-bottom: 2.53vh;
 }
 
 #resumo_casos{
-    width: 448px;
-    height: 232px;
+    width: 31.1vw;
+    height: 29.37vh;
     display: inline-block;
     border-radius: 30px;
     background-color: #FFFFFF;
-    margin-top: 33px;
-    margin-left: 20px;
+    margin-top: 4.77vh;
+    margin-left: 1.39vw;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
     vertical-align: top;
 }
@@ -285,14 +284,14 @@
 }
 
 #resumo_obitos{
-    width: 448px;
-    height: 232px;
+    width: 31.1vw;
+    height: 29.37vh;
     display: inline-block;
     border-radius: 30px;
     background-color: #FFFFFF;
-    margin-top: 33px;
-    margin-left: 43px;
-    position: absolute;
+    margin-top: 4.77vh;
+    margin-left: 3vw;
+    /*position: absolute;*/
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
 }
 
@@ -349,19 +348,19 @@
 
 /* Gráfico 1 */
 #grafico-1{
-    width: 940px;
-    height: 281px;
-    margin-left: 20px;
-    margin-top: 33px;
+    width: 65.28vw;
+    height: 35.57vh;
+    margin-left: 1.39vw;
+    margin-top: 4.18vh;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
 }
 
 /* Gráfico 2 */
 #grafico-2{
-    width: 940px;
-    height: 281px;
-    margin-left: 20px;
-    margin-top: 33px;
+    width: 65.28vw;
+    height: 35.57vh;
+    margin-left: 1.39vw;
+    margin-top: 4.18vh;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.30);
 }
 
