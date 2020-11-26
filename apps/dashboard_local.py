@@ -216,10 +216,10 @@ layout = html.Div(children=[
                         children=[
                             dcc.DatePickerRange(
                                 id='escolha_data_local',
-                                min_date_allowed=datetime(2020, 2, 25),
+                                min_date_allowed=datetime(2020, 3, 19),
                                 max_date_allowed=datetime(2020, 11, 21),
-                                start_date=datetime(2020, 3, 14).date(),
-                                end_date=datetime(2020, 6, 20).date(),
+                                start_date=datetime(2020, 3, 19).date(),
+                                end_date=datetime(2020, 11, 21).date(),
                                 clearable=True,
                                 start_date_placeholder_text="Data Inicial",
                                 end_date_placeholder_text="Data Final",
@@ -365,6 +365,10 @@ layout = html.Div(children=[
 
 ])
 
+data = 3
+total_cases = 4
+total_deaths = 6
+
 @app.callback(
 Output('grafico-1_local', 'figure'),
 Input('Submit_button_local', 'n_clicks'), 
@@ -386,6 +390,22 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
     dataframe_mapa_local = new_end_date_df1.dropna(subset = ['estado'])
     dataframe_mapa_local['id'] = dataframe_mapa_local['estado'].apply(lambda x: state_id_map[x])
 
+    df_data_interval = newlocation_df1
+    df_data_interval['data'] = df_data_interval['data'].dt.strftime('%Y-%m-%d')
+    df_data_interval = df_data_interval.values.tolist()
+    
+    for i in range(len(df_data_interval)):
+        if df_data_interval[i][data] == start_date_string:
+            aux_start_date = i
+    
+        elif df_data_interval[i][data] == end_date_string:
+            aux_end_date = i
+    
+    df_data_interval_update = []
+    for i in range(len(df_data_interval)):
+        if i >= aux_start_date and i <= aux_end_date:
+            df_data_interval_update.append(df_data_interval[i])
+
     #Se a opção de tipo de informação ou tipo de localização estiver vazia, impedir atualização do gráfico 1
     if not selected_info or not selected_location: 
         raise PreventUpdate
@@ -395,8 +415,8 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
         if selected_info == ['grafico_casos'] :
 
             fig_bar_local_1 = go.Figure( data = [go.Bar( 
-                y = newlocation_df1['casosAcumulado'], 
-                x = newlocation_df1['data'], 
+                y = [df_data_interval_update[i][total_cases] for i in range(len(df_data_interval_update))],
+                x = [df_data_interval_update[i][data] for i in range(len(df_data_interval_update))],
                 marker =  dict(
                     autocolorscale = True,
                     color = 'rgb(255, 220, 0)',
@@ -444,8 +464,8 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
         elif selected_info == ['grafico_mortes'] :
             
             fig_bar_local_1 = go.Figure( data = [go.Bar(
-                y = newlocation_df1['obitosAcumulado'], 
-                x = newlocation_df1['data'],
+                y = [df_data_interval_update[i][total_deaths] for i in range(len(df_data_interval_update))],
+                x = [df_data_interval_update[i][data] for i in range(len(df_data_interval_update))],
                 marker =  dict(
                     autocolorscale = True,
                     color = 'rgb(255, 72, 0)',
@@ -495,8 +515,8 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
             
             fig_bar_local_1 = go.Figure( data = [
                 go.Bar(
-                    y = newlocation_df1['casosAcumulado'], 
-                    x = newlocation_df1['data'],
+                    y = [df_data_interval_update[i][total_cases] for i in range(len(df_data_interval_update))],
+                    x = [df_data_interval_update[i][data] for i in range(len(df_data_interval_update))],
                     marker =  dict(
                         autocolorscale = True,
                         color = 'rgb(255, 220, 0)',
@@ -516,8 +536,8 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                     hovertemplate = " Data: %{x|%d/%m/%Y} <br> Casos: %{y} <extra></extra>",  
                 ),
                 go.Bar(
-                    y = newlocation_df1['obitosAcumulado'],
-                    x = newlocation_df1['data'],
+                    y = [df_data_interval_update[i][total_deaths] for i in range(len(df_data_interval_update))],
+                    x = [df_data_interval_update[i][data] for i in range(len(df_data_interval_update))],
                     marker = dict(
                         autocolorscale = True,
                         color = 'rgb(255, 72, 0)',
@@ -571,8 +591,8 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
             
             fig_scatter_local_1 = go.Figure( data = [
                 go.Scatter(
-                    x = newlocation_df1["data"],    
-                    y = newlocation_df1["casosAcumulado"],
+                    y = [df_data_interval_update[i][total_cases] for i in range(len(df_data_interval_update))],
+                    x = [df_data_interval_update[i][data] for i in range(len(df_data_interval_update))],
                     line = dict(
                         color = "rgb(255, 220, 0)",
                         width = 4,
@@ -616,8 +636,8 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
         elif selected_info == ['grafico_mortes']:
             fig_scatter_local_1 = go.Figure( data = [
                 go.Scatter(
-                    x = newlocation_df1["data"], 
-                    y = newlocation_df1["obitosAcumulado"],
+                    y = [df_data_interval_update[i][total_deaths] for i in range(len(df_data_interval_update))],
+                    x = [df_data_interval_update[i][data] for i in range(len(df_data_interval_update))],
                     line = dict(
                         color = "rgb(255, 72, 0)",
                         width = 4,
@@ -664,8 +684,8 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
             
             fig_scatter_local_1 = go.Figure( data = [
                 go.Scatter(
-                    x = newlocation_df1["data"],    
-                    y = newlocation_df1["casosAcumulado"],
+                    y = [df_data_interval_update[i][total_cases] for i in range(len(df_data_interval_update))],
+                    x = [df_data_interval_update[i][data] for i in range(len(df_data_interval_update))],
                     line = dict(
                         color = "rgb(255, 220, 0)",
                         width = 4,
@@ -682,8 +702,8 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                 ),
 
                 go.Scatter(
-                    x = newlocation_df1["data"], 
-                    y = newlocation_df1["obitosAcumulado"],
+                    y = [df_data_interval_update[i][total_deaths] for i in range(len(df_data_interval_update))],
+                    x = [df_data_interval_update[i][data] for i in range(len(df_data_interval_update))],
                     line = dict(
                         color = "rgb(255, 72, 0)",
                         width = 4,
@@ -876,13 +896,31 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                     end_date, selected_graph):
 
     start_date_object = date.fromisoformat(start_date)
-    start_date_string = start_date_object.strftime('%d/%m/%Y')
+    start_date_string = start_date_object.strftime('%Y-%m-%d')
     end_date_object = date.fromisoformat(end_date)
-    end_date_string = end_date_object.strftime('%d/%m/%Y')
+    end_date_string = end_date_object.strftime('%Y-%m-%d')
+
     newlocation_df1 = df_local[df_local.estado_nome == selected_location] #redefinindo o dataframe
     new_end_date_df1 = df_local[df_local.data == end_date_string]
+
     dataframe_mapa_local = new_end_date_df1.dropna(subset = ['estado'])
     dataframe_mapa_local['id'] = dataframe_mapa_local['estado'].apply(lambda x: state_id_map[x])
+
+    df_data_interval = newlocation_df1
+    df_data_interval['data'] = df_data_interval['data'].dt.strftime('%Y-%m-%d')
+    df_data_interval = df_data_interval.values.tolist()
+    
+    for i in range(len(df_data_interval)):
+        if df_data_interval[i][data] == start_date_string:
+            aux_start_date = i
+    
+        elif df_data_interval[i][data] == end_date_string:
+            aux_end_date = i
+    
+    df_data_interval_update = []
+    for i in range(len(df_data_interval)):
+        if i >= aux_start_date and i <= aux_end_date:
+            df_data_interval_update.append(df_data_interval[i])
 
     if not selected_info or not selected_location:
         raise PreventUpdate
@@ -892,8 +930,8 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
         if selected_info == ['grafico_casos'] :
 
             fig_bar_local_2 = go.Figure( data = [go.Bar( 
-                y = newlocation_df1['casosAcumulado'], 
-                x = newlocation_df1['data'], 
+                y = [df_data_interval_update[i][total_cases] for i in range(len(df_data_interval_update))],
+                x = [df_data_interval_update[i][data] for i in range(len(df_data_interval_update))],
                 marker =  dict(
                     autocolorscale = True,
                     color = 'rgb(255, 220, 0)',
@@ -940,8 +978,8 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
 
         elif selected_info == ['grafico_mortes'] :
             fig_bar_local_2 = go.Figure( data = [go.Bar(
-                y = newlocation_df1['obitosAcumulado'], 
-                x = newlocation_df1['data'],
+                y = [df_data_interval_update[i][total_deaths] for i in range(len(df_data_interval_update))],
+                x = [df_data_interval_update[i][data] for i in range(len(df_data_interval_update))],
                 marker =  dict(
                     autocolorscale = True,
                     color = 'rgb(255, 72, 0)',
@@ -990,8 +1028,8 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
         elif (selected_info == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']):
             fig_bar_local_2 = go.Figure( data = [
                 go.Bar(
-                    y = newlocation_df1['casosAcumulado'], 
-                    x = newlocation_df1['data'],
+                    y = [df_data_interval_update[i][total_cases] for i in range(len(df_data_interval_update))],
+                    x = [df_data_interval_update[i][data] for i in range(len(df_data_interval_update))],
                     marker =  dict(
                         autocolorscale = True,
                         color = 'rgb(255, 220, 0)',
@@ -1011,8 +1049,8 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                     hovertemplate = " Data: %{x|%d/%m/%Y} <br> Casos: %{y} <extra></extra>",  
                 ),
                 go.Bar(
-                    y = newlocation_df1['obitosAcumulado'],
-                    x = newlocation_df1['data'],
+                    y = [df_data_interval_update[i][total_deaths] for i in range(len(df_data_interval_update))],
+                    x = [df_data_interval_update[i][data] for i in range(len(df_data_interval_update))],
                     marker = dict(
                         autocolorscale = True,
                         color = 'rgb(255, 72, 0)',
@@ -1064,8 +1102,8 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
         if selected_info == ['grafico_casos']:
             fig_scatter_local_2 = go.Figure( data = [
                 go.Scatter(
-                    x = newlocation_df1["data"],    
-                    y = newlocation_df1["casosAcumulado"],
+                    y = [df_data_interval_update[i][total_cases] for i in range(len(df_data_interval_update))],
+                    x = [df_data_interval_update[i][data] for i in range(len(df_data_interval_update))],
                     line = dict(
                         color = "rgb(255, 220, 0)",
                         width = 4,
@@ -1109,8 +1147,8 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
         elif selected_info == ['grafico_mortes']:
             fig_scatter_local_2 = go.Figure( data = [
                 go.Scatter(
-                    x = newlocation_df1["data"], 
-                    y = newlocation_df1["obitosAcumulado"],
+                    y = [df_data_interval_update[i][total_deaths] for i in range(len(df_data_interval_update))],
+                    x = [df_data_interval_update[i][data] for i in range(len(df_data_interval_update))],
                     line = dict(
                         color = "rgb(255, 72, 0)",
                         width = 4,
@@ -1156,8 +1194,8 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
         elif (selected_info == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']):
             fig_scatter_local_2 = go.Figure( data = [
                 go.Scatter(
-                    x = newlocation_df1["data"],    
-                    y = newlocation_df1["casosAcumulado"],
+                    y = [df_data_interval_update[i][total_cases] for i in range(len(df_data_interval_update))],
+                    x = [df_data_interval_update[i][data] for i in range(len(df_data_interval_update))],
                     line = dict(
                         color = "rgb(255, 220, 0)",
                         width = 4,
@@ -1174,8 +1212,8 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                 ),
 
                 go.Scatter(
-                    x = newlocation_df1["data"], 
-                    y = newlocation_df1["obitosAcumulado"],
+                    y = [df_data_interval_update[i][total_deaths] for i in range(len(df_data_interval_update))],
+                    x = [df_data_interval_update[i][data] for i in range(len(df_data_interval_update))],
                     line = dict(
                         color = "rgb(255, 72, 0)",
                         width = 4,
