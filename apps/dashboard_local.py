@@ -667,8 +667,8 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                 ),
 
                 go.Scatter(
-                    x = df_local["data"], 
-                    y = df_local["obitosAcumulado"],
+                    x = newlocation_df1["data"], 
+                    y = newlocation_df1["obitosAcumulado"],
                     line = dict(
                         color = "rgb(255, 72, 0)",
                         width = 4,
@@ -1141,8 +1141,8 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                 ),
 
                 go.Scatter(
-                    x = df_local["data"], 
-                    y = df_local["obitosAcumulado"],
+                    x = newlocation_df1["data"], 
+                    y = newlocation_df1["obitosAcumulado"],
                     line = dict(
                         color = "rgb(255, 72, 0)",
                         width = 4,
