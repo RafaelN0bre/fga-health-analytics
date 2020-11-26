@@ -213,7 +213,7 @@ layout = html.Div(children=[
                             dcc.DatePickerRange(
                                 id='escolha_data',
                                 min_date_allowed=datetime(2020, 3, 9),
-                                max_date_allowed=datetime(2020, 9, 20),
+                                max_date_allowed=datetime(2020, 11, 21),
                                 #initial_visible_month=date(2020, 3, 10),
                                 start_date=datetime(2020, 3, 14).date(),
                                 end_date=datetime(2020, 6, 20).date(),

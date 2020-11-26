@@ -69,10 +69,10 @@ layout = html.Div(children=[
                         id='Primeira_linha_local',
                         children=[
                             dcc.Dropdown(id = 'pais_grafico_1_local',
-                                options = [{'label': i, 'value': i} for i in np.sort(df_local['estado'].dropna().unique())], 
+                                options = [{'label': i, 'value': i} for i in np.sort(df_local['estado_nome'].dropna().unique())], 
 
                                 optionHeight = 35,            #Espaço entre as opções do dropdown
-                                value  = 'RO',                #Opção padrão ao iniciar a página
+                                value  = 'Acre',                #Opção padrão ao iniciar a página
                                 disabled = False,             #Capacidade de interagir com o dropdown
                                 multi = False,                #Permitir múltiplas escolhas 
                                 searchable = True,            #Permitir digitar para procurar valor
@@ -88,10 +88,10 @@ layout = html.Div(children=[
                             ),
 
                             dcc.Dropdown(id = 'pais_grafico_2_local', #Antes grafico2_dado1
-                                options = [{'label': i, 'value': i} for i in np.sort(df_local['estado'].dropna().unique())], 
+                                options = [{'label': i, 'value': i} for i in np.sort(df_local['estado_nome'].dropna().unique())], 
                                 #options: Leitura da coluna location da planilha, para evitar repetição o unique
                                 optionHeight = 35,
-                                value  = 'PR',
+                                value  = 'Acre',
                                 disabled = False,
                                 multi = False,                
                                 searchable = True,
@@ -217,7 +217,7 @@ layout = html.Div(children=[
                             dcc.DatePickerRange(
                                 id='escolha_data_local',
                                 min_date_allowed=datetime(2020, 2, 25),
-                                max_date_allowed=datetime(2020, 9, 20),
+                                max_date_allowed=datetime(2020, 11, 21),
                                 start_date=datetime(2020, 3, 14).date(),
                                 end_date=datetime(2020, 6, 20).date(),
                                 clearable=True,
@@ -380,8 +380,9 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
     end_date_string = end_date_object.strftime('%Y-%m-%d')
 
     #Restrição do dataframe
-    newlocation_df1 = df_local[df_local.estado == selected_location]
+    newlocation_df1 = df_local[df_local.estado_nome == selected_location]
     new_end_date_df1 = df_local[df_local.data == end_date_string]
+    
     dataframe_mapa_local = new_end_date_df1.dropna(subset = ['estado'])
     dataframe_mapa_local['id'] = dataframe_mapa_local['estado'].apply(lambda x: state_id_map[x])
 
@@ -715,7 +716,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                 z =  dataframe_mapa_local['casosAcumulado'],  
                 zmax = 200000,
                 zmin = 0,
-                text = dataframe_mapa_local['estado'],
+                text = dataframe_mapa_local['estado_nome'],
                 colorscale = [[0, 'rgb(255, 250, 173)'], [1, 'rgb(255,220,0)']],
                 autocolorscale = False,
                 reversescale = False,
@@ -781,7 +782,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                 z =  dataframe_mapa_local['obitosAcumulado'],  
                 zmax = 35000,
                 zmin = 0,
-                text = dataframe_mapa_local['estado'],
+                text = dataframe_mapa_local['estado_nome'],
                 colorscale = [[0, 'rgb(250, 127, 114)'], [1, 'rgb(139, 0, 0)']],
                 autocolorscale = False,
                 reversescale = False,
@@ -860,7 +861,7 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
     start_date_string = start_date_object.strftime('%d/%m/%Y')
     end_date_object = date.fromisoformat(end_date)
     end_date_string = end_date_object.strftime('%d/%m/%Y')
-    newlocation_df1 = df_local[df_local.estado == selected_location] #redefinindo o dataframe
+    newlocation_df1 = df_local[df_local.estado_nome == selected_location] #redefinindo o dataframe
     new_end_date_df1 = df_local[df_local.data == end_date_string]
     dataframe_mapa_local = new_end_date_df1.dropna(subset = ['estado'])
     dataframe_mapa_local['id'] = dataframe_mapa_local['estado'].apply(lambda x: state_id_map[x])
@@ -1188,7 +1189,7 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                 z =  dataframe_mapa_local['casosAcumulado'],  
                 zmax = 200000,
                 zmin = 0,
-                text = dataframe_mapa_local['estado'],
+                text = dataframe_mapa_local['estado_nome'],
                 colorscale = [[0, 'rgb(255, 250, 173)'], [1, 'rgb(255,220,0)']],
                 autocolorscale = False,
                 reversescale = False,
@@ -1254,7 +1255,7 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                 z =  dataframe_mapa_local['obitosAcumulado'],  
                 zmax = 35000,
                 zmin = 0,
-                text = dataframe_mapa_local['estado'],
+                text = dataframe_mapa_local['estado_nome'],
                 colorscale = [[0, 'rgb(250, 127, 114)'], [1, 'rgb(139, 0, 0)']],
                 autocolorscale = False,
                 reversescale = False,
@@ -1327,15 +1328,15 @@ def update_top_3_local(confirm_action, end_date):
     end_date_string = end_date_object.strftime('%Y-%m-%d')
     new_end_date_df1 = df_local[df_local.data == end_date_string]
    
-    df_local_top3 = new_end_date_df1[['estado','obitosAcumulado']].sort_values( by=['obitosAcumulado'],ascending=False).dropna().head(3)
-
+    df_local_top3 = new_end_date_df1[['estado_nome','obitosAcumulado']].sort_values( by=['obitosAcumulado'],ascending=False).query('estado_nome != "Brasil"').dropna().head(3)
+                                                                                                                                            
     if not end_date:
         raise PreventUpdate
 
     else:
         fig_bar_local_top3 = go.Figure( data = [
             go.Bar(
-                x= df_local_top3['estado'], 
+                x= df_local_top3['estado_nome'], 
                 y = df_local_top3['obitosAcumulado'],
                 textposition = 'auto',
                 marker =  dict(
