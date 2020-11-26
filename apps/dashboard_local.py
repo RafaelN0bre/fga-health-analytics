@@ -423,6 +423,9 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                     'y': 0.97,
                 },
                 xaxis_tickangle=-30,
+                xaxis={
+                    'tickformat': '%m/%Y',
+                },
                 font_family="Courier New",
                 font_size=12,
                 barmode='overlay',
@@ -470,6 +473,9 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                     'y': 0.97,
                 },
                 xaxis_tickangle=-30,
+                xaxis={
+                    'tickformat': '%m/%Y',
+                },
                 font_family="Courier New",
                 font_size=12,
                 barmode='overlay',
@@ -539,6 +545,9 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                     'x': 0.5,
                     'y': 0.97,
                 },
+                xaxis={
+                    'tickformat': '%m/%Y',
+                },
                 xaxis_tickangle=-30,
                 font_family="Courier New",
                 font_size=12,
@@ -586,6 +595,9 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                     'x': 0.5,
                     'y': 0.97,
                 },
+                xaxis={
+                    'tickformat': '%m/%Y',
+                },
                 xaxis_tickangle=-30,
                 font_family="Courier New",
                 font_size=12,
@@ -629,6 +641,9 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
+                },
+                xaxis={
+                    'tickformat': '%m/%Y',
                 },
                 xaxis_tickangle=-30,
                 font_family="Courier New",
@@ -691,6 +706,9 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
+                },
+                xaxis={
+                    'tickformat': '%m/%Y',
                 },
                 xaxis_tickangle=-30,
                 font_family="Courier New",
@@ -901,6 +919,9 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                     'x': 0.5,
                     'y': 0.97,
                 },
+                xaxis={
+                    'tickformat': '%m/%Y',
+                },
                 xaxis_tickangle=-30,
                 font_family="Courier New",
                 font_size=12,
@@ -946,6 +967,9 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
+                },
+                xaxis={
+                    'tickformat': '%m/%Y',
                 },
                 xaxis_tickangle=-30,
                 font_family="Courier New",
@@ -1016,6 +1040,9 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                     'x': 0.5,
                     'y': 0.97,
                 },
+                xaxis={
+                    'tickformat': '%m/%Y',
+                },
                 xaxis_tickangle=-30,
                 font_family="Courier New",
                 font_size=12,
@@ -1061,6 +1088,9 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                     'x': 0.5,
                     'y': 0.97,
                 },
+                xaxis={
+                    'tickformat': '%m/%Y',
+                },
                 xaxis_tickangle=-30,
                 font_family="Courier New",
                 font_size=12,
@@ -1104,6 +1134,9 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
+                },
+                xaxis={
+                    'tickformat': '%m/%Y',
                 },
                 xaxis_tickangle=-30,
                 font_family="Courier New",
@@ -1165,6 +1198,9 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
                     'font.size': 22,
                     'x': 0.5,
                     'y': 0.97,
+                },
+                xaxis={
+                    'tickformat': '%m/%Y',
                 },
                 xaxis_tickangle=-30,
                 font_family="Courier New",
