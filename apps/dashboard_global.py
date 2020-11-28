@@ -362,9 +362,32 @@ layout = html.Div(children=[
     ),
 
 ])
+
 data = 3
 total_cases = 4
 total_deaths = 6
+
+def arredondamento (number):
+    if number < 1000 and number > 500:
+        number = int(round(number/1000.0, 1) * 1000)
+
+    elif number < 10000 and number > 1000:
+        number = int(round(number/10000.0, 1) * 10000)
+
+    elif number < 100000 and number > 10000:
+        number = int(round(number/100000.0, 1) * 100000)
+
+    elif number < 1000000 and number > 100000:
+        number = int(round(number/1000000.0, 1) * 1000000)
+    
+    elif number < 10000000 and number > 1000000:
+        number = int(round(number/10000000.0, 1) * 10000000)
+    
+    elif number > 10000000:
+        number = int(round(number/10000000.0, 1) * 10000000)
+    
+    return number
+
 @app.callback(
 Output('grafico-1', 'figure'),
 Input('Submit_button', 'n_clicks'), 
@@ -384,7 +407,6 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
     new_end_date_df1 = df_global[df_global.date == end_date_string]
 
     df_data_interval = newlocation_df1.values.tolist()
-    
     for i in range(len(df_data_interval)):
         if df_data_interval[i][data] == start_date_string:
             aux_start_date = i
@@ -396,6 +418,22 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
     for i in range(len(df_data_interval)):
         if i >= aux_start_date and i <= aux_end_date:
             df_data_interval_update.append(df_data_interval[i]) 
+
+    lista_casos = new_end_date_df1['total_cases'].dropna().values.tolist()
+    lista_mortes = new_end_date_df1['total_deaths'].dropna().values.tolist()
+
+    for i in range(len(lista_casos)):
+        for h in range(0, len(lista_casos)-i-1 ):
+            if lista_casos[h] < lista_casos[h+1]:
+                lista_casos[h], lista_casos[h+1] = lista_casos[h+1], lista_casos[h]
+
+    for i in range(len(lista_mortes)):
+        for h in range(0, len(lista_mortes)-i-1 ):
+            if lista_mortes[h] < lista_mortes[h+1]:
+                lista_mortes[h], lista_mortes[h+1] = lista_mortes[h+1], lista_mortes[h]
+    
+    valor_max_casos = arredondamento(lista_casos[1])
+    valor_max_mortes = arredondamento(lista_mortes[1]) 
             
     #Se a opção de tipo de informação ou tipo de localização estiver vazia, impedir atualização do gráfico 1
     if not selected_info or not selected_location: 
@@ -744,8 +782,9 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
             fig_map_global_1 = go.Figure(data=go.Choropleth(
                 locations = new_end_date_df1['iso_code'],
                 z =  new_end_date_df1['total_cases'],  
-                zmax = 8000000,
+                zmax = valor_max_casos,
                 zmin = 0,
+                zauto = False,
                 text = new_end_date_df1['location'],
                 colorscale = [[0, 'rgb(255, 250, 173)'], [1, 'rgb(255,220,0)']],
                 autocolorscale = False,
@@ -755,7 +794,8 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                 colorbar = dict(
                     bordercolor = "black",
                     borderwidth = 1,
-                    tickprefix = '',
+                    tickmode = "auto",
+                    nticks = 10,
                     x = 0.8,
                 ),
                 hoverlabel = dict(
@@ -803,7 +843,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
             fig_map_global_1 = go.Figure(data=go.Choropleth(
                 locations = new_end_date_df1['iso_code'], 
                 z =  new_end_date_df1['total_deaths'],  
-                zmax = 300000,
+                zmax = valor_max_mortes,
                 zmin = 0,
                 text = new_end_date_df1['location'],
                 colorscale = [[0, 'rgb(250, 127, 114)'], [1, 'rgb(139, 0, 0)']],
@@ -814,7 +854,8 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
                 colorbar = dict(
                     bordercolor = "black",
                     borderwidth = 1,
-                    tickprefix = '',
+                    tickmode = "auto",
+                    nticks = 10,
                     x = 0.8,
                 ),
                 hoverlabel = dict(
@@ -882,7 +923,6 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
     
 
     df_data_interval = newlocation_df1.values.tolist()
-    
     for i in range(len(df_data_interval)):
         if df_data_interval[i][data] == start_date_string:
             aux_start_date = i
@@ -895,6 +935,21 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
         if i >= aux_start_date and i <= aux_end_date:
             df_data_interval_update.append(df_data_interval[i])
 
+    lista_casos = new_end_date_df1['total_cases'].dropna().values.tolist()
+    lista_mortes = new_end_date_df1['total_deaths'].dropna().values.tolist()
+
+    for i in range(len(lista_casos)):
+        for h in range(0, len(lista_casos)-i-1 ):
+            if lista_casos[h] < lista_casos[h+1]:
+                lista_casos[h], lista_casos[h+1] = lista_casos[h+1], lista_casos[h]
+
+    for i in range(len(lista_mortes)):
+        for h in range(0, len(lista_mortes)-i-1 ):
+            if lista_mortes[h] < lista_mortes[h+1]:
+                lista_mortes[h], lista_mortes[h+1] = lista_mortes[h+1], lista_mortes[h]
+    
+    valor_max_casos = arredondamento(lista_casos[1])
+    valor_max_mortes = arredondamento(lista_mortes[1]) 
 
     if not selected_info or not selected_location:
         raise PreventUpdate
@@ -1242,7 +1297,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
             fig_map_global_2 = go.Figure(data=go.Choropleth(
                 locations = new_end_date_df1['iso_code'],
                 z =  new_end_date_df1['total_cases'],  
-                zmax = 8000000,
+                zmax = valor_max_casos,
                 zmin = 0,
                 text = new_end_date_df1['location'],
                 colorscale = [[0, 'rgb(255, 250, 173)'], [1, 'rgb(255,220,0)']],
@@ -1253,7 +1308,8 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                 colorbar = dict(
                     bordercolor = "black",
                     borderwidth = 1,
-                    tickprefix = '',
+                    tickmode = "auto",
+                    nticks = 10,
                     x = 0.8,
                 ),
                 hoverlabel = dict(
@@ -1300,7 +1356,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
             fig_map_global_2 = go.Figure(data=go.Choropleth(
                 locations = new_end_date_df1['iso_code'], 
                 z =  new_end_date_df1['total_deaths'],  
-                zmax = 300000,
+                zmax = valor_max_mortes,
                 zmin = 0,
                 text = new_end_date_df1['location'],
                 colorscale = [[0, 'rgb(250, 127, 114)'], [1, 'rgb(139, 0, 0)']],
@@ -1311,7 +1367,8 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
                 colorbar = dict(
                     bordercolor = "black",
                     borderwidth = 1,
-                    tickprefix = '',
+                    tickmode = "auto",
+                    nticks = 10,
                     x = 0.8,
                 ),
                 hoverlabel = dict(
