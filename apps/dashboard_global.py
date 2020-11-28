@@ -1515,7 +1515,7 @@ def pop_up_message(confirm_action, selected_location, selected_graph, selected_i
             return True, '...'
 
     if selected_graph_2 == "grafico_mapa":
-        if selected_info_2 == ['grafico_casos', 'grafico_mortes']:
+        if selected_info_2 == ['grafico_casos', 'grafico_mortes'] or selected_info_2 == ['grafico_mortes', 'grafico_casos']:
             return False, 'O gráfico de mapa não pode receber as informações de morte e casos simultaneamente. Selecione casos ou mortes, ou altere o tipo de gráfico e tente novamente.'
         
         elif selected_info_2 == ['grafico_casos'] or ['grafico_mortes']:
@@ -1525,7 +1525,7 @@ def pop_up_message(confirm_action, selected_location, selected_graph, selected_i
             return False, 'Não é possível gerar gráficos com a opção tipo de informação vazia. Selecione casos, morte ou ambos e tente novamente.' 
 
     if selected_graph == "grafico_mapa":
-        if selected_info == ['grafico_casos', 'grafico_mortes']:
+        if selected_info == ['grafico_casos', 'grafico_mortes'] or selected_info == ['grafico_mortes', 'grafico_casos']:
             return False, 'O gráfico de mapa não pode receber as informações de morte e casos simultaneamente. Selecione casos ou mortes, ou altere o tipo de gráfico e tente novamente.'
 
         elif selected_info == ['grafico_casos'] or ['grafico_mortes']:
