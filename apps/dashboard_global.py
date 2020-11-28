@@ -20,8 +20,7 @@ PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath("../datasets").resolve()
 df_global = pd.read_excel(DATA_PATH.joinpath("covid_global_trans.xlsx"))
 
-#Fonte Original Do código do joao paulo
-#df_global_top3 = df_global[['location','date','total_deaths']].sort_values( by=['date','total_deaths'],ascending=False).drop(45580, axis=0).dropna().head(3)
+
 
 layout = html.Div(children=[
     html.Div(
@@ -64,7 +63,8 @@ layout = html.Div(children=[
                     html.Div(
                         id='Primeira_linha',
                         children=[
-                            dcc.Dropdown(id = 'pais_grafico_1',
+                            dcc.Dropdown(id = 'pais_grafico_1',  
+                            # Utilização de List Comprehension na criação das opções    
                                 options = [{'label': i, 'value': i} for i in np.sort(df_global.location.unique())], 
 
                                 optionHeight = 35,            #Espaço entre as opções do dropdown
@@ -74,7 +74,6 @@ layout = html.Div(children=[
                                 searchable = True,            #Permitir digitar para procurar valor
                                 placeholder = 'Selecione...', #Frase que aparece quando nada foi selecionado
                                 clearable = True,             #Permitir que seja apagado o valor escolhido
-                                    #classname = '',               #Extrai a calsse de algum documento css dentro da pasata assets
                                 persistence = True,           #Mantem o valor até que , no type memory, a página dê um refresh
                                 persistence_type = 'memory',
                                 style={
@@ -83,11 +82,11 @@ layout = html.Div(children=[
                                 },
                             ),
 
-                            dcc.Dropdown(id = 'pais_grafico_2', #Antes grafico2_dado1
+                            dcc.Dropdown(id = 'pais_grafico_2',
                                 options = [{'label': i, 'value': i} for i in np.sort(df_global.location.unique())], 
                                 #options: Leitura da coluna location da planilha, para evitar repetição o unique
                                 optionHeight = 35,
-                                value  = 'Mundo',
+                                value  = 'Brasil',
                                 disabled = False,
                                 multi = False,                
                                 searchable = True,
@@ -211,10 +210,10 @@ layout = html.Div(children=[
                         },
                         children=[
                             dcc.DatePickerRange(
+                                #Seleção de data
                                 id='escolha_data',
                                 min_date_allowed=datetime(2020, 3, 27),
                                 max_date_allowed=datetime(2020, 11, 21),
-                                #initial_visible_month=date(2020, 3, 10),
                                 start_date=datetime(2020, 3, 27).date(),
                                 end_date=datetime(2020, 11, 21).date(),
                                 clearable=True,
@@ -363,10 +362,12 @@ layout = html.Div(children=[
 
 ])
 
+#Referência das colunas nos dataframes
 data = 3
 total_cases = 4
 total_deaths = 6
 
+# Criação de uma função para definir a escala no figure de mapa
 def arredondamento (number):
     if number < 1000 and number > 500:
         number = int(round(number/1000.0, 1) * 1000)
@@ -397,6 +398,7 @@ State('escolha_data', 'start_date'),
 State('escolha_data', 'end_date'),
 State('tipo_grafico_1', 'value'),]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
 def update_figure(confirm_action, selected_location, selected_info, start_date, end_date, selected_graph):
+    #Formatação de Data
     start_date_object = date.fromisoformat(start_date)
     start_date_string = start_date_object.strftime('%Y-%m-%d')
     end_date_object = date.fromisoformat(end_date)
@@ -406,6 +408,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
     newlocation_df1 = df_global[df_global.location == selected_location]
     new_end_date_df1 = df_global[df_global.date == end_date_string]
 
+    #Definição de um dataframe com início na data inicial e final na data final
     df_data_interval = newlocation_df1.values.tolist()
     for i in range(len(df_data_interval)):
         if df_data_interval[i][data] == start_date_string:
@@ -419,6 +422,7 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
         if i >= aux_start_date and i <= aux_end_date:
             df_data_interval_update.append(df_data_interval[i]) 
 
+    #Definição de máximos de casos
     lista_casos = new_end_date_df1['total_cases'].dropna().values.tolist()
     lista_mortes = new_end_date_df1['total_deaths'].dropna().values.tolist()
 

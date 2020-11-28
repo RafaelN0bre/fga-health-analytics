@@ -20,8 +20,10 @@ PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath("../datasets").resolve()
 df_local = pd.read_excel(DATA_PATH.joinpath("covid_brasil.xlsx"))
 
+#leitura do código json
 brazil_states = json.load(open('brazil-states.geojson', 'r'))
 
+#Criação de um dicionário que relaciona as siglas do json com os IDs coincidentes
 state_id_map = {}
 for feature in brazil_states['features']:
     feature['id'] = feature['properties']['id']
@@ -69,16 +71,18 @@ layout = html.Div(children=[
                         id='Primeira_linha_local',
                         children=[
                             dcc.Dropdown(id = 'pais_grafico_1_local',
+                            #List comprehension
+                            #Lista de dicionários definida através de loop de repetição 
                                 options = [{'label': i, 'value': i} for i in np.sort(df_local['estado_nome'].dropna().unique())], 
-
+                            #.dropna() --> Tirar os valores vazios
+                            #.unique() --> Não repetir valores (Localizações)
                                 optionHeight = 35,            #Espaço entre as opções do dropdown
-                                value  = 'Acre',                #Opção padrão ao iniciar a página
+                                value  = 'Brasil',              #Opção padrão ao iniciar a página
                                 disabled = False,             #Capacidade de interagir com o dropdown
                                 multi = False,                #Permitir múltiplas escolhas 
                                 searchable = True,            #Permitir digitar para procurar valor
                                 placeholder = 'Selecione...', #Frase que aparece quando nada foi selecionado
                                 clearable = True,             #Permitir que seja apagado o valor escolhido
-                                    #classname = '',               #Extrai a calsse de algum documento css dentro da pasata assets
                                 persistence = True,           #Mantem o valor até que , no type memory, a página dê um refresh
                                 persistence_type = 'memory',
                                 style={
@@ -87,11 +91,10 @@ layout = html.Div(children=[
                                 },
                             ),
 
-                            dcc.Dropdown(id = 'pais_grafico_2_local', #Antes grafico2_dado1
+                            dcc.Dropdown(id = 'pais_grafico_2_local', 
                                 options = [{'label': i, 'value': i} for i in np.sort(df_local['estado_nome'].dropna().unique())], 
-                                #options: Leitura da coluna location da planilha, para evitar repetição o unique
                                 optionHeight = 35,
-                                value  = 'Acre',
+                                value  = 'São Paulo',
                                 disabled = False,
                                 multi = False,                
                                 searchable = True,
@@ -163,7 +166,7 @@ layout = html.Div(children=[
                                 ], 
 
                                 optionHeight = 35,
-                                value  = 'grafico_barra',
+                                value  = 'grafico_linha',
                                 disabled = False, 
                                 multi = False,
                                 searchable = False,
@@ -215,6 +218,7 @@ layout = html.Div(children=[
                         },
                         children=[
                             dcc.DatePickerRange(
+                                #Seleção de datas
                                 id='escolha_data_local',
                                 min_date_allowed=datetime(2020, 3, 19),
                                 max_date_allowed=datetime(2020, 11, 21),
@@ -364,11 +368,13 @@ layout = html.Div(children=[
     ),
 
 ])
+# Variáveis utilizadas para referência dos dataframes
 
 data = 3
 total_cases = 4
 total_deaths = 6
 
+# Utilização nos valores máximos de casos e mortes utilizados no gráfico de mapa
 def arredondamento (number):
     if number < 1000 and number > 500:
         number = int(round(number/1000.0, 1) * 1000)
@@ -397,8 +403,9 @@ Input('Submit_button_local', 'n_clicks'),
 State('casos_mortes_grafico_1_local', 'value'),
 State('escolha_data_local', 'start_date'),
 State('escolha_data_local', 'end_date'),
-State('tipo_grafico_1_local', 'value'),]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
+State('tipo_grafico_1_local', 'value'),])
 def update_figure1_local(confirm_action, selected_location, selected_info, start_date, end_date, selected_graph):
+    #Formatação de Data
     start_date_object = date.fromisoformat(start_date)
     start_date_string = start_date_object.strftime('%Y-%m-%d')
     end_date_object = date.fromisoformat(end_date)
@@ -408,9 +415,13 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
     newlocation_df1 = df_local[df_local.estado_nome == selected_location]
     new_end_date_df1 = df_local[df_local.data == end_date_string]
     
+    #Criação de ID
     dataframe_mapa_local = new_end_date_df1.dropna(subset = ['estado'])
     dataframe_mapa_local['id'] = dataframe_mapa_local['estado'].apply(lambda x: state_id_map[x])
 
+    #Restrição da data no dataframe --> Criação dele baseado em data inicial e final
+    #Referência desses dataframes para criação dos eixos x e y nos gráficos é feita
+    #mediante compreensão de lista
     df_data_interval = newlocation_df1
     df_data_interval['data'] = df_data_interval['data'].dt.strftime('%Y-%m-%d')
     df_data_interval = df_data_interval.values.tolist()
@@ -427,9 +438,11 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
         if i >= aux_start_date and i <= aux_end_date:
             df_data_interval_update.append(df_data_interval[i])
 
+    # Criando a lista com o as datas dentro do intervalo selecionado
     lista_casos = new_end_date_df1['casosAcumulado'].dropna().values.tolist()
     lista_mortes = new_end_date_df1['obitosAcumulado'].dropna().values.tolist()
 
+    #Bubble Sort --> Ordenamento em pares
     for i in range(len(lista_casos)):
         for h in range(0, len(lista_casos)-1 ):
             if lista_casos[h] < lista_casos[h+1]:
@@ -440,6 +453,7 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
             if lista_mortes[h] < lista_mortes[h+1]:
                 lista_mortes[h], lista_mortes[h+1] = lista_mortes[h+1], lista_mortes[h]
     
+    #Definição de valores máximos e mínimos
     valor_max_casos = arredondamento(lista_casos[1])
     valor_max_mortes = arredondamento(lista_mortes[1])
 
@@ -933,49 +947,61 @@ State('escolha_data_local', 'end_date'),
 State('tipo_grafico_2_local', 'value'),]) #primeiro o id do dropdown q será utilizado, dps a propriedade q será mudada.
 def update_figure_2_local(confirm_action, selected_location, selected_info, start_date, 
                     end_date, selected_graph):
-
+    #Formatação de datas 
     start_date_object = date.fromisoformat(start_date)
     start_date_string = start_date_object.strftime('%Y-%m-%d')
     end_date_object = date.fromisoformat(end_date)
     end_date_string = end_date_object.strftime('%Y-%m-%d')
 
-    newlocation_df1 = df_local[df_local.estado_nome == selected_location] #redefinindo o dataframe
+    #Restrição/ Filtro de dataframe
+    newlocation_df1 = df_local[df_local.estado_nome == selected_location]
     new_end_date_df1 = df_local[df_local.data == end_date_string]
 
+    # Criação da coluna ID
     dataframe_mapa_local = new_end_date_df1.dropna(subset = ['estado'])
     dataframe_mapa_local['id'] = dataframe_mapa_local['estado'].apply(lambda x: state_id_map[x])
-
+    
+    #Restrição da data no dataframe --> Criação dele baseado em data inicial e final
+    #Referência desses dataframes para criação dos eixos x e y nos gráficos é feita
+    #mediante compreensão de lista
     df_data_interval = newlocation_df1
     df_data_interval['data'] = df_data_interval['data'].dt.strftime('%Y-%m-%d')
     df_data_interval = df_data_interval.values.tolist()
     
     for i in range(len(df_data_interval)):
-        if df_data_interval[i][data] == start_date_string:
-            aux_start_date = i
+        if df_data_interval[i][data] == start_date_string: 
+            aux_start_date = i #Em que linha do dataframe está a data inicial 
     
         elif df_data_interval[i][data] == end_date_string:
-            aux_end_date = i
+            aux_end_date = i #Em que linha do dataframe está a data final 
     
+    # Criando a lista com o as datas dentro do intervalo selecionado
     df_data_interval_update = []
     for i in range(len(df_data_interval)):
         if i >= aux_start_date and i <= aux_end_date:
             df_data_interval_update.append(df_data_interval[i])
 
-    lista_casos = new_end_date_df1['casosAcumulado'].dropna().values.tolist()
+    #Definição dos valores máximos de casos e mortes
+
+    #Lista com dados referentes somente a casos 
+    lista_casos = new_end_date_df1['casosAcumulado'].dropna().values.tolist() 
+    #Lista com dados referentes somente a mortes
     lista_mortes = new_end_date_df1['obitosAcumulado'].dropna().values.tolist()
 
+    #Bubble Sort --> Ordenamento em pares
     for i in range(len(lista_casos)):
         for h in range(0, len(lista_casos)-1 ):
-            if lista_casos[h] < lista_casos[h+1]:
+            if lista_casos[h] < lista_casos[h+1]: # Se condição for atingida, troca um pelo outro
                 lista_casos[h], lista_casos[h+1] = lista_casos[h+1], lista_casos[h]
 
+    #Ordenamento Bubble Sort
     for i in range(len(lista_mortes)):
         for h in range(0, len(lista_mortes)-1 ):
             if lista_mortes[h] < lista_mortes[h+1]:
                 lista_mortes[h], lista_mortes[h+1] = lista_mortes[h+1], lista_mortes[h]
     
-    valor_max_casos = arredondamento(lista_casos[1])
-    valor_max_mortes = arredondamento(lista_mortes[1])
+    valor_max_casos = arredondamento(lista_casos[1]) #variável do maior valor de casos
+    valor_max_mortes = arredondamento(lista_mortes[1]) #variável do maior valor de mortes
 
     if not selected_info or not selected_location:
         raise PreventUpdate
@@ -1450,17 +1476,18 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
         elif (selected_info == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']):
             raise PreventUpdate
 
-#Callback com erro por causa da data - Datas menores que 10.
 @app.callback(
     Output('top3_local', 'figure'),
     Input('Submit_button_local', 'n_clicks'),
     State('escolha_data_local', 'end_date'),
 )
 def update_top_3_local(confirm_action, end_date):
+    #Formação de datas
     end_date_object = date.fromisoformat(end_date)
     end_date_string = end_date_object.strftime('%Y-%m-%d')
     new_end_date_df1 = df_local[df_local.data == end_date_string]
    
+    #Restrição do dataframe sem lista
     df_local_top3 = new_end_date_df1[['estado_nome','obitosAcumulado']].sort_values( by=['obitosAcumulado'],ascending=False).query('estado_nome != "Brasil"').dropna().head(3)
                                                                                                                                             
     if not end_date:
@@ -1580,21 +1607,24 @@ Input('Submit_button_local', 'n_clicks'),
 State('escolha_data_local', 'end_date'),]
 )
 def resumo_geral(confirm_action, start_date, end_date):
-    
+    #Formatação de datas
     start_date_object = date.fromisoformat(start_date)
     start_date_string = start_date_object.strftime('%Y-%m-%d')
     end_date_object = date.fromisoformat(end_date)
     end_date_string = end_date_object.strftime('%Y-%m-%d')
 
+    #Restrição dos dataframes
     newlocation_df1 = df_local[df_local['regiao'] == 'Brasil']
     data_resumo_geral_fim = newlocation_df1[newlocation_df1['data'] == end_date_string]
     data_resumo_geral_inicio = newlocation_df1[newlocation_df1['data'] == start_date_string]
     
+    #Criação das variáveis
     var_resumo_casos_fim  = float(data_resumo_geral_fim['casosAcumulado'].values)
     var_resumo_casos_inicio = float(data_resumo_geral_inicio['casosAcumulado'].values)
     var_resumo_mortes_fim  = float(data_resumo_geral_fim['obitosAcumulado'].values)
     var_resumo_mortes_inicio = float(data_resumo_geral_inicio['obitosAcumulado'].values)
 
+    #Cálculo dos valores e criação de variável para receber eles.
     children_casos_acumulado =  'Acumulado: {}'.format(var_resumo_casos_fim)
     children_casos_novos = 'Novos casos: {}'.format(var_resumo_casos_fim - var_resumo_casos_inicio)
     children_mortes_acumulado = 'Acumulado: {}'.format(var_resumo_mortes_fim)
