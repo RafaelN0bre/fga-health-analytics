@@ -212,10 +212,10 @@ layout = html.Div(children=[
                         children=[
                             dcc.DatePickerRange(
                                 id='escolha_data',
-                                min_date_allowed=datetime(2020, 3, 9),
+                                min_date_allowed=datetime(2020, 3, 27),
                                 max_date_allowed=datetime(2020, 11, 21),
                                 #initial_visible_month=date(2020, 3, 10),
-                                start_date=datetime(2020, 3, 9).date(),
+                                start_date=datetime(2020, 3, 27).date(),
                                 end_date=datetime(2020, 11, 21).date(),
                                 clearable=True,
                                 start_date_placeholder_text="Data Inicial",
@@ -1508,7 +1508,7 @@ def pop_up_message(confirm_action, selected_location, selected_graph, selected_i
         if not selected_info or not selected_info_2:
             return False, 'Não é possível gerar gráficos com a opção tipo de informação vazia. Selecione casos, morte ou ambos e tente novamente.'
         
-        elif selected_info == ['grafico_casos', 'grafico_mortes'] or selected_info_2 == ['grafico_casos', 'grafico_mortes']:
+        elif selected_info == ['grafico_casos', 'grafico_mortes'] or selected_info_2 == ['grafico_casos', 'grafico_mortes'] or selected_info == ['grafico_mortes', 'grafico_casos'] or selected_info_2 == ['grafico_mortes', 'grafico_casos']:
             return False, 'O gráfico de mapa não pode receber as informações de morte e casos simultaneamente. Selecione casos ou mortes, ou altere o tipo de gráfico e tente novamente.'
 
         else:
@@ -1579,33 +1579,3 @@ def resumo_geral(confirm_action, start_date, end_date):
     children_letalidade = 'Letalidade: {:.2f}%'.format(var_resumo_mortes_fim*100/var_resumo_casos_fim)
 
     return [children_casos_acumulado, children_casos_novos, children_mortes_acumulado, children_mortes_novos, children_letalidade]
-'''
-        Esse código é uma tentativa de inserir o intervalo de data para gráfico de barra
-        Funciona porém faltar melhorar
-
-       start_date_object = date.fromisoformat(start_date)
-        start_dia_string = start_date_object.strftime('%d')
-        if(start_dia_string != "10" or start_dia_string != "20" or start_dia_string != "30"):
-            start_dia_string = start_dia_string.replace("0", "")
-        start_dia = int(start_dia_string)
-
-        start_mes_string = start_date_object.strftime('%m')
-        start_mes_string = start_mes_string.replace("0", "")
-        start_mes = int(start_mes_string)
-
-        start_ano_string = start_date_object.strftime('%Y')
-        start_ano = int(start_ano_string)
-
-        end_date_object = date.fromisoformat(end_date)
-        end_dia_string = end_date_object.strftime('%d')
-        if(end_dia_string != "10" or end_dia_string != "20" or end_dia_string != "30"):
-            end_dia_string = end_dia_string.replace("0", "")
-        end_dia = int(end_dia_string)
-
-        end_mes_string = end_date_object.strftime('%m')
-        end_mes_string = end_mes_string.replace("0", "")
-        end_mes = int(end_mes_string)
-
-        end_ano_string = end_date_object.strftime('%Y')
-        end_ano = int(end_ano_string)
-'''
