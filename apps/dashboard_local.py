@@ -431,12 +431,12 @@ def update_figure1_local(confirm_action, selected_location, selected_info, start
     lista_mortes = new_end_date_df1['obitosAcumulado'].dropna().values.tolist()
 
     for i in range(len(lista_casos)):
-        for h in range(0, len(lista_casos)-i-1 ):
+        for h in range(0, len(lista_casos)-1 ):
             if lista_casos[h] < lista_casos[h+1]:
                 lista_casos[h], lista_casos[h+1] = lista_casos[h+1], lista_casos[h]
 
     for i in range(len(lista_mortes)):
-        for h in range(0, len(lista_mortes)-i-1 ):
+        for h in range(0, len(lista_mortes)-1 ):
             if lista_mortes[h] < lista_mortes[h+1]:
                 lista_mortes[h], lista_mortes[h+1] = lista_mortes[h+1], lista_mortes[h]
     
@@ -965,12 +965,12 @@ def update_figure_2_local(confirm_action, selected_location, selected_info, star
     lista_mortes = new_end_date_df1['obitosAcumulado'].dropna().values.tolist()
 
     for i in range(len(lista_casos)):
-        for h in range(0, len(lista_casos)-i-1 ):
+        for h in range(0, len(lista_casos)-1 ):
             if lista_casos[h] < lista_casos[h+1]:
                 lista_casos[h], lista_casos[h+1] = lista_casos[h+1], lista_casos[h]
 
     for i in range(len(lista_mortes)):
-        for h in range(0, len(lista_mortes)-i-1 ):
+        for h in range(0, len(lista_mortes)-1 ):
             if lista_mortes[h] < lista_mortes[h+1]:
                 lista_mortes[h], lista_mortes[h+1] = lista_mortes[h+1], lista_mortes[h]
     

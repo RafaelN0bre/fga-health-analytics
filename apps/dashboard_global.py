@@ -423,12 +423,12 @@ def update_figure(confirm_action, selected_location, selected_info, start_date, 
     lista_mortes = new_end_date_df1['total_deaths'].dropna().values.tolist()
 
     for i in range(len(lista_casos)):
-        for h in range(0, len(lista_casos)-i-1 ):
+        for h in range(0, len(lista_casos)-1 ):
             if lista_casos[h] < lista_casos[h+1]:
                 lista_casos[h], lista_casos[h+1] = lista_casos[h+1], lista_casos[h]
 
     for i in range(len(lista_mortes)):
-        for h in range(0, len(lista_mortes)-i-1 ):
+        for h in range(0, len(lista_mortes)-1 ):
             if lista_mortes[h] < lista_mortes[h+1]:
                 lista_mortes[h], lista_mortes[h+1] = lista_mortes[h+1], lista_mortes[h]
     
@@ -939,12 +939,12 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
     lista_mortes = new_end_date_df1['total_deaths'].dropna().values.tolist()
 
     for i in range(len(lista_casos)):
-        for h in range(0, len(lista_casos)-i-1 ):
+        for h in range(0, len(lista_casos)-1 ):
             if lista_casos[h] < lista_casos[h+1]:
                 lista_casos[h], lista_casos[h+1] = lista_casos[h+1], lista_casos[h]
 
     for i in range(len(lista_mortes)):
-        for h in range(0, len(lista_mortes)-i-1 ):
+        for h in range(0, len(lista_mortes)-1 ):
             if lista_mortes[h] < lista_mortes[h+1]:
                 lista_mortes[h], lista_mortes[h+1] = lista_mortes[h+1], lista_mortes[h]
     
@@ -1428,13 +1428,9 @@ def update_top_3_global(confirm_action, end_date):
     df_global_top3 = new_end_date_df1.values.tolist()
 
     for i in range(len(df_global_top3)):
-        for h in range(0, len(df_global_top3)-i-1 ):
+        for h in range(0, len(df_global_top3)-1 ):
             if df_global_top3[h][6] < df_global_top3[h+1][6]:
                 df_global_top3[h], df_global_top3[h+1] = df_global_top3[h+1], df_global_top3[h]
-    
-    for i in range(len(df_global_top3)):
-        if df_global_top3[i][2] == "Mundo":
-            df_global_top3[i] = None 
     
     df_global_top3 = df_global_top3[1:4]        
 

@@ -32,7 +32,7 @@ app.layout = html.Div(children=[
         children=[
             dcc.Link('Global', href='/apps/dashboard_global', id='navbar_global_selection'),
             dcc.Link('Local', href='/apps/dashboard_local', id='navbar_local_selection'),
-            dcc.Link('Referencias', href='/apps/referencias', id='navbar_referencias_selection'),
+            dcc.Link('Referências', href='/apps/referencias', id='navbar_referencias_selection'),
             dcc.Link('Sobre Nós', href='/apps/sobre_nos', id='navbar_sobre_nos_selection'),
         ]
     ),
