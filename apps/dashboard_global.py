@@ -1418,7 +1418,7 @@ def update_figure_2(confirm_action, selected_location, selected_info, start_date
         elif (selected_info == ['grafico_casos', 'grafico_mortes'] or ['grafico_mortes', 'grafico_casos']):
             raise PreventUpdate
 
-#Callback com erro por causa da data - Datas menores que 10.
+
 @app.callback(
     Output('top3_global', 'figure'),
     Input('Submit_button', 'n_clicks'),
